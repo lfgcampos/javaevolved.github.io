@@ -218,6 +218,8 @@
         const isHorizontalSwipe = absDeltaX > 50 && absDeltaX > absDeltaY;
         
         if (isHorizontalSwipe) {
+          // Prevent default navigation
+          e.preventDefault();
           // Swipe left = show modern, swipe right = show old
           if (deltaX < 0) {
             // Swipe left - show modern
@@ -228,12 +230,13 @@
           }
         } else if (absDeltaX < 10 && absDeltaY < 10) {
           // It's a tap (movement under 10px threshold)
+          e.preventDefault();
           card.classList.toggle('toggled');
         }
-      }, { passive: true });
+      }, { passive: false });
 
-      // Prevent click events from propagating when on touch devices
-      // to avoid navigation when toggling
+      // Prevent click events on card-code from navigating
+      // (the touch handlers above already handle the interaction)
       card.addEventListener('click', (e) => {
         if (e.target.closest('.card-code')) {
           e.preventDefault();
