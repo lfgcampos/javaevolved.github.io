@@ -181,11 +181,71 @@
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     if (!isTouchDevice) return;
 
+    // Update hover hints for touch devices
+    document.querySelectorAll('.hover-hint').forEach(hint => {
+      hint.textContent = '👆 tap or swipe →';
+    });
+
     document.querySelectorAll('.tip-card').forEach(card => {
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+      let isSwiping = false;
+
+      // Track touch start
+      card.addEventListener('touchstart', (e) => {
+        // Only track touches on the card-code area
+        if (!e.target.closest('.card-code')) return;
+        
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        isSwiping = false;
+      }, { passive: true });
+
+      // Track touch move to detect swipe
+      card.addEventListener('touchmove', (e) => {
+        if (!e.target.closest('.card-code')) return;
+        isSwiping = true;
+      }, { passive: true });
+
+      // Handle touch end for swipe or tap
+      card.addEventListener('touchend', (e) => {
+        // Only handle touches on the card-code area
+        if (!e.target.closest('.card-code')) return;
+
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+        const absDeltaX = Math.abs(deltaX);
+        const absDeltaY = Math.abs(deltaY);
+
+        // Determine if it's a swipe (horizontal movement > 50px and more horizontal than vertical)
+        const isHorizontalSwipe = absDeltaX > 50 && absDeltaX > absDeltaY;
+        
+        if (isHorizontalSwipe) {
+          // Swipe left = show modern, swipe right = show old
+          if (deltaX < 0) {
+            // Swipe left - show modern
+            card.classList.add('toggled');
+          } else {
+            // Swipe right - show old
+            card.classList.remove('toggled');
+          }
+        } else if (!isSwiping) {
+          // It's a tap (no significant movement)
+          card.classList.toggle('toggled');
+        }
+      }, { passive: true });
+
+      // Prevent click events from propagating when on touch devices
+      // to avoid navigation when toggling
       card.addEventListener('click', (e) => {
-        // Don't toggle if clicking a link inside the card
-        if (e.target.closest('a')) return;
-        card.classList.toggle('toggled');
+        if (e.target.closest('.card-code')) {
+          e.preventDefault();
+        }
       });
     });
   };
