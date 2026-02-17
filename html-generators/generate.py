@@ -13,6 +13,8 @@ TEMPLATE_FILE = "templates/slug-template.html"
 WHY_CARD_TEMPLATE = "templates/why-card.html"
 RELATED_CARD_TEMPLATE = "templates/related-card.html"
 SOCIAL_SHARE_TEMPLATE = "templates/social-share.html"
+INDEX_TEMPLATE = "templates/index.html"
+INDEX_CARD_TEMPLATE = "templates/index-card.html"
 CONTENT_DIR = "content"
 SITE_DIR = "site"
 
@@ -159,6 +161,20 @@ def _support_badge_class(state):
     return {"preview": "preview", "experimental": "experimental"}.get(state, "widely")
 
 
+def render_index_card(index_card_template, data):
+    """Render a single index page preview card."""
+    cat = data["category"]
+    return replace_tokens(index_card_template, {
+        "category": cat,
+        "slug": data["slug"],
+        "catDisplay": CATEGORY_DISPLAY[cat],
+        "title": escape(data["title"]),
+        "oldCode": escape(data["oldCode"]),
+        "modernCode": escape(data["modernCode"]),
+        "jdkVersion": data["jdkVersion"],
+    })
+
+
 def generate_html(template, why_card_template, related_card_template,
                   social_share_template, data, all_snippets):
     """Generate the full HTML page for a snippet by rendering the template."""
@@ -204,6 +220,8 @@ def main():
     why_card_template = open(WHY_CARD_TEMPLATE).read()
     related_card_template = open(RELATED_CARD_TEMPLATE).read()
     social_share_template = open(SOCIAL_SHARE_TEMPLATE).read()
+    index_template = open(INDEX_TEMPLATE).read()
+    index_card_template = open(INDEX_CARD_TEMPLATE).read()
     all_snippets = load_all_snippets()
     print(f"Loaded {len(all_snippets)} snippets")
 
@@ -234,16 +252,20 @@ def main():
 
     print(f"Rebuilt data/snippets.json with {len(snippets_list)} entries")
 
-    # Patch index.html with the current snippet count
+    # Generate index.html from template
+    tip_cards = "\n".join(
+        render_index_card(index_card_template, data)
+        for data in all_snippets.values()
+    )
     count = len(all_snippets)
-    index_path = os.path.join(SITE_DIR, "index.html")
-    with open(index_path) as f:
-        index_content = f.read()
-    index_content = index_content.replace("{{snippetCount}}", str(count))
-    with open(index_path, "w") as f:
-        f.write(index_content)
+    index_html = replace_tokens(index_template, {
+        "tipCards": tip_cards,
+        "snippetCount": str(count),
+    })
+    with open(os.path.join(SITE_DIR, "index.html"), "w") as f:
+        f.write(index_html)
 
-    print(f"Patched index.html with snippet count: {count}")
+    print(f"Generated index.html with {count} cards")
 
 
 if __name__ == "__main__":

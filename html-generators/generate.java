@@ -61,13 +61,16 @@ record Snippet(JsonNode node) {
     }
 }
 
-record Templates(String page, String whyCard, String relatedCard, String socialShare) {
+record Templates(String page, String whyCard, String relatedCard, String socialShare,
+                 String index, String indexCard) {
     static Templates load() throws IOException {
         return new Templates(
             Files.readString(Path.of("templates/slug-template.html")),
             Files.readString(Path.of("templates/why-card.html")),
             Files.readString(Path.of("templates/related-card.html")),
-            Files.readString(Path.of("templates/social-share.html")));
+            Files.readString(Path.of("templates/social-share.html")),
+            Files.readString(Path.of("templates/index.html")),
+            Files.readString(Path.of("templates/index-card.html")));
     }
 }
 
@@ -97,10 +100,15 @@ void main() throws IOException {
     Files.writeString(Path.of(SITE_DIR, "data", "snippets.json"), prettyMapper.writeValueAsString(snippetsList) + "\n");
     IO.println("Rebuilt data/snippets.json with %d entries".formatted(snippetsList.size()));
 
-    // Patch index.html with the current snippet count
-    var indexPath = Path.of(SITE_DIR, "index.html");
-    Files.writeString(indexPath, Files.readString(indexPath).replace("{{snippetCount}}", String.valueOf(allSnippets.size())));
-    IO.println("Patched index.html with snippet count: %d".formatted(allSnippets.size()));
+    // Generate index.html from template
+    var tipCards = allSnippets.values().stream()
+            .map(s -> renderIndexCard(templates.indexCard(), s))
+            .collect(Collectors.joining("\n"));
+    var indexHtml = replaceTokens(templates.index(), Map.of(
+            "tipCards", tipCards,
+            "snippetCount", String.valueOf(allSnippets.size())));
+    Files.writeString(Path.of(SITE_DIR, "index.html"), indexHtml);
+    IO.println("Generated index.html with %d cards".formatted(allSnippets.size()));
 }
 
 SequencedMap<String, Snippet> loadAllSnippets() throws IOException {
@@ -164,6 +172,14 @@ String renderNavArrows(Snippet snippet) {
             .map(n -> "<a href=\"/%s.html\" aria-label=\"Next pattern\">→</a>".formatted(n))
             .orElse("");
     return prev + "\n          " + next;
+}
+
+String renderIndexCard(String tpl, Snippet s) {
+    return replaceTokens(tpl, Map.ofEntries(
+            Map.entry("category", s.category()), Map.entry("slug", s.slug()),
+            Map.entry("catDisplay", s.catDisplay()), Map.entry("title", escape(s.title())),
+            Map.entry("oldCode", escape(s.oldCode())), Map.entry("modernCode", escape(s.modernCode())),
+            Map.entry("jdkVersion", s.jdkVersion())));
 }
 
 String renderWhyCards(String tpl, JsonNode whyList) {

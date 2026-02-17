@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>java.evolved Code Snippets | java.evolved</title>
+  <meta name="description" content="A collection of modern Java code snippets. Every old Java pattern next to its clean, modern replacement — side by side.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://javaevolved.github.io">
+
+  <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#f97316">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="java.evolved">
+
+  <meta property="og:title" content="java.evolved Code Snippets | java.evolved">
+  <meta property="og:description" content="A collection of modern Java code snippets. Every old Java pattern next to its clean, modern replacement — side by side.">
+  <meta property="og:url" content="https://javaevolved.github.io">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="java.evolved">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://javaevolved.github.io/images/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@bruaborges">
+  <meta name="twitter:title" content="java.evolved Code Snippets | java.evolved">
+  <meta name="twitter:description" content="A collection of modern Java code snippets. Every old Java pattern next to its clean, modern replacement — side by side.">
+  <meta name="twitter:image" content="https://javaevolved.github.io/images/social-card.png">
+
+  <style>
+    @font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url('/assets/fonts/inter.woff2') format('woff2')}
+    @font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 700;font-display:swap;src:url('/assets/fonts/jetbrains-mono.woff2') format('woff2')}
+  </style>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "java.evolved",
+    "url": "https:\/\/javaevolved.github.io",
+    "description": "A collection of modern Java code snippets. Every old Java pattern next to its clean, modern replacement — side by side."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "java.evolved: Java has evolved. Your code can too.",
+    "url": "https:\/\/javaevolved.github.io\/",
+    "description": "A collection of modern Java code snippets. Every old Java pattern next to its clean, modern replacement — side by side.",
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": {{snippetCount}},
+      "itemListElement": [
+                {"@type": "ListItem", "position": 1, "url": "https:\/\/javaevolved.github.io\/type-inference-with-var", "name": "Type inference with var"}
+                ,{"@type": "ListItem", "position": 2, "url": "https:\/\/javaevolved.github.io\/text-blocks-for-multiline-strings", "name": "Text blocks for multiline strings"}
+                ,{"@type": "ListItem", "position": 3, "url": "https:\/\/javaevolved.github.io\/switch-expressions", "name": "Switch expressions"}
+                ,{"@type": "ListItem", "position": 4, "url": "https:\/\/javaevolved.github.io\/pattern-matching-instanceof", "name": "Pattern matching for instanceof"}
+                ,{"@type": "ListItem", "position": 5, "url": "https:\/\/javaevolved.github.io\/records-for-data-classes", "name": "Records for data classes"}
+                ,{"@type": "ListItem", "position": 6, "url": "https:\/\/javaevolved.github.io\/sealed-classes", "name": "Sealed classes for type hierarchies"}
+                ,{"@type": "ListItem", "position": 7, "url": "https:\/\/javaevolved.github.io\/record-patterns", "name": "Record patterns (destructuring)"}
+                ,{"@type": "ListItem", "position": 8, "url": "https:\/\/javaevolved.github.io\/unnamed-variables", "name": "Unnamed variables with _"}
+                ,{"@type": "ListItem", "position": 9, "url": "https:\/\/javaevolved.github.io\/compact-source-files", "name": "Compact source files"}
+                ,{"@type": "ListItem", "position": 10, "url": "https:\/\/javaevolved.github.io\/flexible-constructor-bodies", "name": "Flexible constructor bodies"}
+                ,{"@type": "ListItem", "position": 11, "url": "https:\/\/javaevolved.github.io\/enhanced-for-with-var", "name": "Enhanced for with var"}
+                ,{"@type": "ListItem", "position": 12, "url": "https:\/\/javaevolved.github.io\/diamond-operator", "name": "Diamond operator"}
+                ,{"@type": "ListItem", "position": 13, "url": "https:\/\/javaevolved.github.io\/private-interface-methods", "name": "Private interface methods"}
+                ,{"@type": "ListItem", "position": 14, "url": "https:\/\/javaevolved.github.io\/pattern-matching-switch", "name": "Pattern matching in switch"}
+                ,{"@type": "ListItem", "position": 15, "url": "https:\/\/javaevolved.github.io\/guarded-patterns", "name": "Guarded patterns with when"}
+                ,{"@type": "ListItem", "position": 16, "url": "https:\/\/javaevolved.github.io\/primitive-types-in-patterns", "name": "Primitive types in patterns"}
+                ,{"@type": "ListItem", "position": 17, "url": "https:\/\/javaevolved.github.io\/module-import-declarations", "name": "Module import declarations"}
+                ,{"@type": "ListItem", "position": 18, "url": "https:\/\/javaevolved.github.io\/exhaustive-switch", "name": "Exhaustive switch without default"}
+                ,{"@type": "ListItem", "position": 19, "url": "https:\/\/javaevolved.github.io\/immutable-list-creation", "name": "Immutable list creation"}
+                ,{"@type": "ListItem", "position": 20, "url": "https:\/\/javaevolved.github.io\/immutable-map-creation", "name": "Immutable map creation"}
+                ,{"@type": "ListItem", "position": 21, "url": "https:\/\/javaevolved.github.io\/immutable-set-creation", "name": "Immutable set creation"}
+                ,{"@type": "ListItem", "position": 22, "url": "https:\/\/javaevolved.github.io\/copying-collections-immutably", "name": "Copying collections immutably"}
+                ,{"@type": "ListItem", "position": 23, "url": "https:\/\/javaevolved.github.io\/map-entry-factory", "name": "Map.entry() factory"}
+                ,{"@type": "ListItem", "position": 24, "url": "https:\/\/javaevolved.github.io\/sequenced-collections", "name": "Sequenced collections"}
+                ,{"@type": "ListItem", "position": 25, "url": "https:\/\/javaevolved.github.io\/collectors-teeing", "name": "Collectors.teeing()"}
+                ,{"@type": "ListItem", "position": 26, "url": "https:\/\/javaevolved.github.io\/stream-toarray-typed", "name": "Typed stream toArray"}
+                ,{"@type": "ListItem", "position": 27, "url": "https:\/\/javaevolved.github.io\/unmodifiable-collectors", "name": "Unmodifiable collectors"}
+                ,{"@type": "ListItem", "position": 28, "url": "https:\/\/javaevolved.github.io\/string-isblank", "name": "String.isBlank()"}
+                ,{"@type": "ListItem", "position": 29, "url": "https:\/\/javaevolved.github.io\/string-strip", "name": "String.strip() vs trim()"}
+                ,{"@type": "ListItem", "position": 30, "url": "https:\/\/javaevolved.github.io\/string-repeat", "name": "String.repeat()"}
+                ,{"@type": "ListItem", "position": 31, "url": "https:\/\/javaevolved.github.io\/string-indent-transform", "name": "String.indent() and transform()"}
+                ,{"@type": "ListItem", "position": 32, "url": "https:\/\/javaevolved.github.io\/string-formatted", "name": "String.formatted()"}
+                ,{"@type": "ListItem", "position": 33, "url": "https:\/\/javaevolved.github.io\/multiline-json-sql", "name": "Multiline JSON\/SQL\/HTML"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/string-chars-stream", "name": "String chars as stream"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/stream-of-nullable", "name": "Stream.ofNullable()"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/stream-iterate-predicate", "name": "Stream.iterate() with predicate"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/stream-takewhile-dropwhile", "name": "Stream takeWhile \/ dropWhile"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/collectors-flatmapping", "name": "Collectors.flatMapping()"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/stream-tolist", "name": "Stream.toList()"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/stream-mapmulti", "name": "Stream.mapMulti()"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/stream-gatherers", "name": "Stream gatherers"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/virtual-thread-executor", "name": "Virtual thread executor"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/optional-ifpresentorelse", "name": "Optional.ifPresentOrElse()"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/optional-or", "name": "Optional.or() fallback"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/virtual-threads", "name": "Virtual threads"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/structured-concurrency", "name": "Structured concurrency"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/scoped-values", "name": "Scoped values"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/stable-values", "name": "Stable values"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/completablefuture-chaining", "name": "CompletableFuture chaining"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/executor-try-with-resources", "name": "ExecutorService auto-close"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/thread-sleep-duration", "name": "Thread.sleep with Duration"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/process-api", "name": "Modern Process API"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/concurrent-http-virtual", "name": "Concurrent HTTP with virtual threads"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/lock-free-lazy-init", "name": "Lock-free lazy initialization"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/http-client", "name": "Modern HTTP client"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/reading-files", "name": "Reading files"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/writing-files", "name": "Writing files"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/inputstream-transferto", "name": "InputStream.transferTo()"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/path-of", "name": "Path.of() factory"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/try-with-resources-effectively-final", "name": "Try-with-resources improvement"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/files-mismatch", "name": "Files.mismatch()"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/deserialization-filters", "name": "Deserialization filters"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/helpful-npe", "name": "Helpful NullPointerExceptions"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/optional-chaining", "name": "Optional chaining"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/require-nonnull-else", "name": "Objects.requireNonNullElse()"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/multi-catch", "name": "Multi-catch exception handling"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/null-in-switch", "name": "Null case in switch"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/record-based-errors", "name": "Record-based error responses"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/java-time-basics", "name": "java.time API basics"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/duration-and-period", "name": "Duration and Period"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/date-formatting", "name": "Date formatting"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/instant-precision", "name": "Instant with nanosecond precision"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/math-clamp", "name": "Math.clamp()"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/hex-format", "name": "HexFormat"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/pem-encoding", "name": "PEM encoding\/decoding"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/key-derivation-functions", "name": "Key Derivation Functions"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/strong-random", "name": "Strong random generation"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/tls-default", "name": "TLS 1.3 by default"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/jshell-prototyping", "name": "JShell for prototyping"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/single-file-execution", "name": "Single-file execution"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/multi-file-source", "name": "Multi-file source launcher"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/jfr-profiling", "name": "JFR for profiling"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/compact-object-headers", "name": "Compact object headers"}
+                ,{"@type": "ListItem", "position": 34, "url": "https:\/\/javaevolved.github.io\/aot-class-preloading", "name": "AOT class preloading"}
+                ,{"@type": "ListItem", "position": 35, "url": "https:\/\/javaevolved.github.io\/default-interface-methods", "name": "Default interface methods"}
+              ]
+    }
+  }
+  </script>
+</head>
+<body data-page="home">
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo">java.<span>evolved</span></a>
+      <div class="nav-right">
+        <a href="https://github.com/javaevolved/javaevolved.github.io" target="_blank" rel="noopener" class="github-link" aria-label="View on GitHub">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M10 3C6.13 3 3 6.13 3 10c0 3.09 2 5.71 4.77 6.63.35.06.48-.15.48-.33v-1.16c-1.95.42-2.36-1.07-2.36-1.07-.32-.81-.78-1.03-.78-1.03-.64-.43.05-.42.05-.42.7.05 1.07.72 1.07.72.63 1.08 1.65.77 2.05.59.06-.46.24-.77.44-.95-1.57-.18-3.22-.78-3.22-3.48 0-.77.27-1.4.72-1.89-.07-.18-.31-.9.07-1.87 0 0 .59-.19 1.93.72.56-.16 1.16-.24 1.76-.24s1.2.08 1.76.24c1.34-.91 1.93-.72 1.93-.72.38.97.14 1.69.07 1.87.45.49.72 1.12.72 1.89 0 2.71-1.65 3.3-3.23 3.47.25.22.48.65.48 1.31v1.94c0 .19.13.4.48.33C15 15.71 17 13.09 17 10c0-3.87-3.13-7-7-7z"/>
+          </svg>
+        </a>
+        <div class="cmd-bar" id="searchTrigger">Search… <kbd>⌘K</kbd></div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">✦ {{snippetCount}} modern patterns · Java 8 → Java 25</div>
+    <h1>Java has evolved.<br><span class="gradient">Your code can too.</span></h1>
+    <p>Every old Java pattern next to its clean, modern replacement — side by side.</p>
+    <a href="/language/records-for-data-classes.html" class="hero-compare">
+      <div class="hero-compare-side old">
+        <div class="compare-label old">✕ Old</div>
+        <pre class="code-text" style="margin:0;background:none;border:none;font:inherit;line-height:inherit;padding:0;overflow:visible"><code style="background:none;border:none;padding:0;font:inherit">public class Point {
+    private final int x, y;
+    public Point(int x, int y) { ... }
+    public int getX() { return x; }
+    public int getY() { return y; }
+    // equals, hashCode, toString
+}</code></pre>
+      </div>
+      <div class="hero-compare-side modern">
+        <div class="compare-label modern">✓ Modern</div>
+        <pre class="code-text" style="margin:0;background:none;border:none;font:inherit;line-height:inherit;padding:0;overflow:visible"><code style="background:none;border:none;padding:0;font:inherit">public record Point(int x, int y) {}</code></pre>
+      </div>
+    </a>
+  </section>
+
+  <div class="social-share" id="socialShare">
+    <span class="share-label">Share</span>
+    <a href="https://x.com/intent/tweet?url=https%3A%2F%2Fjavaevolved.github.io&text=java.evolved%20%E2%80%93%20Every%20old%20Java%20pattern%20next%20to%20its%20modern%20replacement%2C%20side%20by%20side." target="_blank" rel="noopener" class="share-btn share-x" aria-label="Share on X">𝕏</a>
+    <a href="https://bsky.app/intent/compose?text=java.evolved%20%E2%80%93%20Every%20old%20Java%20pattern%20next%20to%20its%20modern%20replacement%2C%20side%20by%20side.%20https%3A%2F%2Fjavaevolved.github.io" target="_blank" rel="noopener" class="share-btn share-bsky" aria-label="Share on Bluesky">🦋</a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fjavaevolved.github.io" target="_blank" rel="noopener" class="share-btn share-li" aria-label="Share on LinkedIn">in</a>
+    <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fjavaevolved.github.io&title=java.evolved%20%E2%80%93%20Old%20Java%20vs%20Modern%20Java%2C%20side%20by%20side" target="_blank" rel="noopener" class="share-btn share-reddit" aria-label="Share on Reddit">⬡</a>
+  </div>
+
+  <section class="copilot-callout">
+    <div class="copilot-callout-inner">
+      <span class="copilot-icon">🤖</span>
+      <div class="copilot-callout-text">
+        <strong>Modernize your Java codebase with GitHub Copilot.</strong>
+        Let Copilot help you migrate legacy patterns to modern Java — automatically.
+      </div>
+      <div class="copilot-callout-links">
+        <a href="https://github.com/solutions/use-case/app-modernization" target="_blank" rel="noopener">App Modernization →</a>
+        <a href="https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/modernize-java-applications" target="_blank" rel="noopener">Java Guide →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="all-comparisons" style="padding-top:24px">
+    <div class="section-header">
+      <h2 class="section-title">All comparisons</h2>
+      <span class="section-badge">{{snippetCount}} snippets</span>
+    </div>
+    <div class="filter-pills" id="categoryFilter">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="language">Language</button>
+      <button class="filter-pill" data-filter="collections">Collections</button>
+      <button class="filter-pill" data-filter="strings">Strings</button>
+      <button class="filter-pill" data-filter="streams">Streams</button>
+      <button class="filter-pill" data-filter="concurrency">Concurrency</button>
+      <button class="filter-pill" data-filter="io">I/O</button>
+      <button class="filter-pill" data-filter="errors">Errors</button>
+      <button class="filter-pill" data-filter="datetime">Date/Time</button>
+      <button class="filter-pill" data-filter="security">Security</button>
+      <button class="filter-pill" data-filter="tooling">Tooling</button>
+    </div>
+    <div class="tips-grid" id="tipsGrid">
+{{tipCards}}
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="number orange">{{snippetCount}}</div>
+      <div class="label">Modern Patterns</div>
+    </div>
+    <div class="stat-card">
+      <div class="number green">17</div>
+      <div class="label">JDK Versions Covered</div>
+    </div>
+    <div class="stat-card">
+      <div class="number blue">10</div>
+      <div class="label">Categories</div>
+    </div>
+    <div class="stat-card">
+      <div class="number pink">0</div>
+      <div class="label">Lines of Python Required</div>
+    </div>
+  </div>
+
+  <footer>
+    <p><a href="/">java.evolved</a> — Java has evolved. Your code can too.</p>
+    <p>Made with ❤️ by <a href="https://github.com/brunoborges" target="_blank" rel="noopener">Bruno Borges</a> and <a href="https://github.com/features/copilot" target="_blank" rel="noopener">GitHub Copilot</a></p>
+    <p><a href="https://github.com/javaevolved/javaevolved.github.io" target="_blank" rel="noopener">View on GitHub</a></p>
+  </footer>
+
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-modal">
+      <div class="search-input-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input class="search-input" id="searchInput" type="text" placeholder="Search snippets…" autocomplete="off">
+        <span class="search-esc" id="searchClose">ESC</span>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+      <div class="search-footer">
+        <span><kbd>↑↓</kbd> navigate</span>
+        <span><kbd>↵</kbd> open</span>
+        <span><kbd>esc</kbd> close</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
