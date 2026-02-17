@@ -35,7 +35,7 @@
     "description": "Widely available since JDK 11 (Sept 2018)"
   },
   "prev": "security/strong-random",
-  "next": "tooling/jshell-prototyping",
+  "next": "security/random-generator",
   "related": [
     "security/pem-encoding",
     "security/key-derivation-functions",

@@ -35,7 +35,7 @@
     "description": "Widely available since JDK 9 (Sept 2017)"
   },
   "prev": "streams/optional-ifpresentorelse",
-  "next": "concurrency/virtual-threads",
+  "next": "streams/predicate-not",
   "related": [
     "streams/stream-iterate-predicate",
     "streams/stream-gatherers",

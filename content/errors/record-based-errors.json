@@ -35,7 +35,7 @@
     "description": "Widely available since JDK 16 (March 2021)"
   },
   "prev": "errors/null-in-switch",
-  "next": "datetime/java-time-basics",
+  "next": "errors/optional-orelsethrow",
   "related": [
     "errors/helpful-npe",
     "errors/require-nonnull-else",

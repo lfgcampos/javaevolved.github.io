@@ -1309,6 +1309,33 @@ String result = text
           <span class="arrow-link">→</span>
         </div>
       </a>
+      <a href="/strings/string-lines.html" class="tip-card" data-category="strings">
+        <div class="tip-card-body">
+          <div class="tip-card-header">
+            <div class="tip-badges"><span class="badge strings">Strings</span></div>
+          </div>
+          <h3>String.lines() for line splitting</h3>
+        </div>
+        <div class="card-code">
+          <div class="card-code-layer old-layer">
+            <span class="mini-label">Old</span>
+            <span class="code-text">String[] lines = text.split(&quot;\n&quot;);
+for (String line : lines) {
+    System.out.println(line);
+}</span>
+          </div>
+          <div class="card-code-layer modern-layer">
+            <span class="mini-label">Modern</span>
+            <span class="code-text">text.lines()
+    .forEach(System.out::println);</span>
+          </div>
+          <span class="hover-hint">hover to see modern →</span>
+        </div>
+        <div class="tip-card-footer">
+          <span class="browser-support"><span class="dot"></span> JDK 11+</span>
+          <span class="arrow-link">→</span>
+        </div>
+      </a>
       <a href="/streams/stream-of-nullable.html" class="tip-card" data-category="streams">
         <div class="tip-card-body">
           <div class="tip-card-header">
@@ -1618,6 +1645,33 @@ if (!cfg.isPresent()) {
         </div>
         <div class="tip-card-footer">
           <span class="browser-support"><span class="dot"></span> JDK 9+</span>
+          <span class="arrow-link">→</span>
+        </div>
+      </a>
+      <a href="/streams/predicate-not.html" class="tip-card" data-category="streams">
+        <div class="tip-card-body">
+          <div class="tip-card-header">
+            <div class="tip-badges"><span class="badge streams">Streams</span></div>
+          </div>
+          <h3>Predicate.not() for negation</h3>
+        </div>
+        <div class="card-code">
+          <div class="card-code-layer old-layer">
+            <span class="mini-label">Old</span>
+            <span class="code-text">list.stream()
+    .filter(s -&gt; !s.isBlank())
+    .collect(Collectors.toList());</span>
+          </div>
+          <div class="card-code-layer modern-layer">
+            <span class="mini-label">Modern</span>
+            <span class="code-text">list.stream()
+    .filter(Predicate.not(String::isBlank))
+    .toList();</span>
+          </div>
+          <span class="hover-hint">hover to see modern →</span>
+        </div>
+        <div class="tip-card-footer">
+          <span class="browser-support"><span class="dot"></span> JDK 11+</span>
           <span class="arrow-link">→</span>
         </div>
       </a>
@@ -2411,6 +2465,35 @@ public class ErrorResponse {
           <span class="arrow-link">→</span>
         </div>
       </a>
+      <a href="/errors/optional-orelsethrow.html" class="tip-card" data-category="errors">
+        <div class="tip-card-body">
+          <div class="tip-card-header">
+            <div class="tip-badges"><span class="badge errors">Errors</span></div>
+          </div>
+          <h3>Optional.orElseThrow() without supplier</h3>
+        </div>
+        <div class="card-code">
+          <div class="card-code-layer old-layer">
+            <span class="mini-label">Old</span>
+            <span class="code-text">// Risky: get() throws if empty
+String value = optional.get();
+
+// Verbose supplier
+String value = optional
+    .orElseThrow(NoSuchElementException::new);</span>
+          </div>
+          <div class="card-code-layer modern-layer">
+            <span class="mini-label">Modern</span>
+            <span class="code-text">// Clear intent
+String value = optional.orElseThrow();</span>
+          </div>
+          <span class="hover-hint">hover to see modern →</span>
+        </div>
+        <div class="tip-card-footer">
+          <span class="browser-support"><span class="dot"></span> JDK 10+</span>
+          <span class="arrow-link">→</span>
+        </div>
+      </a>
       <a href="/datetime/java-time-basics.html" class="tip-card" data-category="datetime">
         <div class="tip-card-body">
           <div class="tip-card-header">
@@ -2728,6 +2811,32 @@ var client = HttpClient.newBuilder()
         </div>
         <div class="tip-card-footer">
           <span class="browser-support"><span class="dot"></span> JDK 11+</span>
+          <span class="arrow-link">→</span>
+        </div>
+      </a>
+      <a href="/security/random-generator.html" class="tip-card" data-category="security">
+        <div class="tip-card-body">
+          <div class="tip-card-header">
+            <div class="tip-badges"><span class="badge security">Security</span></div>
+          </div>
+          <h3>RandomGenerator interface</h3>
+        </div>
+        <div class="card-code">
+          <div class="card-code-layer old-layer">
+            <span class="mini-label">Old</span>
+            <span class="code-text">Random rng = new Random();
+int value = rng.nextInt(100);</span>
+          </div>
+          <div class="card-code-layer modern-layer">
+            <span class="mini-label">Modern</span>
+            <span class="code-text">var rng = RandomGenerator
+    .of(&quot;L64X128MixRandom&quot;);
+int value = rng.nextInt(100);</span>
+          </div>
+          <span class="hover-hint">hover to see modern →</span>
+        </div>
+        <div class="tip-card-footer">
+          <span class="browser-support"><span class="dot"></span> JDK 17+</span>
           <span class="arrow-link">→</span>
         </div>
       </a>
