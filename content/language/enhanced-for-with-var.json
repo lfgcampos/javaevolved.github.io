@@ -1,7 +1,7 @@
 {
   "id": 11,
   "slug": "enhanced-for-with-var",
-  "title": "Enhanced for with var",
+  "title": "Loop variable inference",
   "category": "language",
   "difficulty": "beginner",
   "jdkVersion": "10",
