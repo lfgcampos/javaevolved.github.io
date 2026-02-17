@@ -6,7 +6,7 @@ on:
     paths:
       - 'content/*/**.json'
       - 'templates/**'
-      - 'Generate.java'
+      - 'generate.java'
       - 'site/**'
   workflow_dispatch:
 
@@ -36,11 +36,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.jbang
-          key: jbang-${{ runner.os }}-${{ hashFiles('Generate.java') }}
+          key: jbang-${{ runner.os }}-${{ hashFiles('generate.java') }}
           restore-keys: jbang-${{ runner.os }}-
 
       - name: Generate HTML pages and snippets.json
-        run: jbang Generate.java
+        run: jbang generate.java
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

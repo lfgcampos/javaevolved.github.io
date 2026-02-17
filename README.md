@@ -38,7 +38,7 @@ This site uses a **JSON-first** build pipeline:
 
 - **Source of truth**: Individual `category/slug.json` files (85 across 10 category folders)
 - **Template**: `slug-template.html` — shared HTML template with `{{placeholder}}` tokens
-- **Generator**: `Generate.java` — a [JBang](https://jbang.dev) script that produces all HTML detail pages and `data/snippets.json`
+- **Generator**: `generate.java` — a [JBang](https://jbang.dev) script that produces all HTML detail pages and `data/snippets.json`
 - **Deploy**: GitHub Actions runs the generator and deploys to GitHub Pages
 
 Generated files (`category/*.html` and `data/snippets.json`) are in `.gitignore` — never edit them directly.
@@ -54,7 +54,7 @@ Generated files (`category/*.html` and `data/snippets.json`) are in `.gitignore`
 
 ```bash
 # Generate all HTML pages and data/snippets.json into site/
-jbang Generate.java
+jbang generate.java
 
 # Serve locally
 python3 -m http.server -d site 8090
@@ -76,7 +76,7 @@ Contributions are welcome! Content is managed as JSON files — never edit gener
 1. Fork the repo
 2. Create or edit a JSON file in the appropriate content folder (e.g. `content/language/my-feature.json`)
 3. Follow the [snippet JSON schema](.github/copilot-instructions.md) for all required fields
-4. Run `jbang Generate.java` to verify your changes build correctly
+4. Run `jbang generate.java` to verify your changes build correctly
 5. Update `site/index.html` with a new preview card if adding a new snippet
 6. Open a pull request
 
