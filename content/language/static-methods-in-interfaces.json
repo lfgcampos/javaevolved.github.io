@@ -9,7 +9,7 @@
   "modernLabel": "Java 8+",
   "oldApproach": "Utility classes",
   "modernApproach": "Interface static methods",
-  "oldCode": "// Separate utility class needed\npublic class StringUtils {\n    public static boolean isBlank(\n        String s) {\n        return s == null ||\n               s.trim().isEmpty();\n    }\n}\n\n// Usage\nif (StringUtils.isBlank(input)) { ... }",
+  "oldCode": "// Separate utility class needed\npublic class ValidatorUtils {\n    public static boolean isBlank(\n        String s) {\n        return s == null ||\n               s.trim().isEmpty();\n    }\n}\n\n// Usage\nif (ValidatorUtils.isBlank(input)) { ... }",
   "modernCode": "public interface Validator {\n    boolean validate(String s);\n\n    static boolean isBlank(String s) {\n        return s == null ||\n               s.trim().isEmpty();\n    }\n}\n\n// Usage\nif (Validator.isBlank(input)) { ... }",
   "summary": "Add static utility methods directly to interfaces instead of separate utility classes.",
   "explanation": "Before Java 8, utility methods related to an interface had to live in a separate class (e.g., Collections for Collection). Static methods in interfaces let you keep related utilities together. Common in modern APIs like Comparator.comparing(), Stream.of(), and List.of().",
