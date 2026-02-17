@@ -2,7 +2,7 @@
 name: New Pattern Submission
 description: Submit a new modern Java pattern
 title: "[Pattern] "
-labels: ["new-pattern"]
+labels: ["slug"]
 body:
   - type: markdown
     attributes:
