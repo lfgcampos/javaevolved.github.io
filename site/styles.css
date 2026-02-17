@@ -934,15 +934,19 @@ nav {
   border-color: var(--border-light);
 }
 
-.why-card .icon {
+.why-card .why-icon {
   font-size: 1.5rem;
-  margin-bottom: 12px;
+  display: inline;
+  margin-right: 8px;
+  vertical-align: middle;
 }
 
-.why-card h4 {
+.why-card h3 {
   font-size: 0.95rem;
   font-weight: 600;
   margin-bottom: 8px;
+  display: inline;
+  vertical-align: middle;
 }
 
 .why-card p {
