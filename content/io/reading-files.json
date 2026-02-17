@@ -34,7 +34,7 @@
     "state": "available",
     "description": "Widely available since JDK 11 (Sept 2018)"
   },
-  "prev": "io/http-client",
+  "prev": "io/io-class-console-io",
   "next": "io/writing-files",
   "related": [
     "io/try-with-resources-effectively-final",

@@ -35,7 +35,7 @@
     "description": "Widely available since JDK 11 (Sept 2018)"
   },
   "prev": "concurrency/lock-free-lazy-init",
-  "next": "io/reading-files",
+  "next": "io/io-class-console-io",
   "related": [
     "io/reading-files",
     "io/inputstream-transferto",
