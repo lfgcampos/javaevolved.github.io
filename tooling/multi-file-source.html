@@ -256,12 +256,10 @@ $ java Main
             <div class="card-code-layer modern-layer">
               <div class="mini-label">Java 25</div>
               <pre class="code-text">// Training run:
-$ java -XX:AOTMode=record \
-    -XX:AOTConfiguration=app.aotconf \
+$ java -XX:AOTCacheOutput=app.aot \
     -cp app.jar com.App
 // Production:
-$ java -XX:AOTMode=on \
-    -XX:AOTCache=app.aot \
+$ java -XX:AOTCache=app.aot \
     -cp app.jar com.App</pre>
             </div>
             <span class="hover-hint">Hover to see modern ➜</span>

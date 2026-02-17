@@ -232,7 +232,7 @@ try {
 } finally { exec.shutdown(); }</pre>
             </div>
             <div class="card-code-layer modern-layer">
-              <div class="mini-label">Java 25</div>
+              <div class="mini-label">Java 25 (Preview)</div>
               <pre class="code-text">try (var scope = new StructuredTaskScope
         .ShutdownOnFailure()) {
     var u = scope.fork(this::fetchUser);
@@ -273,7 +273,7 @@ Logger getLogger() {
 }</pre>
             </div>
             <div class="card-code-layer modern-layer">
-              <div class="mini-label">Java 25</div>
+              <div class="mini-label">Java 25 (Preview)</div>
               <pre class="code-text">private final StableValue&lt;Logger&gt; logger =
     StableValue.of(this::createLogger);
 
@@ -315,7 +315,7 @@ Logger getLogger() {
 }</pre>
             </div>
             <div class="card-code-layer modern-layer">
-              <div class="mini-label">Java 25</div>
+              <div class="mini-label">Java 25 (Preview)</div>
               <pre class="code-text">class Config {
     private static final
         StableValue&lt;Config&gt; INST =
