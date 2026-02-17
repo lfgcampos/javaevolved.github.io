@@ -4,16 +4,10 @@ on:
   push:
     branches: [main]
     paths:
-      - '*/**.json'
-      - 'slug-template.html'
+      - 'content/*/**.json'
+      - 'templates/**'
       - 'Generate.java'
-      - 'index.html'
-      - 'styles.css'
-      - 'app.js'
-      - 'manifest.json'
-      - 'favicon.svg'
-      - 'assets/**'
-      - 'images/**'
+      - 'site/**'
   workflow_dispatch:
 
 permissions:
@@ -54,7 +48,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: site
 
   deploy:
     needs: build

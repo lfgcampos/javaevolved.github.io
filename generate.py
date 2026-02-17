@@ -9,7 +9,9 @@ import re
 from urllib.parse import quote
 
 BASE_URL = "https://javaevolved.github.io"
-TEMPLATE_FILE = "slug-template.html"
+TEMPLATE_FILE = "templates/slug-template.html"
+CONTENT_DIR = "content"
+SITE_DIR = "site"
 
 CATEGORY_DISPLAY = {
     "language": "Language",
@@ -54,7 +56,7 @@ def load_all_snippets():
     ]
     json_files = []
     for cat in categories:
-        json_files.extend(sorted(glob.glob(f"{cat}/*.json")))
+        json_files.extend(sorted(glob.glob(f"{CONTENT_DIR}/{cat}/*.json")))
     for path in json_files:
         with open(path) as f:
             data = json.load(f)
@@ -215,7 +217,9 @@ def main():
 
     for key, data in all_snippets.items():
         html_content = generate_html(template, data, all_snippets).strip()
-        out_path = f"{data['category']}/{data['slug']}.html"
+        out_dir = os.path.join(SITE_DIR, data['category'])
+        os.makedirs(out_dir, exist_ok=True)
+        out_path = os.path.join(out_dir, f"{data['slug']}.html")
         with open(out_path, "w", newline="") as f:
             f.write(html_content)
 
@@ -228,8 +232,8 @@ def main():
         entry = {k: v for k, v in data.items() if k not in ("_path", "prev", "next", "related")}
         snippets_list.append(entry)
 
-    os.makedirs("data", exist_ok=True)
-    with open("data/snippets.json", "w") as f:
+    os.makedirs(os.path.join(SITE_DIR, "data"), exist_ok=True)
+    with open(os.path.join(SITE_DIR, "data", "snippets.json"), "w") as f:
         json.dump(snippets_list, f, indent=2, ensure_ascii=False)
         f.write("\n")
 
@@ -237,10 +241,11 @@ def main():
 
     # Patch index.html with the current snippet count
     count = len(all_snippets)
-    with open("index.html") as f:
+    index_path = os.path.join(SITE_DIR, "index.html")
+    with open(index_path) as f:
         index_content = f.read()
     index_content = index_content.replace("{{snippetCount}}", str(count))
-    with open("index.html", "w") as f:
+    with open(index_path, "w") as f:
         f.write(index_content)
 
     print(f"Patched index.html with snippet count: {count}")

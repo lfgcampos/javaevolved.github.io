@@ -27,7 +27,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
  */
 
 static final String BASE_URL = "https://javaevolved.github.io";
-static final String TEMPLATE_FILE = "slug-template.html";
+static final String TEMPLATE_FILE = "templates/slug-template.html";
+static final String CONTENT_DIR = "content";
+static final String SITE_DIR = "site";
 static final Pattern TOKEN_PATTERN = Pattern.compile("\\{\\{(\\w+)}}");
 static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -109,7 +111,8 @@ void main() throws IOException {
     // Generate HTML files
     for (var snippet : allSnippets.values()) {
         var html = generateHtml(template, snippet, allSnippets).strip();
-        Files.writeString(Path.of(snippet.category(), snippet.slug() + ".html"), html);
+        Files.createDirectories(Path.of(SITE_DIR, snippet.category()));
+        Files.writeString(Path.of(SITE_DIR, snippet.category(), snippet.slug() + ".html"), html);
     }
     IO.println("Generated %d HTML files".formatted(allSnippets.size()));
 
@@ -123,17 +126,18 @@ void main() throws IOException {
             })
             .toList();
 
-    Files.createDirectories(Path.of("data"));
+    Files.createDirectories(Path.of(SITE_DIR, "data"));
     var prettyMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-    Files.writeString(Path.of("data", "snippets.json"),
+    Files.writeString(Path.of(SITE_DIR, "data", "snippets.json"),
             prettyMapper.writeValueAsString(snippetsList) + "\n");
     IO.println("Rebuilt data/snippets.json with %d entries".formatted(snippetsList.size()));
 
     // Patch index.html with the current snippet count
     int count = allSnippets.size();
-    var indexContent = Files.readString(Path.of("index.html"))
+    var indexPath = Path.of(SITE_DIR, "index.html");
+    var indexContent = Files.readString(indexPath)
             .replace("{{snippetCount}}", String.valueOf(count));
-    Files.writeString(Path.of("index.html"), indexContent);
+    Files.writeString(indexPath, indexContent);
     IO.println("Patched index.html with snippet count: %d".formatted(count));
 }
 
@@ -142,7 +146,7 @@ void main() throws IOException {
 SequencedMap<String, Snippet> loadAllSnippets() throws IOException {
     SequencedMap<String, Snippet> snippets = new LinkedHashMap<>();
     for (var cat : CATEGORIES) {
-        var catDir = Path.of(cat);
+        var catDir = Path.of(CONTENT_DIR, cat);
         if (!Files.isDirectory(catDir)) continue;
 
         try (var stream = Files.newDirectoryStream(catDir, "*.json")) {
