@@ -494,6 +494,7 @@ nav {
 .old-layer {
   opacity: 1;
   background: var(--old-bg);
+  min-height: 100%;
 }
 
 .modern-layer {
