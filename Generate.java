@@ -60,13 +60,18 @@ record Snippet(JsonNode node) {
     }
 }
 
+record Templates(String page, String whyCard, String relatedCard, String socialShare) {
+    static Templates load() throws IOException {
+        return new Templates(
+            Files.readString(Path.of("templates/slug-template.html")),
+            Files.readString(Path.of("templates/why-card.html")),
+            Files.readString(Path.of("templates/related-card.html")),
+            Files.readString(Path.of("templates/social-share.html")));
+    }
+}
+
 void main() throws IOException {
-    var templates = new String[] {
-        Files.readString(Path.of("templates/slug-template.html")),
-        Files.readString(Path.of("templates/why-card.html")),
-        Files.readString(Path.of("templates/related-card.html")),
-        Files.readString(Path.of("templates/social-share.html"))
-    };
+    var templates = Templates.load();
     var allSnippets = loadAllSnippets();
     IO.println("Loaded %d snippets".formatted(allSnippets.size()));
 
@@ -176,8 +181,8 @@ String renderSocialShare(String tpl, String slug, String title) {
     return replaceTokens(tpl, Map.of("encodedUrl", encodedUrl, "encodedText", encodedText));
 }
 
-String generateHtml(String[] tpl, Snippet s, Map<String, Snippet> all) throws IOException {
-    return replaceTokens(tpl[0], Map.ofEntries(
+String generateHtml(Templates tpl, Snippet s, Map<String, Snippet> all) throws IOException {
+    return replaceTokens(tpl.page(), Map.ofEntries(
             Map.entry("title", escape(s.title())), Map.entry("summary", escape(s.summary())),
             Map.entry("slug", s.slug()), Map.entry("category", s.category()),
             Map.entry("categoryDisplay", s.catDisplay()), Map.entry("difficulty", s.difficulty()),
@@ -191,9 +196,9 @@ String generateHtml(String[] tpl, Snippet s, Map<String, Snippet> all) throws IO
             Map.entry("titleJson", jsonEscape(s.title())), Map.entry("summaryJson", jsonEscape(s.summary())),
             Map.entry("categoryDisplayJson", jsonEscape(s.catDisplay())),
             Map.entry("navArrows", renderNavArrows(s)),
-            Map.entry("whyCards", renderWhyCards(tpl[1], s.whyModernWins())),
-            Map.entry("relatedCards", renderRelatedSection(tpl[2], s, all)),
-            Map.entry("socialShare", renderSocialShare(tpl[3], s.slug(), s.title()))));
+            Map.entry("whyCards", renderWhyCards(tpl.whyCard(), s.whyModernWins())),
+            Map.entry("relatedCards", renderRelatedSection(tpl.relatedCard(), s, all)),
+            Map.entry("socialShare", renderSocialShare(tpl.socialShare(), s.slug(), s.title()))));
 }
 
 String replaceTokens(String template, Map<String, String> replacements) {
