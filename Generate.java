@@ -1,287 +1,325 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
-//JAVA 21+
+//JAVA 25
 //DEPS com.fasterxml.jackson.core:jackson-databind:2.18.3
+
+import module java.base;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Generate HTML detail pages from JSON snippet files and slug-template.html.
  * JBang equivalent of generate.py — produces identical output.
+ *
+ * Uses modern Java features up to Java 25:
+ *   - Compact source file / void main()  (JEP 512)
+ *   - Module imports                      (JEP 511)
+ *   - Records                             (JEP 395)
+ *   - Sealed interfaces                   (JEP 409)
+ *   - Pattern matching for switch         (JEP 441)
+ *   - Text blocks                         (JEP 378)
+ *   - Unnamed variables (_)               (JEP 456)
+ *   - Stream.toList()                     (JDK 16)
+ *   - String.formatted()                  (JDK 15)
+ *   - SequencedMap                        (JDK 21)
  */
-public class Generate {
 
-    static final String BASE_URL = "https://javaevolved.github.io";
-    static final String TEMPLATE_FILE = "slug-template.html";
+static final String BASE_URL = "https://javaevolved.github.io";
+static final String TEMPLATE_FILE = "slug-template.html";
+static final Pattern TOKEN_PATTERN = Pattern.compile("\\{\\{(\\w+)}}");
+static final ObjectMapper MAPPER = new ObjectMapper();
 
-    static final Map<String, String> CATEGORY_DISPLAY = Map.ofEntries(
-            Map.entry("language", "Language"),
-            Map.entry("collections", "Collections"),
-            Map.entry("strings", "Strings"),
-            Map.entry("streams", "Streams"),
-            Map.entry("concurrency", "Concurrency"),
-            Map.entry("io", "I/O"),
-            Map.entry("errors", "Errors"),
-            Map.entry("datetime", "Date/Time"),
-            Map.entry("security", "Security"),
-            Map.entry("tooling", "Tooling")
-    );
+static final List<String> CATEGORIES = List.of(
+        "language", "collections", "strings", "streams", "concurrency",
+        "io", "errors", "datetime", "security", "tooling");
 
-    static final List<String> CATEGORIES = List.of(
-            "language", "collections", "strings", "streams", "concurrency",
-            "io", "errors", "datetime", "security", "tooling"
-    );
+static final Map<String, String> CATEGORY_DISPLAY = Map.ofEntries(
+        Map.entry("language", "Language"),
+        Map.entry("collections", "Collections"),
+        Map.entry("strings", "Strings"),
+        Map.entry("streams", "Streams"),
+        Map.entry("concurrency", "Concurrency"),
+        Map.entry("io", "I/O"),
+        Map.entry("errors", "Errors"),
+        Map.entry("datetime", "Date/Time"),
+        Map.entry("security", "Security"),
+        Map.entry("tooling", "Tooling"));
 
-    static final Set<String> EXCLUDED_KEYS = Set.of("_path", "prev", "next", "related");
+static final Set<String> EXCLUDED_KEYS = Set.of("_path", "prev", "next", "related");
 
-    static final ObjectMapper mapper = new ObjectMapper();
-    static final Pattern TOKEN_PATTERN = Pattern.compile("\\{\\{(\\w+)}}");
+// -- Records for structured data -----------------------------------------
 
-    public static void main(String[] args) throws IOException {
-        String template = Files.readString(Path.of(TEMPLATE_FILE));
-        Map<String, JsonNode> allSnippets = loadAllSnippets();
-        System.out.println("Loaded " + allSnippets.size() + " snippets");
+record Snippet(JsonNode node) {
+    String get(String field) { return node.get(field).asText(); }
+    String slug()       { return get("slug"); }
+    String category()   { return get("category"); }
+    String title()      { return get("title"); }
+    String summary()    { return get("summary"); }
+    String difficulty()  { return get("difficulty"); }
+    String jdkVersion() { return get("jdkVersion"); }
+    String oldLabel()   { return get("oldLabel"); }
+    String modernLabel(){ return get("modernLabel"); }
+    String oldCode()    { return get("oldCode"); }
+    String modernCode() { return get("modernCode"); }
+    String oldApproach(){ return get("oldApproach"); }
+    String modernApproach() { return get("modernApproach"); }
+    String explanation(){ return get("explanation"); }
+    String support()    { return get("support"); }
+    String key()        { return "%s/%s".formatted(category(), slug()); }
+    String catDisplay() { return CATEGORY_DISPLAY.get(category()); }
 
-        // Generate HTML files
-        for (var entry : allSnippets.entrySet()) {
-            JsonNode data = entry.getValue();
-            String htmlContent = generateHtml(template, data, allSnippets).strip();
-            String category = data.get("category").asText();
-            String slug = data.get("slug").asText();
-            Path outPath = Path.of(category, slug + ".html");
-            Files.writeString(outPath, htmlContent);
-        }
-        System.out.println("Generated " + allSnippets.size() + " HTML files");
-
-        // Rebuild data/snippets.json
-        List<Map<String, Object>> snippetsList = new ArrayList<>();
-        for (var entry : allSnippets.entrySet()) {
-            Map<String, Object> map = mapper.convertValue(entry.getValue(),
-                    new TypeReference<LinkedHashMap<String, Object>>() {});
-            EXCLUDED_KEYS.forEach(map::remove);
-            snippetsList.add(map);
-        }
-
-        Files.createDirectories(Path.of("data"));
-        ObjectMapper prettyMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-        String json = prettyMapper.writeValueAsString(snippetsList) + "\n";
-        Files.writeString(Path.of("data", "snippets.json"), json);
-        System.out.println("Rebuilt data/snippets.json with " + snippetsList.size() + " entries");
-
-        // Patch index.html with the current snippet count
-        int count = allSnippets.size();
-        String indexContent = Files.readString(Path.of("index.html"));
-        indexContent = indexContent.replace("{{snippetCount}}", String.valueOf(count));
-        Files.writeString(Path.of("index.html"), indexContent);
-        System.out.println("Patched index.html with snippet count: " + count);
+    Optional<String> prev() {
+        return node.has("prev") && !node.get("prev").isNull()
+                ? Optional.of(node.get("prev").asText()) : Optional.empty();
     }
 
-    static Map<String, JsonNode> loadAllSnippets() throws IOException {
-        Map<String, JsonNode> snippets = new LinkedHashMap<>();
-        for (String cat : CATEGORIES) {
-            Path catDir = Path.of(cat);
-            if (!Files.isDirectory(catDir)) continue;
-            List<Path> jsonFiles = new ArrayList<>();
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(catDir, "*.json")) {
-                stream.forEach(jsonFiles::add);
-            }
-            jsonFiles.sort(Path::compareTo);
-            for (Path path : jsonFiles) {
-                JsonNode data = mapper.readTree(path.toFile());
-                String key = data.get("category").asText() + "/" + data.get("slug").asText();
-                snippets.put(key, data);
-            }
-        }
-        return snippets;
+    Optional<String> next() {
+        return node.has("next") && !node.get("next").isNull()
+                ? Optional.of(node.get("next").asText()) : Optional.empty();
     }
 
-    static String escape(String text) {
-        if (text == null) return "";
-        return text.replace("&", "&amp;")
-                   .replace("<", "&lt;")
-                   .replace(">", "&gt;")
-                   .replace("\"", "&quot;")
-                   .replace("'", "&#x27;");
+    List<String> related() {
+        var rel = node.get("related");
+        if (rel == null) return List.of();
+        List<String> paths = new ArrayList<>();
+        rel.forEach(n -> paths.add(n.asText()));
+        return paths;
     }
 
-    static String jsonEscape(String text) {
-        // Produce ASCII-only JSON string content (matching Python json.dumps(ensure_ascii=True)[1:-1])
-        try {
-            String full = mapper.writeValueAsString(text); // includes surrounding quotes
-            String inner = full.substring(1, full.length() - 1);
-            // Jackson doesn't escape non-ASCII by default; do it manually
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < inner.length(); i++) {
-                char c = inner.charAt(i);
-                if (c > 127) {
-                    sb.append(String.format("\\u%04x", (int) c));
-                } else {
-                    sb.append(c);
-                }
-            }
-            return sb.toString();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    JsonNode whyModernWins() { return node.get("whyModernWins"); }
+}
+
+// -- Sealed interface for nav arrow rendering ----------------------------
+
+sealed interface NavArrow {
+    record Link(String href) implements NavArrow {}
+    record Disabled()        implements NavArrow {}
+    record Empty()           implements NavArrow {}
+}
+
+// -- Entry point (compact source file, JEP 512) -------------------------
+
+void main() throws IOException {
+    var template = Files.readString(Path.of(TEMPLATE_FILE));
+    var allSnippets = loadAllSnippets();
+    IO.println("Loaded %d snippets".formatted(allSnippets.size()));
+
+    // Generate HTML files
+    for (var snippet : allSnippets.values()) {
+        var html = generateHtml(template, snippet, allSnippets).strip();
+        Files.writeString(Path.of(snippet.category(), snippet.slug() + ".html"), html);
     }
+    IO.println("Generated %d HTML files".formatted(allSnippets.size()));
 
-    static String urlEncode(String s) {
-        return URLEncoder.encode(s, StandardCharsets.UTF_8).replace("+", "%20");
-    }
+    // Rebuild data/snippets.json
+    var snippetsList = allSnippets.values().stream()
+            .map(s -> {
+                Map<String, Object> map = MAPPER.convertValue(s.node(),
+                        new TypeReference<LinkedHashMap<String, Object>>() {});
+                EXCLUDED_KEYS.forEach(map::remove);
+                return map;
+            })
+            .toList();
 
-    static String renderNavArrows(JsonNode data) {
-        List<String> parts = new ArrayList<>();
-        if (data.has("prev") && !data.get("prev").isNull()) {
-            parts.add("<a href=\"/" + data.get("prev").asText() + ".html\" aria-label=\"Previous pattern\">←</a>");
-        } else {
-            parts.add("<span class=\"nav-arrow-disabled\">←</span>");
-        }
-        if (data.has("next") && !data.get("next").isNull()) {
-            parts.add("<a href=\"/" + data.get("next").asText() + ".html\" aria-label=\"Next pattern\">→</a>");
-        } else {
-            parts.add("");
-        }
-        return String.join("\n          ", parts);
-    }
+    Files.createDirectories(Path.of("data"));
+    var prettyMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    Files.writeString(Path.of("data", "snippets.json"),
+            prettyMapper.writeValueAsString(snippetsList) + "\n");
+    IO.println("Rebuilt data/snippets.json with %d entries".formatted(snippetsList.size()));
 
-    static String renderWhyCards(JsonNode whyList) {
-        List<String> cards = new ArrayList<>();
-        for (JsonNode w : whyList) {
-            cards.add("        <div class=\"why-card\">\n"
-                    + "          <div class=\"why-icon\">" + w.get("icon").asText() + "</div>\n"
-                    + "          <h3>" + escape(w.get("title").asText()) + "</h3>\n"
-                    + "          <p>" + escape(w.get("desc").asText()) + "</p>\n"
-                    + "        </div>");
-        }
-        return String.join("\n", cards);
-    }
+    // Patch index.html with the current snippet count
+    int count = allSnippets.size();
+    var indexContent = Files.readString(Path.of("index.html"))
+            .replace("{{snippetCount}}", String.valueOf(count));
+    Files.writeString(Path.of("index.html"), indexContent);
+    IO.println("Patched index.html with snippet count: %d".formatted(count));
+}
 
-    static String renderRelatedCard(JsonNode relatedData) {
-        String cat = relatedData.get("category").asText();
-        String slug = relatedData.get("slug").asText();
-        String catDisplay = CATEGORY_DISPLAY.get(cat);
-        String path = cat + "/" + slug;
-        String difficulty = relatedData.get("difficulty").asText();
+// -- Loading snippets ----------------------------------------------------
 
-        return "        <a href=\"/" + path + ".html\" class=\"tip-card\">\n"
-                + "          <div class=\"tip-card-body\">\n"
-                + "            <div class=\"tip-card-header\">\n"
-                + "              <div class=\"tip-badges\">\n"
-                + "                <span class=\"badge " + cat + "\">" + catDisplay + "</span>\n"
-                + "                <span class=\"badge " + difficulty + "\">" + difficulty + "</span>\n"
-                + "              </div>\n"
-                + "            </div>\n"
-                + "            <h3>" + escape(relatedData.get("title").asText()) + "</h3>\n"
-                + "          </div>\n"
-                + "          <div class=\"card-code\">\n"
-                + "            <div class=\"card-code-layer old-layer\">\n"
-                + "              <div class=\"mini-label\">" + escape(relatedData.get("oldLabel").asText()) + "</div>\n"
-                + "              <pre class=\"code-text\">" + escape(relatedData.get("oldCode").asText()) + "</pre>\n"
-                + "            </div>\n"
-                + "            <div class=\"card-code-layer modern-layer\">\n"
-                + "              <div class=\"mini-label\">" + escape(relatedData.get("modernLabel").asText()) + "</div>\n"
-                + "              <pre class=\"code-text\">" + escape(relatedData.get("modernCode").asText()) + "</pre>\n"
-                + "            </div>\n"
-                + "            <span class=\"hover-hint\">Hover to see modern ➜</span>\n"
-                + "          </div>\n"
-                + "          <div class=\"tip-card-footer\">\n"
-                + "            <span class=\"browser-support\"><span class=\"dot\"></span>JDK " + relatedData.get("jdkVersion").asText() + "+</span>\n"
-                + "            <span class=\"arrow-link\">→</span>\n"
-                + "          </div>\n"
-                + "        </a>";
-    }
+SequencedMap<String, Snippet> loadAllSnippets() throws IOException {
+    SequencedMap<String, Snippet> snippets = new LinkedHashMap<>();
+    for (var cat : CATEGORIES) {
+        var catDir = Path.of(cat);
+        if (!Files.isDirectory(catDir)) continue;
 
-    static String renderRelatedSection(JsonNode relatedPaths, Map<String, JsonNode> allSnippets) {
-        List<String> cards = new ArrayList<>();
-        if (relatedPaths != null) {
-            for (JsonNode pathNode : relatedPaths) {
-                String path = pathNode.asText();
-                if (allSnippets.containsKey(path)) {
-                    cards.add(renderRelatedCard(allSnippets.get(path)));
-                }
+        try (var stream = Files.newDirectoryStream(catDir, "*.json")) {
+            var sorted = new ArrayList<Path>();
+            stream.forEach(sorted::add);
+            sorted.sort(Path::compareTo);
+
+            for (var path : sorted) {
+                var snippet = new Snippet(MAPPER.readTree(path.toFile()));
+                snippets.put(snippet.key(), snippet);
             }
         }
-        return String.join("\n", cards);
     }
+    return snippets;
+}
 
-    static String renderSocialShare(String slug, String title) {
-        String pageUrl = BASE_URL + "/" + slug + ".html";
-        String shareText = title + " \u2013 java.evolved";
-        String encodedUrl = urlEncode(pageUrl);
-        String encodedText = urlEncode(shareText);
+// -- HTML escaping -------------------------------------------------------
 
-        String xUrl = "https://x.com/intent/tweet?url=" + encodedUrl + "&text=" + encodedText;
-        String bskyUrl = "https://bsky.app/intent/compose?text=" + encodedText + "%20" + encodedUrl;
-        String liUrl = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodedUrl;
-        String redditUrl = "https://www.reddit.com/submit?url=" + encodedUrl + "&title=" + encodedText;
+String escape(String text) {
+    return switch (text) {
+        case null -> "";
+        case String s -> s.replace("&", "&amp;")
+                          .replace("<", "&lt;")
+                          .replace(">", "&gt;")
+                          .replace("\"", "&quot;")
+                          .replace("'", "&#x27;");
+    };
+}
 
-        return "  <div class=\"social-share\">\n"
-                + "    <span class=\"share-label\">Share</span>\n"
-                + "    <a href=\"" + xUrl + "\" target=\"_blank\" rel=\"noopener\" class=\"share-btn share-x\" aria-label=\"Share on X\">𝕏</a>\n"
-                + "    <a href=\"" + bskyUrl + "\" target=\"_blank\" rel=\"noopener\" class=\"share-btn share-bsky\" aria-label=\"Share on Bluesky\">🦋</a>\n"
-                + "    <a href=\"" + liUrl + "\" target=\"_blank\" rel=\"noopener\" class=\"share-btn share-li\" aria-label=\"Share on LinkedIn\">in</a>\n"
-                + "    <a href=\"" + redditUrl + "\" target=\"_blank\" rel=\"noopener\" class=\"share-btn share-reddit\" aria-label=\"Share on Reddit\">⬡</a>\n"
-                + "  </div>";
-    }
-
-    static String generateHtml(String template, JsonNode data, Map<String, JsonNode> allSnippets) {
-        String cat = data.get("category").asText();
-        String slug = data.get("slug").asText();
-        String catDisplay = CATEGORY_DISPLAY.get(cat);
-        String title = data.get("title").asText();
-
-        Map<String, String> replacements = new HashMap<>();
-        replacements.put("title", escape(title));
-        replacements.put("summary", escape(data.get("summary").asText()));
-        replacements.put("slug", slug);
-        replacements.put("category", cat);
-        replacements.put("categoryDisplay", catDisplay);
-        replacements.put("difficulty", data.get("difficulty").asText());
-        replacements.put("jdkVersion", data.get("jdkVersion").asText());
-        replacements.put("oldLabel", escape(data.get("oldLabel").asText()));
-        replacements.put("modernLabel", escape(data.get("modernLabel").asText()));
-        replacements.put("oldCode", escape(data.get("oldCode").asText()));
-        replacements.put("modernCode", escape(data.get("modernCode").asText()));
-        replacements.put("oldApproach", escape(data.get("oldApproach").asText()));
-        replacements.put("modernApproach", escape(data.get("modernApproach").asText()));
-        replacements.put("explanation", escape(data.get("explanation").asText()));
-        replacements.put("support", escape(data.get("support").asText()));
-        replacements.put("canonicalUrl", BASE_URL + "/" + cat + "/" + slug + ".html");
-        replacements.put("flatUrl", BASE_URL + "/" + slug + ".html");
-        replacements.put("titleJson", jsonEscape(title));
-        replacements.put("summaryJson", jsonEscape(data.get("summary").asText()));
-        replacements.put("categoryDisplayJson", jsonEscape(catDisplay));
-        replacements.put("navArrows", renderNavArrows(data));
-        replacements.put("whyCards", renderWhyCards(data.get("whyModernWins")));
-        replacements.put("relatedCards", renderRelatedSection(data.get("related"), allSnippets));
-        replacements.put("socialShare", renderSocialShare(slug, title));
-
-        Matcher m = TOKEN_PATTERN.matcher(template);
-        StringBuilder sb = new StringBuilder();
-        while (m.find()) {
-            String key = m.group(1);
-            String replacement = replacements.getOrDefault(key, m.group(0));
-            m.appendReplacement(sb, Matcher.quoteReplacement(replacement));
+String jsonEscape(String text) {
+    try {
+        var quoted = MAPPER.writeValueAsString(text);
+        var inner = quoted.substring(1, quoted.length() - 1);
+        var sb = new StringBuilder(inner.length());
+        for (int i = 0; i < inner.length(); i++) {
+            char c = inner.charAt(i);
+            if (c > 127) {
+                sb.append("\\u%04x".formatted((int) c));
+            } else {
+                sb.append(c);
+            }
         }
-        m.appendTail(sb);
         return sb.toString();
+    } catch (IOException _) {
+        throw new RuntimeException("Failed to JSON-escape: " + text);
     }
+}
+
+String urlEncode(String s) {
+    return URLEncoder.encode(s, StandardCharsets.UTF_8).replace("+", "%20");
+}
+
+// -- Rendering helpers ---------------------------------------------------
+
+String renderNavArrows(Snippet snippet) {
+    NavArrow prev = snippet.prev()
+            .<NavArrow>map(p -> new NavArrow.Link("/" + p + ".html"))
+            .orElse(new NavArrow.Disabled());
+    NavArrow next = snippet.next()
+            .<NavArrow>map(n -> new NavArrow.Link("/" + n + ".html"))
+            .orElse(new NavArrow.Empty());
+
+    return renderArrow(prev, "Previous pattern", "←")
+            + "\n          "
+            + renderArrow(next, "Next pattern", "→");
+}
+
+String renderArrow(NavArrow arrow, String label, String symbol) {
+    return switch (arrow) {
+        case NavArrow.Link(var href) ->
+                "<a href=\"%s\" aria-label=\"%s\">%s</a>".formatted(href, label, symbol);
+        case NavArrow.Disabled() ->
+                "<span class=\"nav-arrow-disabled\">%s</span>".formatted(symbol);
+        case NavArrow.Empty() -> "";
+    };
+}
+
+String renderWhyCards(JsonNode whyList) {
+    var cards = new ArrayList<String>();
+    for (var w : whyList) {
+        cards.add("        <div class=\"why-card\">\n"
+                + "          <div class=\"why-icon\">%s</div>\n".formatted(w.get("icon").asText())
+                + "          <h3>%s</h3>\n".formatted(escape(w.get("title").asText()))
+                + "          <p>%s</p>\n".formatted(escape(w.get("desc").asText()))
+                + "        </div>");
+    }
+    return String.join("\n", cards);
+}
+
+String renderRelatedCard(Snippet rel) {
+    return "        <a href=\"/%s/%s.html\" class=\"tip-card\">\n".formatted(rel.category(), rel.slug())
+            + "          <div class=\"tip-card-body\">\n"
+            + "            <div class=\"tip-card-header\">\n"
+            + "              <div class=\"tip-badges\">\n"
+            + "                <span class=\"badge %s\">%s</span>\n".formatted(rel.category(), rel.catDisplay())
+            + "                <span class=\"badge %s\">%s</span>\n".formatted(rel.difficulty(), rel.difficulty())
+            + "              </div>\n"
+            + "            </div>\n"
+            + "            <h3>%s</h3>\n".formatted(escape(rel.title()))
+            + "          </div>\n"
+            + "          <div class=\"card-code\">\n"
+            + "            <div class=\"card-code-layer old-layer\">\n"
+            + "              <div class=\"mini-label\">%s</div>\n".formatted(escape(rel.oldLabel()))
+            + "              <pre class=\"code-text\">%s</pre>\n".formatted(escape(rel.oldCode()))
+            + "            </div>\n"
+            + "            <div class=\"card-code-layer modern-layer\">\n"
+            + "              <div class=\"mini-label\">%s</div>\n".formatted(escape(rel.modernLabel()))
+            + "              <pre class=\"code-text\">%s</pre>\n".formatted(escape(rel.modernCode()))
+            + "            </div>\n"
+            + "            <span class=\"hover-hint\">Hover to see modern ➜</span>\n"
+            + "          </div>\n"
+            + "          <div class=\"tip-card-footer\">\n"
+            + "            <span class=\"browser-support\"><span class=\"dot\"></span>JDK %s+</span>\n".formatted(rel.jdkVersion())
+            + "            <span class=\"arrow-link\">→</span>\n"
+            + "          </div>\n"
+            + "        </a>";
+}
+
+String renderRelatedSection(Snippet snippet, Map<String, Snippet> allSnippets) {
+    return snippet.related().stream()
+            .filter(allSnippets::containsKey)
+            .map(path -> renderRelatedCard(allSnippets.get(path)))
+            .collect(Collectors.joining("\n"));
+}
+
+String renderSocialShare(String slug, String title) {
+    var pageUrl = "%s/%s.html".formatted(BASE_URL, slug);
+    var shareText = "%s \u2013 java.evolved".formatted(title);
+    var encodedUrl = urlEncode(pageUrl);
+    var encodedText = urlEncode(shareText);
+
+    return "  <div class=\"social-share\">\n"
+            + "    <span class=\"share-label\">Share</span>\n"
+            + "    <a href=\"https://x.com/intent/tweet?url=%s&text=%s\" target=\"_blank\" rel=\"noopener\" class=\"share-btn share-x\" aria-label=\"Share on X\">𝕏</a>\n".formatted(encodedUrl, encodedText)
+            + "    <a href=\"https://bsky.app/intent/compose?text=%s%%20%s\" target=\"_blank\" rel=\"noopener\" class=\"share-btn share-bsky\" aria-label=\"Share on Bluesky\">🦋</a>\n".formatted(encodedText, encodedUrl)
+            + "    <a href=\"https://www.linkedin.com/sharing/share-offsite/?url=%s\" target=\"_blank\" rel=\"noopener\" class=\"share-btn share-li\" aria-label=\"Share on LinkedIn\">in</a>\n".formatted(encodedUrl)
+            + "    <a href=\"https://www.reddit.com/submit?url=%s&title=%s\" target=\"_blank\" rel=\"noopener\" class=\"share-btn share-reddit\" aria-label=\"Share on Reddit\">⬡</a>\n".formatted(encodedUrl, encodedText)
+            + "  </div>";
+}
+
+// -- Main generation logic -----------------------------------------------
+
+String generateHtml(String template, Snippet snippet, Map<String, Snippet> allSnippets) {
+    var replacements = Map.ofEntries(
+            Map.entry("title",              escape(snippet.title())),
+            Map.entry("summary",            escape(snippet.summary())),
+            Map.entry("slug",               snippet.slug()),
+            Map.entry("category",           snippet.category()),
+            Map.entry("categoryDisplay",    snippet.catDisplay()),
+            Map.entry("difficulty",         snippet.difficulty()),
+            Map.entry("jdkVersion",         snippet.jdkVersion()),
+            Map.entry("oldLabel",           escape(snippet.oldLabel())),
+            Map.entry("modernLabel",        escape(snippet.modernLabel())),
+            Map.entry("oldCode",            escape(snippet.oldCode())),
+            Map.entry("modernCode",         escape(snippet.modernCode())),
+            Map.entry("oldApproach",        escape(snippet.oldApproach())),
+            Map.entry("modernApproach",     escape(snippet.modernApproach())),
+            Map.entry("explanation",        escape(snippet.explanation())),
+            Map.entry("support",            escape(snippet.support())),
+            Map.entry("canonicalUrl",       "%s/%s/%s.html".formatted(BASE_URL, snippet.category(), snippet.slug())),
+            Map.entry("flatUrl",            "%s/%s.html".formatted(BASE_URL, snippet.slug())),
+            Map.entry("titleJson",          jsonEscape(snippet.title())),
+            Map.entry("summaryJson",        jsonEscape(snippet.summary())),
+            Map.entry("categoryDisplayJson", jsonEscape(snippet.catDisplay())),
+            Map.entry("navArrows",          renderNavArrows(snippet)),
+            Map.entry("whyCards",           renderWhyCards(snippet.whyModernWins())),
+            Map.entry("relatedCards",       renderRelatedSection(snippet, allSnippets)),
+            Map.entry("socialShare",        renderSocialShare(snippet.slug(), snippet.title()))
+    );
+
+    var m = TOKEN_PATTERN.matcher(template);
+    var sb = new StringBuilder();
+    while (m.find()) {
+        var key = m.group(1);
+        m.appendReplacement(sb, Matcher.quoteReplacement(
+                replacements.getOrDefault(key, m.group(0))));
+    }
+    m.appendTail(sb);
+    return sb.toString();
 }
