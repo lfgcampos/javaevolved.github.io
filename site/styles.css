@@ -589,6 +589,81 @@ nav {
   gap: 8px;
 }
 
+/* ---------- View Toggle Button ---------- */
+.view-toggle-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.view-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.view-toggle-btn:hover {
+  background: var(--surface-2);
+  border-color: var(--border-light);
+  transform: translateY(-2px);
+}
+
+.view-toggle-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* ---------- Expanded Mode ---------- */
+.tips-grid.expanded .tip-card {
+  pointer-events: auto;
+}
+
+.tips-grid.expanded .tip-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.tips-grid.expanded .tip-card .card-code {
+  display: flex;
+  flex-direction: column;
+}
+
+.tips-grid.expanded .tip-card .old-layer,
+.tips-grid.expanded .tip-card .modern-layer {
+  position: static;
+  opacity: 1;
+  min-height: auto;
+  border-top: 1px solid var(--border);
+}
+
+.tips-grid.expanded .tip-card .old-layer {
+  border-top: none;
+}
+
+.tips-grid.expanded .tip-card .hover-hint {
+  display: none;
+}
+
+/* Disable hover effects in expanded mode */
+.tips-grid.expanded .tip-card:hover .old-layer,
+.tips-grid.expanded .tip-card.toggled .old-layer {
+  opacity: 1;
+}
+
+.tips-grid.expanded .tip-card:hover .modern-layer,
+.tips-grid.expanded .tip-card.toggled .modern-layer {
+  opacity: 1;
+}
+
 /* ---------- Stats Bar ---------- */
 .stats-bar {
   display: flex;

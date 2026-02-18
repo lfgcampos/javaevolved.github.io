@@ -211,6 +211,12 @@
         // Only handle touches on the card-code area
         if (!e.target.closest('.card-code')) return;
 
+        // Don't handle touch events when in expanded mode
+        const tipsGrid = document.getElementById('tipsGrid');
+        if (tipsGrid && tipsGrid.classList.contains('expanded')) {
+          return;
+        }
+
         touchEndX = e.changedTouches[0].clientX;
         touchEndY = e.changedTouches[0].clientY;
 
@@ -245,6 +251,11 @@
       // This is a safety net in case touch events trigger click as fallback
       card.addEventListener('click', (e) => {
         if (e.target.closest('.card-code')) {
+          // Don't prevent navigation when in expanded mode
+          const tipsGrid = document.getElementById('tipsGrid');
+          if (tipsGrid && tipsGrid.classList.contains('expanded')) {
+            return;
+          }
           e.preventDefault();
           e.stopPropagation();
         }
@@ -471,6 +482,36 @@
   };
 
   /* ==========================================================
+     6. View Toggle (Expand/Collapse All Cards)
+     ========================================================== */
+  const initViewToggle = () => {
+    const toggleBtn = document.getElementById('viewToggle');
+    const tipsGrid = document.getElementById('tipsGrid');
+    if (!toggleBtn || !tipsGrid) return;
+
+    let isExpanded = false;
+
+    toggleBtn.addEventListener('click', () => {
+      isExpanded = !isExpanded;
+      
+      if (isExpanded) {
+        tipsGrid.classList.add('expanded');
+        toggleBtn.querySelector('.view-toggle-icon').textContent = '⊞';
+        toggleBtn.querySelector('.view-toggle-text').textContent = 'Collapse All';
+        
+        // Remove toggled class from all cards when expanding
+        document.querySelectorAll('.tip-card').forEach(card => {
+          card.classList.remove('toggled');
+        });
+      } else {
+        tipsGrid.classList.remove('expanded');
+        toggleBtn.querySelector('.view-toggle-icon').textContent = '⊟';
+        toggleBtn.querySelector('.view-toggle-text').textContent = 'Expand All';
+      }
+    });
+  };
+
+  /* ==========================================================
      Utilities
      ========================================================== */
   const escapeHtml = (str) => {
@@ -488,6 +529,7 @@
     });
     initFilters();
     initCardToggle();
+    initViewToggle();
     initCopyButtons();
     initSyntaxHighlighting();
     initNewsletter();
