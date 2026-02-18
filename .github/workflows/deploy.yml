@@ -34,10 +34,26 @@ jobs:
           distribution: 'temurin'
           java-version: '25'
 
-      - uses: ./.github/actions/build-generator
+      - name: Restore cached JAR and AOT
+        id: cache-restore
+        uses: actions/cache/restore@v5
+        with:
+          path: |
+            html-generators/generate.jar
+            html-generators/generate.aot
+          key: generator-${{ hashFiles('html-generators/generate.java') }}
 
-      - name: Generate HTML pages and snippets.json
+      - name: Generate with cached JAR + AOT
+        if: steps.cache-restore.outputs.cache-hit == 'true'
         run: java -XX:AOTCache=html-generators/generate.aot -jar html-generators/generate.jar
+
+      - name: Setup JBang (cache miss)
+        if: steps.cache-restore.outputs.cache-hit != 'true'
+        uses: jbangdev/setup-jbang@main
+
+      - name: Generate with JBang (cache miss)
+        if: steps.cache-restore.outputs.cache-hit != 'true'
+        run: jbang html-generators/generate.java
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
