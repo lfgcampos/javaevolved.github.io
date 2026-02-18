@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - '.github/workflows/build-generator.yml'
       - 'html-generators/generate.java'
   workflow_dispatch:
 
