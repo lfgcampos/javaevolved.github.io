@@ -14,7 +14,7 @@
 #
 # Usage:
 #   ./html-generators/benchmark/run.sh            # print results to stdout
-#   ./html-generators/benchmark/run.sh --update    # also update README.md
+#   ./html-generators/benchmark/run.sh --update    # also update LOCAL.md
 
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
@@ -136,14 +136,14 @@ echo "  Fat JAR + AOT:           ${AOT_CI}s"
 echo ""
 
 # ---------------------------------------------------------------------------
-# Optionally update README.md
+# Optionally update LOCAL.md
 # ---------------------------------------------------------------------------
 if $UPDATE_MD; then
-  MD="html-generators/benchmark/README.md"
+  MD="html-generators/benchmark/LOCAL.md"
   cat > "$MD" <<EOF
-# Generator Benchmarks
+# Local Benchmark Results
 
-Performance comparison of execution methods for the HTML generator, measured on $SNIPPET_COUNT snippets across 10 categories.
+Local benchmark results from \`run.sh\`. These will differ from CI because of OS file caching and warm \`__pycache__/\`.
 
 ## Phase 1: Training / Build Cost (one-time)
 
@@ -166,11 +166,9 @@ After one-time setup, these are the per-run execution times.
 | **JBang** | ${JBANG_STEADY}s | Includes JBang launcher overhead |
 | **Python** | ${PY_STEADY}s | Uses cached \`__pycache__\` bytecode |
 
-## Phase 3: CI Cold Start (fresh runner, no caches)
+## Phase 3: CI Cold Start (simulated locally)
 
-Simulates a CI environment where every run is the first run.
-Python has no \`__pycache__\`, JBang has no compilation cache.
-Java AOT benefits from the pre-built \`.aot\` file restored from actions cache.
+Clears \`__pycache__/\` and JBang cache, then measures a single run. On a local machine the OS file cache still helps, so these numbers are faster than true CI.
 
 | Method | Time | Notes |
 |--------|------|-------|
@@ -179,10 +177,10 @@ Java AOT benefits from the pre-built \`.aot\` file restored from actions cache.
 | **JBang** | ${JBANG_CI}s | Must compile source before running |
 | **Python** | ${PY_CI}s | No \`__pycache__\`; full interpretation |
 
-## How It Works
+## How each method works
 
-- **Python** caches compiled bytecode in \`__pycache__/\` after the first run, similar to how Java's AOT cache works.
-- **Java AOT** (JEP 483) snapshots ~3,300 pre-loaded classes from a training run into a \`.aot\` file, eliminating class loading overhead on subsequent runs.
+- **Python** caches compiled bytecode in \`__pycache__/\` after the first run, similar to how Java's AOT cache works. But this cache is local-only and not available in CI.
+- **Java AOT** (JEP 483) snapshots ~3,300 pre-loaded classes from a training run into a \`.aot\` file, eliminating class loading overhead on subsequent runs. The \`.aot\` file is stored in the GitHub Actions cache.
 - **JBang** compiles and caches internally but adds launcher overhead on every invocation.
 - **Fat JAR** (\`java -jar\`) loads and links all classes from scratch each time.
 
