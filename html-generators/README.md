@@ -13,7 +13,7 @@ This folder contains the build scripts that generate all HTML detail pages and `
 
 ## Benchmark
 
-See [BENCHMARK.md](BENCHMARK.md) for performance comparisons across all four execution methods (AOT, Fat JAR, JBang, Python).
+See [BENCHMARK.md](benchmark/BENCHMARK.md) for performance comparisons across all four execution methods (AOT, Fat JAR, JBang, Python).
 
 ## Running
 
