@@ -56,7 +56,7 @@ Generated files (`site/category/*.html` and `site/data/snippets.json`) are in `.
 java -jar html-generators/generate.jar
 
 # Serve locally
-jwebserver -d site -p 8090
+jwebserver -b 0.0.0.0 -d site -p 8090
 # Open http://localhost:8090
 ```
 
