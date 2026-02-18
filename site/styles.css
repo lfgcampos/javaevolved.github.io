@@ -1056,6 +1056,10 @@ nav {
 }
 
 /* ---------- Documentation Links ---------- */
+.docs-section {
+  margin: 40px 0;
+}
+
 .docs-links {
   display: flex;
   flex-wrap: wrap;
@@ -1083,6 +1087,10 @@ nav {
 }
 
 /* ---------- Related ---------- */
+.related {
+  margin: 40px 0;
+}
+
 .related-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
