@@ -1,0 +1,49 @@
+name: Build Generator
+description: Restore or build the generator JAR and AOT cache
+
+outputs:
+  cache-hit:
+    description: Whether the cache was hit
+    value: ${{ steps.cache-restore.outputs.cache-hit }}
+
+runs:
+  using: composite
+  steps:
+    - name: Restore cached JAR and AOT
+      id: cache-restore
+      uses: actions/cache/restore@v5
+      with:
+        path: |
+          html-generators/generate.jar
+          html-generators/generate.aot
+        key: generator-${{ hashFiles('html-generators/generate.java') }}
+
+    - name: Setup Java
+      if: steps.cache-restore.outputs.cache-hit != 'true'
+      uses: actions/setup-java@v5
+      with:
+        distribution: 'temurin'
+        java-version: '25'
+
+    - name: Setup JBang
+      if: steps.cache-restore.outputs.cache-hit != 'true'
+      uses: jbangdev/setup-jbang@main
+
+    - name: Build fat JAR
+      if: steps.cache-restore.outputs.cache-hit != 'true'
+      shell: bash
+      run: jbang export fatjar --force --output html-generators/generate.jar html-generators/generate.java
+
+    - name: Build AOT cache
+      if: steps.cache-restore.outputs.cache-hit != 'true'
+      shell: bash
+      run: java -XX:AOTCacheOutput=html-generators/generate.aot -jar html-generators/generate.jar
+
+    - name: Save to cache
+      if: steps.cache-restore.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v5
+      with:
+        path: |
+          html-generators/generate.jar
+          html-generators/generate.aot
+        key: generator-${{ hashFiles('html-generators/generate.java') }}
