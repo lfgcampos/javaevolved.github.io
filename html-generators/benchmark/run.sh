@@ -114,6 +114,28 @@ echo "  Fat JAR + AOT:           ${AOT_STEADY}s"
 echo ""
 
 # ---------------------------------------------------------------------------
+# Phase 3: CI cold start (no caches, simulates fresh runner)
+# ---------------------------------------------------------------------------
+echo "=== Phase 3: CI Cold Start (fresh runner, no caches) ==="
+echo ""
+
+find html-generators -name '__pycache__' -type d -exec rm -rf {} + 2>/dev/null || true
+PY_CI=$(measure python3 html-generators/generate.py)
+echo "  Python (no __pycache__): ${PY_CI}s"
+
+jbang cache clear > /dev/null 2>&1 || true
+JBANG_CI=$(measure jbang html-generators/generate.java)
+echo "  JBang (no cache):        ${JBANG_CI}s"
+
+JAR_CI=$(measure java -jar "$JAR")
+echo "  Fat JAR:                 ${JAR_CI}s"
+
+AOT_CI=$(measure java -XX:AOTCache="$AOT" -jar "$JAR")
+echo "  Fat JAR + AOT:           ${AOT_CI}s"
+
+echo ""
+
+# ---------------------------------------------------------------------------
 # Optionally update README.md
 # ---------------------------------------------------------------------------
 if $UPDATE_MD; then
@@ -143,6 +165,19 @@ After one-time setup, these are the per-run execution times.
 | **Fat JAR** | ${JAR_STEADY}s | JVM class loading on every run |
 | **JBang** | ${JBANG_STEADY}s | Includes JBang launcher overhead |
 | **Python** | ${PY_STEADY}s | Uses cached \`__pycache__\` bytecode |
+
+## Phase 3: CI Cold Start (fresh runner, no caches)
+
+Simulates a CI environment where every run is the first run.
+Python has no \`__pycache__\`, JBang has no compilation cache.
+Java AOT benefits from the pre-built \`.aot\` file restored from actions cache.
+
+| Method | Time | Notes |
+|--------|------|-------|
+| **Fat JAR + AOT** | **${AOT_CI}s** | AOT cache ships pre-loaded classes |
+| **Fat JAR** | ${JAR_CI}s | JVM class loading from scratch |
+| **JBang** | ${JBANG_CI}s | Must compile source before running |
+| **Python** | ${PY_CI}s | No \`__pycache__\`; full interpretation |
 
 ## How It Works
 

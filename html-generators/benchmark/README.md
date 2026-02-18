@@ -8,9 +8,9 @@ These are one-time setup costs, comparable across languages.
 
 | Step | Time | What it does |
 |------|------|-------------|
-| Python first run | 2.34s | Interprets source, creates `__pycache__` bytecode |
-| JBang export | 2.92s | Compiles source + bundles dependencies into fat JAR |
-| AOT training run | 3.14s | Runs JAR once to record class loading, produces `.aot` cache |
+| Python first run | 1.98s | Interprets source, creates `__pycache__` bytecode |
+| JBang export | 2.19s | Compiles source + bundles dependencies into fat JAR |
+| AOT training run | 2.92s | Runs JAR once to record class loading, produces `.aot` cache |
 
 ## Phase 2: Steady-State Execution (avg of 5 runs)
 
@@ -18,10 +18,23 @@ After one-time setup, these are the per-run execution times.
 
 | Method | Avg Time | Notes |
 |--------|---------|-------|
-| **Fat JAR + AOT** | **0.35s** | Fastest; pre-loaded classes from AOT cache |
-| **Fat JAR** | 0.50s | JVM class loading on every run |
-| **JBang** | 1.19s | Includes JBang launcher overhead |
-| **Python** | 1.37s | Uses cached `__pycache__` bytecode |
+| **Fat JAR + AOT** | **0.32s** | Fastest; pre-loaded classes from AOT cache |
+| **Fat JAR** | 0.44s | JVM class loading on every run |
+| **JBang** | 1.08s | Includes JBang launcher overhead |
+| **Python** | 1.26s | Uses cached `__pycache__` bytecode |
+
+## Phase 3: CI Cold Start (fresh runner, no caches)
+
+Simulates a CI environment where every run is the first run.
+Python has no `__pycache__`, JBang has no compilation cache.
+Java AOT benefits from the pre-built `.aot` file restored from actions cache.
+
+| Method | Time | Notes |
+|--------|------|-------|
+| **Fat JAR + AOT** | **0.46s** | AOT cache ships pre-loaded classes |
+| **Fat JAR** | 0.40s | JVM class loading from scratch |
+| **JBang** | 3.25s | Must compile source before running |
+| **Python** | 0.16s | No `__pycache__`; full interpretation |
 
 ## How It Works
 

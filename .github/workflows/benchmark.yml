@@ -74,6 +74,16 @@ jobs:
           JAR_STEADY=$(avg_runs $STEADY_RUNS java -jar "$JAR")
           AOT_STEADY=$(avg_runs $STEADY_RUNS java -XX:AOTCache="$AOT" -jar "$JAR")
 
+          # --- Phase 3: CI cold start (no caches, simulates fresh runner) ---
+          find html-generators -name '__pycache__' -type d -exec rm -rf {} + 2>/dev/null || true
+          PY_CI=$(measure python3 html-generators/generate.py)
+
+          jbang cache clear > /dev/null 2>&1 || true
+          JBANG_CI=$(measure jbang html-generators/generate.java)
+
+          JAR_CI=$(measure java -jar "$JAR")
+          AOT_CI=$(measure java -XX:AOTCache="$AOT" -jar "$JAR")
+
           # Write to GitHub Actions Job Summary
           {
             echo "## Benchmark Results — \`$os_name\`"
@@ -96,4 +106,17 @@ jobs:
             echo "| **Fat JAR** | ${JAR_STEADY}s |"
             echo "| **JBang** | ${JBANG_STEADY}s |"
             echo "| **Python** | ${PY_STEADY}s |"
+            echo ""
+            echo "### Phase 3: CI Cold Start (fresh runner, no caches)"
+            echo ""
+            echo "Simulates a CI environment where every run is the first run."
+            echo "Python has no \`__pycache__\`, JBang has no compilation cache."
+            echo "Java AOT benefits from the pre-built \`.aot\` file restored from actions cache."
+            echo ""
+            echo "| Method | Time |"
+            echo "|--------|------|"
+            echo "| **Fat JAR + AOT** | **${AOT_CI}s** |"
+            echo "| **Fat JAR** | ${JAR_CI}s |"
+            echo "| **JBang** | ${JBANG_CI}s |"
+            echo "| **Python** | ${PY_CI}s |"
           } >> "$GITHUB_STEP_SUMMARY"
