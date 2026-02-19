@@ -53,7 +53,7 @@ Generated files (`site/category/*.html` and `site/data/snippets.json`) are in `.
 
 ```bash
 # Generate all HTML pages and data/snippets.json into site/
-java -jar html-generators/generate.jar
+jbang html-generators/generate.java
 
 # Serve locally
 jwebserver -b 0.0.0.0 -d site -p 8090
