@@ -9,7 +9,6 @@ modernLabel: Java 12+
 oldApproach: Two Passes
 modernApproach: teeing()
 oldCode: |
-  // python
   long count = items.stream().count();
   double sum = items.stream()
       .mapToDouble(Item::price)
