@@ -35,7 +35,7 @@
     "description": "Widely available since Spring Boot 1.0 (April 2014); Spring Boot 3 requires Java 17+"
   },
   "prev": "enterprise/jdbc-resultset-vs-jpa-criteria",
-  "next": null,
+  "next": "enterprise/jdbc-vs-jooq",
   "related": [
     "enterprise/ejb-vs-cdi",
     "enterprise/jndi-lookup-vs-cdi-injection",
