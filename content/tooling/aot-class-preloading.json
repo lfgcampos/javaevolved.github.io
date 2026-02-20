@@ -35,7 +35,7 @@
     "description": "Available as a standard feature in JDK 25 LTS (JEPs 514/515, Sept 2025)."
   },
   "prev": "tooling/built-in-http-server",
-  "next": "language/default-interface-methods",
+  "next": "tooling/junit6-with-jspecify",
   "related": [
     "tooling/jshell-prototyping",
     "tooling/single-file-execution",
