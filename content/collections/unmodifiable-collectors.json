@@ -12,7 +12,7 @@
   "oldCode": "List<String> list = stream.collect(\n    Collectors.collectingAndThen(\n        Collectors.toList(),\n        Collections::unmodifiableList\n    )\n);",
   "modernCode": "List<String> list = stream.collect(\n    Collectors.toUnmodifiableList()\n);",
   "summary": "Collect directly to unmodifiable collections.",
-  "explanation": "Java 10 added toUnmodifiableList(), toUnmodifiableSet(), and toUnmodifiableMap() collectors. No more wrapping with collectingAndThen.",
+  "explanation": "Java 10 added toUnmodifiableList(), toUnmodifiableSet(), and toUnmodifiableMap() collectors. No more wrapping with collectingAndThen. For lists specifically, Java 16+ stream.toList() is even simpler — it returns an unmodifiable List without the collect() call.",
   "whyModernWins": [
     {
       "icon": "📏",
@@ -39,7 +39,7 @@
   "related": [
     "collections/immutable-map-creation",
     "collections/immutable-set-creation",
-    "collections/map-entry-factory"
+    "streams/stream-tolist"
   ],
   "docs": [
     {
