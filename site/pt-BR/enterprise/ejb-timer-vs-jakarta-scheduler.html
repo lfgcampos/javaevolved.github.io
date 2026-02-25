@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EJB Timer vs Jakarta Scheduler | java.evolved</title>
+  <meta name="description" content="Replace heavyweight EJB timers with Jakarta Concurrency&#x27;s ManagedScheduledExecutorService for simpler scheduling.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://javaevolved.github.io/pt-BR/enterprise/ejb-timer-vs-jakarta-scheduler.html">
+  <link rel="alternate" hreflang="en" href="https://javaevolved.github.io/enterprise/ejb-timer-vs-jakarta-scheduler.html">
+  <link rel="alternate" hreflang="pt-BR" href="https://javaevolved.github.io/pt-BR/enterprise/ejb-timer-vs-jakarta-scheduler.html">
+  <link rel="alternate" hreflang="x-default" href="https://javaevolved.github.io/enterprise/ejb-timer-vs-jakarta-scheduler.html">
+  <link rel="stylesheet" href="../../styles.css">
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../../manifest.json">
+  <meta name="theme-color" content="#f97316">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="java.evolved">
+
+  <meta property="og:title" content="EJB Timer vs Jakarta Scheduler | java.evolved">
+  <meta property="og:description" content="Replace heavyweight EJB timers with Jakarta Concurrency&#x27;s ManagedScheduledExecutorService for simpler scheduling.">
+  <meta property="og:url" content="https://javaevolved.github.io/pt-BR/enterprise/ejb-timer-vs-jakarta-scheduler.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="java.evolved">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:image" content="https://javaevolved.github.io/images/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EJB Timer vs Jakarta Scheduler | java.evolved">
+  <meta name="twitter:description" content="Replace heavyweight EJB timers with Jakarta Concurrency&#x27;s ManagedScheduledExecutorService for simpler scheduling.">
+  <meta name="twitter:image" content="https://javaevolved.github.io/images/social-card.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "EJB Timer vs Jakarta Scheduler",
+    "description": "Replace heavyweight EJB timers with Jakarta Concurrency's ManagedScheduledExecutorService for simpler scheduling.",
+    "url": "https://javaevolved.github.io/ejb-timer-vs-jakarta-scheduler.html",
+    "publisher": {
+        "@type": "Organization",
+        "name": "java.evolved",
+        "url": "https://javaevolved.github.io"
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://javaevolved.github.io/ejb-timer-vs-jakarta-scheduler.html"
+    }
+}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://javaevolved.github.io/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Enterprise",
+            "item": "https://javaevolved.github.io/#enterprise"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "EJB Timer vs Jakarta Scheduler"
+        }
+    ]
+}
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HL8F2RJW68"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-HL8F2RJW68');
+  </script>
+</head>
+<body data-page="single">
+  <nav>
+    <div class="nav-inner">
+      <a href="/pt-BR/" class="logo">java.<span>evolved</span></a>
+      <div class="nav-right">
+        <a href="https://github.com/javaevolved/javaevolved.github.io" target="_blank" rel="noopener" class="github-link" aria-label="Ver no GitHub">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M10 3C6.13 3 3 6.13 3 10c0 3.09 2 5.71 4.77 6.63.35.06.48-.15.48-.33v-1.16c-1.95.42-2.36-1.07-2.36-1.07-.32-.81-.78-1.03-.78-1.03-.64-.43.05-.42.05-.42.7.05 1.07.72 1.07.72.63 1.08 1.65.77 2.05.59.06-.46.24-.77.44-.95-1.57-.18-3.22-.78-3.22-3.48 0-.77.27-1.4.72-1.89-.07-.18-.31-.9.07-1.87 0 0 .59-.19 1.93.72.56-.16 1.16-.24 1.76-.24s1.2.08 1.76.24c1.34-.91 1.93-.72 1.93-.72.38.97.14 1.69.07 1.87.45.49.72 1.12.72 1.89 0 2.71-1.65 3.3-3.23 3.47.25.22.48.65.48 1.31v1.94c0 .19.13.4.48.33C15 15.71 17 13.09 17 10c0-3.87-3.13-7-7-7z"/>
+          </svg>
+        </a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">☀️</button>
+        <div class="locale-picker" id="localePicker">
+          <button type="button" class="locale-toggle" aria-haspopup="listbox" aria-expanded="false"
+                  aria-label="Select language">🌐</button>
+          <ul role="listbox" aria-label="Language">
+            <li role="option" data-locale="en" aria-selected="false">English</li>
+            <li role="option" data-locale="pt-BR" aria-selected="true" class="active">Português (Brasil)</li>
+          </ul>
+        </div>
+        <a href="/pt-BR/" class="back-link">← Todos os padrões</a>
+        
+        <div class="nav-arrows">
+          <a href="/pt-BR/enterprise/jpa-vs-jakarta-data.html" aria-label="Previous pattern">←</a>
+          <a href="/pt-BR/enterprise/jndi-lookup-vs-cdi-injection.html" aria-label="Next pattern">→</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <article class="article">
+    <div class="breadcrumb">
+      <a href="/pt-BR/">Início</a>
+      <span class="sep">/</span>
+      <a href="/pt-BR/#enterprise">Enterprise</a>
+      <span class="sep">/</span>
+      <span>EJB Timer vs Jakarta Scheduler</span>
+    </div>
+
+    <div class="tip-header">
+      <div class="tip-meta">
+        <span class="badge enterprise">Enterprise</span>
+        <span class="badge intermediate">intermediate</span>
+      </div>
+      <h1>EJB Timer vs Jakarta Scheduler</h1>
+      <p>Replace heavyweight EJB timers with Jakarta Concurrency&#x27;s ManagedScheduledExecutorService for simpler scheduling.</p>
+    </div>
+
+    <section class="compare-section">
+      <div class="section-label">Comparação de Código</div>
+      <div class="compare-container">
+        <div class="compare-panel old-panel">
+          <div class="compare-panel-header">
+            <span class="compare-tag old">✕ Java EE</span>
+            <button class="copy-btn" data-code="old">Copiar</button>
+          </div>
+          <div class="compare-code">
+            <pre class="code-text">@Stateless
+public class ReportGenerator {
+    @Resource
+    TimerService timerService;
+
+    @PostConstruct
+    public void init() {
+        timerService.createCalendarTimer(
+            new ScheduleExpression()
+                .hour(&quot;2&quot;).minute(&quot;0&quot;));
+    }
+
+    @Timeout
+    public void generateReport(Timer timer) {
+        // runs every day at 02:00
+        buildDailyReport();
+    }
+}</pre>
+          </div>
+        </div>
+        <div class="compare-panel modern-panel">
+          <div class="compare-panel-header">
+            <span class="compare-tag modern">✓ Jakarta EE 10+</span>
+            <button class="copy-btn" data-code="modern">Copiar</button>
+          </div>
+          <div class="compare-code">
+            <pre class="code-text">@ApplicationScoped
+public class ReportGenerator {
+    @Resource
+    ManagedScheduledExecutorService scheduler;
+
+    @PostConstruct
+    public void init() {
+        scheduler.scheduleAtFixedRate(
+            this::generateReport,
+            0, 24, TimeUnit.HOURS);
+    }
+
+    public void generateReport() {
+        buildDailyReport();
+    }
+}</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-section">
+      <div class="section-label">Por que a forma moderna ganha</div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">🪶</div>
+          <h3>Reduced boilerplate</h3>
+          <p>No @Timeout callback or ScheduleExpression — use the standard ScheduledExecutorService API.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🧪</div>
+          <h3>Better testability</h3>
+          <p>Plain methods and executor mocks make unit testing straightforward without EJB container.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">☁️</div>
+          <h3>Cloud-native friendly</h3>
+          <p>Managed executors integrate with container lifecycle and work in lightweight runtimes.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-label">Abordagem Antiga</div>
+        <div class="info-value red">EJB TimerService</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Abordagem Moderna</div>
+        <div class="info-value green">ManagedScheduledExecutorService</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Desde o JDK</div>
+        <div class="info-value accent">11</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Dificuldade</div>
+        <div class="info-value blue">intermediate</div>
+      </div>
+    </div>
+
+    <section class="bs-section">
+      <div class="section-label">Suporte JDK</div>
+      <div class="bs-card">
+        <div class="bs-feature-name">EJB Timer vs Jakarta Scheduler</div>
+        <span class="baseline-badge widely">Disponível</span>
+        <p class="bs-desc">Available since Jakarta EE 10 / Concurrency 3.0</p>
+      </div>
+    </section>
+
+    <section class="explanation">
+      <div class="section-label">Como funciona</div>
+      <p>EJB timers require a @Stateless or @Singleton bean with a @Timeout callback and XML or annotation-based schedule expressions. Jakarta Concurrency provides ManagedScheduledExecutorService, which uses the familiar java.util.concurrent scheduling API. The result is less boilerplate, easier unit testing, and no EJB container dependency.</p>
+    </section>
+
+    <section class="docs-section">
+      <div class="section-label">Documentação Relacionada</div>
+      <div class="docs-links">
+        <a href="https://jakarta.ee/specifications/concurrency/" target="_blank" rel="noopener" class="doc-link">Jakarta Concurrency Specification ↗</a>
+        <a href="https://jakarta.ee/specifications/concurrency/3.0/apidocs/" target="_blank" rel="noopener" class="doc-link">Jakarta Concurrency 3.0 API ↗</a>
+      </div>
+    </section>
+
+    <section class="related">
+      <div class="section-label">Padrões relacionados</div>
+      <div class="related-grid">
+        <a href="/pt-BR/enterprise/ejb-vs-cdi.html" class="tip-card">
+          <div class="tip-card-body">
+            <div class="tip-card-header">
+              <div class="tip-badges">
+                <span class="badge enterprise">Enterprise</span>
+                <span class="badge intermediate">intermediate</span>
+              </div>
+            </div>
+            <h3>EJB versus CDI</h3>
+          </div>
+          <div class="card-code">
+            <div class="card-code-layer old-layer">
+              <div class="mini-label">Java EE</div>
+              <pre class="code-text">@Stateless
+public class OrderEJB {
+    @EJB
+    private InventoryEJB inventory;
+
+    public void placeOrder(Order order) {
+        // container-managed transaction
+        inventory.reserve(order.getItem());
+    }
+}</pre>
+            </div>
+            <div class="card-code-layer modern-layer">
+              <div class="mini-label">Jakarta EE 8+</div>
+              <pre class="code-text">@ApplicationScoped
+public class OrderService {
+    @Inject
+    private InventoryService inventory;
+
+    @Transactional
+    public void placeOrder(Order order) {
+        inventory.reserve(order.getItem());
+    }
+}</pre>
+            </div>
+            <span class="hover-hint">Passe o mouse para ver o moderno ➜</span>
+          </div>
+          <div class="tip-card-footer">
+            <span class="browser-support"><span class="dot"></span>JDK 11+</span>
+            <span class="arrow-link">→</span>
+          </div>
+        </a>
+        <a href="/pt-BR/concurrency/virtual-threads.html" class="tip-card">
+          <div class="tip-card-body">
+            <div class="tip-card-header">
+              <div class="tip-badges">
+                <span class="badge concurrency">Concurrency</span>
+                <span class="badge beginner">beginner</span>
+              </div>
+            </div>
+            <h3>Virtual threads</h3>
+          </div>
+          <div class="card-code">
+            <div class="card-code-layer old-layer">
+              <div class="mini-label">Java 8</div>
+              <pre class="code-text">Thread thread = new Thread(() -&gt; {
+    System.out.println(&quot;hello&quot;);
+});
+thread.start();
+thread.join();</pre>
+            </div>
+            <div class="card-code-layer modern-layer">
+              <div class="mini-label">Java 21+</div>
+              <pre class="code-text">Thread.startVirtualThread(() -&gt; {
+    System.out.println(&quot;hello&quot;);
+}).join();</pre>
+            </div>
+            <span class="hover-hint">Passe o mouse para ver o moderno ➜</span>
+          </div>
+          <div class="tip-card-footer">
+            <span class="browser-support"><span class="dot"></span>JDK 21+</span>
+            <span class="arrow-link">→</span>
+          </div>
+        </a>
+        <a href="/pt-BR/concurrency/executor-try-with-resources.html" class="tip-card">
+          <div class="tip-card-body">
+            <div class="tip-card-header">
+              <div class="tip-badges">
+                <span class="badge concurrency">Concurrency</span>
+                <span class="badge beginner">beginner</span>
+              </div>
+            </div>
+            <h3>ExecutorService auto-close</h3>
+          </div>
+          <div class="card-code">
+            <div class="card-code-layer old-layer">
+              <div class="mini-label">Java 8</div>
+              <pre class="code-text">ExecutorService exec =
+    Executors.newCachedThreadPool();
+try {
+    exec.submit(task);
+} finally {
+    exec.shutdown();
+    exec.awaitTermination(
+        1, TimeUnit.MINUTES);
+}</pre>
+            </div>
+            <div class="card-code-layer modern-layer">
+              <div class="mini-label">Java 19+</div>
+              <pre class="code-text">try (var exec =
+        Executors.newCachedThreadPool()) {
+    exec.submit(task);
+}
+// auto shutdown + await on close</pre>
+            </div>
+            <span class="hover-hint">Passe o mouse para ver o moderno ➜</span>
+          </div>
+          <div class="tip-card-footer">
+            <span class="browser-support"><span class="dot"></span>JDK 19+</span>
+            <span class="arrow-link">→</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </article>
+</section>
+
+
+  <div class="social-share">
+    <span class="share-label">Compartilhar</span>
+    <a href="https://x.com/intent/tweet?url=https%3A%2F%2Fjavaevolved.github.io%2Fejb-timer-vs-jakarta-scheduler.html&text=EJB%20Timer%20vs%20Jakarta%20Scheduler%20%E2%80%93%20java.evolved" target="_blank" rel="noopener" class="share-btn share-x" aria-label="Share on X">𝕏</a>
+    <a href="https://bsky.app/intent/compose?text=EJB%20Timer%20vs%20Jakarta%20Scheduler%20%E2%80%93%20java.evolved%20https%3A%2F%2Fjavaevolved.github.io%2Fejb-timer-vs-jakarta-scheduler.html" target="_blank" rel="noopener" class="share-btn share-bsky" aria-label="Share on Bluesky">🦋</a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fjavaevolved.github.io%2Fejb-timer-vs-jakarta-scheduler.html" target="_blank" rel="noopener" class="share-btn share-li" aria-label="Share on LinkedIn">in</a>
+    <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fjavaevolved.github.io%2Fejb-timer-vs-jakarta-scheduler.html&title=EJB%20Timer%20vs%20Jakarta%20Scheduler%20%E2%80%93%20java.evolved" target="_blank" rel="noopener" class="share-btn share-reddit" aria-label="Share on Reddit">⬡</a>
+  </div>
+
+  <footer>
+    <p><a href="/pt-BR/">java.evolved</a> — O Java evoluiu. Seu código também pode.</p>
+    <p>Feito com ❤️ por <a href="https://github.com/brunoborges" target="_blank" rel="noopener">Bruno Borges</a> e <a href="https://github.com/features/copilot" target="_blank" rel="noopener">GitHub Copilot</a></p>
+    <p>Inspirado por <a href="https://modern-css.com" target="_blank" rel="noopener">modern-css.com</a></p>
+    <p><a href="https://github.com/javaevolved/javaevolved.github.io" target="_blank" rel="noopener">Ver no GitHub</a></p>
+  </footer>
+
+<script>
+  window.i18n = {
+    locale: "pt-BR",
+    searchPlaceholder: "Buscar padrões…",
+    noResults: "Nenhum resultado encontrado.",
+    copied: "Copiado!",
+    expandAll: "Expandir Tudo",
+    collapseAll: "Recolher Tudo",
+    hoverHint: "passe o mouse para ver o moderno →",
+    touchHint: "👆 toque ou deslize →"
+  };
+</script>
+  <script src="../../app.js"></script>
+</body>
+</html>
