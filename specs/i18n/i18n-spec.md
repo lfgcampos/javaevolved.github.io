@@ -28,7 +28,7 @@ content/                              # English content (source of truth)
   collections/
     ...
 
-translations/                         # All i18n artefacts
+translations/                         # All i18n artifacts
   strings/
     en.json                           # English UI strings (extracted from templates)
     pt-BR.json                        # Partial — missing keys fall back to en.json
