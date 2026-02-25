@@ -24,9 +24,16 @@ the same build pipeline.
 ```
 content/                              # English content (source of truth)
   language/
-    type-inference-with-var.json
   collections/
-    ...
+  strings/
+  streams/
+  concurrency/
+  io/
+  errors/
+  datetime/
+  security/
+  tooling/
+  enterprise/
 
 translations/                         # All i18n artifacts
   strings/
@@ -38,7 +45,15 @@ translations/                         # All i18n artifacts
       language/
         type-inference-with-var.json  # Full translated JSON (all fields)
       collections/
-        ...
+      strings/
+      streams/
+      concurrency/
+      io/
+      errors/
+      datetime/
+      security/
+      tooling/
+      enterprise/
     ja/
       language/
         ...
