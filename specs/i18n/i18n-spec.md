@@ -126,7 +126,7 @@ need to include keys that differ from English.
     }
   },
   "search": {
-    "placeholder": "Search patterns…",
+    "placeholder": "Search snippets…",
     "noResults": "No results found.",
     "esc": "ESC"
   },
