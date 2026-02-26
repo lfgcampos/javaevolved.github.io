@@ -9,8 +9,8 @@ Internationalization is implemented via two distinct layers:
    (labels, button text, nav, footer, etc.) is extracted into a per-locale
    `translations/strings/{locale}.yaml` file and injected at build time.
 
-2. **Content translation layer** — translated pattern JSON files are complete,
-   stand-alone replacements stored under `translations/content/{locale}/`.
+2. **Content translation layer** — translated pattern YAML files contain only
+   translatable fields, stored under `translations/content/{locale}/`.
    The generator falls back to the English file for any pattern that has not yet
    been translated.
 
@@ -453,16 +453,16 @@ Or explicitly, to support incremental locale addition:
 When a new slug is added, AI generates translations automatically:
 
 ```
-New English slug  →  AI prompt  →  Translated JSON file  →  Schema validation  →  Commit
+New English slug  →  AI prompt  →  Translated YAML file  →  Schema validation  →  Commit
 ```
 
 ### Why this architecture suits AI translation
 
-- The AI receives the full English JSON and returns a complete translated JSON —
+- The AI receives the full English content and returns a translated YAML file —
   no special field-filtering rules in the prompt.
 - `oldCode`/`modernCode` are overwritten by the build tooling, so AI can copy
   them verbatim without risk of hallucinated code shipping to users.
-- The translated file passes the same JSON schema validation as English files —
+- The translated file passes the same schema validation as English files —
   no separate validation logic needed.
 - If the AI file does not exist yet, the fallback is an explicit "untranslated"
   banner rather than a silent gap.
@@ -548,10 +548,10 @@ jbang html-generators/generate.java --locale es
 
 ### Format support
 
-Both content translations and UI strings files can be in JSON or YAML format.
-The generator discovers files by trying `.json`, `.yaml`, and `.yml` extensions
-in order via `findWithExtensions()`. Within a single locale, formats can be
-mixed freely (e.g., strings in YAML, some content in JSON).
+Both content translations and UI strings files use YAML format (`.yaml`).
+The generator also supports JSON (`.json`) and `.yml` extensions as fallbacks,
+discovering files by trying `.json`, `.yaml`, and `.yml` extensions in order
+via `findWithExtensions()`. In practice, all current files use `.yaml`.
 
 ---
 
