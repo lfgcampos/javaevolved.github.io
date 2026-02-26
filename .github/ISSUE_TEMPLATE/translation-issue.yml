@@ -12,31 +12,21 @@ body:
         Found a mistranslation, awkward phrasing, or missing translation?
         Let us know and we'll fix it.
 
-  - type: dropdown
+  - type: input
     id: locale
     attributes:
       label: Language
-      description: "Which language has the issue?"
-      options:
-        - de — Deutsch
-        - es — Español
-        - pt-BR — Português (Brasil)
-        - zh-CN — 中文 (简体)
-        - ar — العربية
-        - fr — Français
-        - ja — 日本語
-        - ko — 한국어
+      description: "Which language has the issue? (e.g. de, es, pt-BR, zh-CN, ar, fr, ja, ko)"
+      placeholder: "pt-BR"
     validations:
       required: true
 
-  - type: dropdown
+  - type: input
     id: area
     attributes:
       label: What is affected?
-      description: "Is this about a pattern page or the site UI (nav, buttons, labels)?"
-      options:
-        - Pattern content (title, summary, explanation, etc.)
-        - UI strings (navigation, buttons, labels, footer)
+      description: "Pattern content or UI strings (navigation, buttons, labels, footer)?"
+      placeholder: "Pattern content"
     validations:
       required: true
 

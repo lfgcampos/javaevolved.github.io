@@ -427,8 +427,13 @@ Map<String, String> buildContributeUrls(Snippet s, String locale, String localeN
     var codeBody = urlEncode("**Pattern:** %s\n**URL:** %s\n\nDescribe the issue:\n".formatted(s.slug(), pageUrl));
     var codeUrl = "%s?title=%s&labels=%s&body=%s".formatted(GITHUB_ISSUES_URL, codeTitle, "bug", codeBody);
 
-    var transUrl = "%s?template=translation-issue.yml&title=%s".formatted(
-            GITHUB_ISSUES_URL, urlEncode("[Translation] %s (%s)".formatted(s.title(), localeName)));
+    var cleanLocaleName = localeName.replaceFirst("^[^\\p{L}]+", "");
+    var transUrl = "%s?template=translation-issue.yml&title=%s&locale=%s&pattern=%s&area=%s".formatted(
+            GITHUB_ISSUES_URL,
+            urlEncode("[Translation] %s (%s)".formatted(s.title(), cleanLocaleName)),
+            urlEncode(locale),
+            urlEncode(s.slug()),
+            urlEncode("Pattern content"));
 
     var suggestUrl = "%s?template=new-pattern.yml".formatted(GITHUB_ISSUES_URL);
 
