@@ -45,5 +45,5 @@ related:
 - "io/reading-files"
 - "io/http-client"
 docs:
-- title: "The try-with-resources Statement"
-  href: "https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html"
+- title: "Catching and Handling Exceptions (dev.java)"
+  href: "https://dev.java/learn/exceptions/catching-handling/"

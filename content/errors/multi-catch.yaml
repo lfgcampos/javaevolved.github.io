@@ -50,5 +50,5 @@ related:
 - "errors/helpful-npe"
 - "errors/require-nonnull-else"
 docs:
-- title: "The catch Blocks"
-  href: "https://docs.oracle.com/javase/tutorial/essential/exceptions/catch.html"
+- title: "Catching and Handling Exceptions (dev.java)"
+  href: "https://dev.java/learn/exceptions/catching-handling/"
