@@ -43,7 +43,7 @@ translations/                         # All i18n artifacts
   content/
     pt-BR/
       language/
-        type-inference-with-var.json  # Full translated JSON (all fields)
+        type-inference-with-var.yaml  # Translated YAML (translatable fields only)
       collections/
       strings/
       streams/
@@ -273,23 +273,28 @@ text is centrally managed and consistently translated.
 
 Translation files contain **only** translatable fields — no structural data:
 
-```json
-// translations/content/pt-BR/language/type-inference-with-var.json
-{
-  "title": "Inferência de tipo com var",
-  "oldApproach": "Tipos explícitos",
-  "modernApproach": "Palavra-chave var",
-  "summary": "Use var para deixar o compilador inferir o tipo local.",
-  "explanation": "...",
-  "whyModernWins": [
-    { "icon": "⚡", "title": "Menos ruído", "desc": "..." },
-    { "icon": "👁",  "title": "Mais legível", "desc": "..." },
-    { "icon": "🔒", "title": "Seguro", "desc": "..." }
-  ],
-  "support": {
-    "description": "Amplamente disponível desde o JDK 10 (março de 2018)"
-  }
-}
+```yaml
+# translations/content/pt-BR/language/type-inference-with-var.yaml
+title: Inferência de tipo com var
+oldApproach: Tipos explícitos
+modernApproach: Palavra-chave var
+summary: Use var para inferência de tipo em variáveis locais — menos ruído, mesma
+  segurança.
+explanation: Desde o Java 10, o compilador infere os tipos de variáveis locais a partir
+  do lado direito da atribuição. Isso reduz o ruído visual sem sacrificar a segurança
+  de tipos. Use var quando o tipo for óbvio pelo contexto.
+whyModernWins:
+  - icon: ⚡
+    title: Menos boilerplate
+    desc: Não é necessário repetir tipos genéricos complexos em ambos os lados da atribuição.
+  - icon: 👁
+    title: Melhor legibilidade
+    desc: Foco nos nomes de variáveis e valores, não nas declarações de tipo.
+  - icon: 🔒
+    title: Ainda seguro em tipos
+    desc: O compilador infere e impõe o tipo exato em tempo de compilação.
+support:
+  description: Amplamente disponível desde o JDK 10 (março de 2018)
 ```
 
 ---
@@ -469,18 +474,18 @@ New English slug  →  AI prompt  →  Translated JSON file  →  Schema validat
 2. **Translate** — For each supported locale, call the translation model with:
    ```
    Translate the following Java pattern from English to {locale}.
-   Return a JSON file containing ONLY these translated fields:
+   Return a YAML file containing ONLY these translated fields:
    - title, summary, explanation, oldApproach, modernApproach
    - whyModernWins (full array with icon, title, desc)
    - support.description (inside a "support" object)
    Do NOT include: slug, id, category, difficulty, jdkVersion, oldLabel,
    modernLabel, oldCode, modernCode, docs, related, prev, next, support.state.
-   Return valid JSON only.
+   Return valid YAML only.
    ```
    See the **Field Translation Reference** table above for the full rationale.
 3. **Validate** — Verify the output contains only translatable fields.
 4. **Commit** — Write the output to
-   `translations/content/{locale}/<cat>/<slug>.json` and commit.
+   `translations/content/{locale}/<cat>/<slug>.yaml` and commit.
 5. **Deploy** — The generator picks it up on next build; the "untranslated"
    banner disappears automatically.
 
