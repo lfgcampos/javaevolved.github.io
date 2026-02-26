@@ -1,0 +1,17 @@
+title: "스코프 값"
+oldApproach: "ThreadLocal"
+modernApproach: "ScopedValue"
+summary: "ThreadLocal의 함정 없이 호출 스택 전반에 걸쳐 데이터를 안전하게 공유합니다."
+explanation: "ScopedValue는 불변이고 상속 가능하며 스코프가 제한된 컨텍스트를 제공합니다. ThreadLocal과 달리 스코프 값은 자동으로 정리되고, 가상 스레드와 함께 작동하며, 호출자가 변경할 수 없습니다."
+whyModernWins:
+- icon: "🔒"
+  title: "불변"
+  desc: "호출자는 읽을 수 있지만 스코프 값을 수정할 수 없습니다."
+- icon: "🧹"
+  title: "자동 정리"
+  desc: "수동 remove() 불필요 — 값은 블록 범위로 제한됩니다."
+- icon: "⚡"
+  title: "가상 스레드 안전"
+  desc: "수백만 개의 가상 스레드에서 효율적으로 작동합니다."
+support:
+  description: "JDK 25 LTS에서 확정 (JEP 506, 2025년 9월)."

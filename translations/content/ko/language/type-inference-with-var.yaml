@@ -1,0 +1,17 @@
+title: "var를 사용한 타입 추론"
+oldApproach: "명시적 타입"
+modernApproach: "var 키워드"
+summary: "지역 변수 타입 추론에 var를 사용합니다 — 노이즈는 줄고 안전성은 동일합니다."
+explanation: "Java 10부터 컴파일러가 우변으로부터 지역 변수 타입을 추론합니다. 타입 안전성을 해치지 않고 시각적 노이즈를 줄입니다. 문맥에서 타입이 명확할 때 var를 사용하세요."
+whyModernWins:
+- icon: "⚡"
+  title: "보일러플레이트 감소"
+  desc: "대입문 양쪽에 복잡한 제네릭 타입을 반복할 필요가 없습니다."
+- icon: "👁"
+  title: "가독성 향상"
+  desc: "타입 선언이 아닌 변수 이름과 값에 집중할 수 있습니다."
+- icon: "🔒"
+  title: "타입 안전성 유지"
+  desc: "컴파일러가 컴파일 시점에 정확한 타입을 추론하고 강제합니다."
+support:
+  description: "JDK 10 (2018년 3월) 이후 널리 사용 가능"

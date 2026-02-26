@@ -1,0 +1,17 @@
+title: "JSF 관리 빈 대 CDI Named 빈"
+oldApproach: "@ManagedBean"
+modernApproach: "@Named + CDI"
+summary: "더 이상 사용되지 않는 JSF @ManagedBean을 통일된 의존성 주입 모델을 위한 CDI @Named로 대체합니다."
+explanation: "JSF의 @ManagedBean과 @ManagedProperty는 Jakarta Faces 4.0에서 더 이상 사용되지 않으며 Jakarta EE 10에서 제거됩니다. CDI @Named는 JSF 뷰에서 빈을 노출하고 전체 CDI 에코시스템에 접근하는 표준 방법입니다."
+whyModernWins:
+- icon: "🔗"
+  title: "통일된 모델"
+  desc: "하나의 CDI 컨테이너가 모든 빈을 관리합니다 — JSF, REST, 서비스 레이어가 동일한 주입을 공유합니다."
+- icon: "🗑️"
+  title: "보일러플레이트 감소"
+  desc: "@Inject가 @ManagedProperty와 필요한 세터 메서드를 대체합니다."
+- icon: "🔮"
+  title: "미래 지향적"
+  desc: "@ManagedBean은 Jakarta EE 10에서 제거됩니다; @Named가 지원되는 대체입니다."
+support:
+  description: "CDI @Named는 Java EE 6 이후 사용 가능; @ManagedBean은 Jakarta EE 10에서 제거됨"

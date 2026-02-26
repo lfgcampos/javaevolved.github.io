@@ -1,0 +1,17 @@
+title: "Duration과 Period"
+oldApproach: "밀리초 연산"
+modernApproach: "Duration / Period"
+summary: "타입 안전한 Duration과 Period로 시간 차이를 계산합니다."
+explanation: "Duration은 시간 기반 양(시간, 분, 초)을 위한 것이고, Period는 날짜 기반 양(년, 월, 일)을 위한 것입니다. 간단한 차이에는 ChronoUnit.between()을 사용합니다. 모두 엣지 케이스를 올바르게 처리합니다."
+whyModernWins:
+- icon: "🎯"
+  title: "타입 안전"
+  desc: "시간에는 Duration, 날짜에는 Period — 혼동이 없습니다."
+- icon: "🛡️"
+  title: "올바른 연산"
+  desc: "DST 전환, 윤년, 윤초를 올바르게 처리합니다."
+- icon: "📖"
+  title: "가독성"
+  desc: "ChronoUnit.DAYS.between()은 영어처럼 읽힙니다."
+support:
+  description: "JDK 8 (2014년 3월) 이후 널리 사용 가능"

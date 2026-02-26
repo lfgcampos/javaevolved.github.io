@@ -1,0 +1,17 @@
+title: "Collectors.flatMapping()"
+oldApproach: "중첩 flatMap"
+modernApproach: "flatMapping()"
+summary: "그룹화 컬렉터 내부에서 flatMapping()을 사용하여 평탄화합니다."
+explanation: "Collectors.flatMapping()은 다운스트림 컬렉터로 일대다 매핑을 적용합니다. groupingBy 내부에서 평탄화 작업에 이상적입니다."
+whyModernWins:
+- icon: "🧩"
+  title: "조합 가능"
+  desc: "groupingBy 내부에서 다운스트림 컬렉터로 작동합니다."
+- icon: "📐"
+  title: "단일 순회"
+  desc: "단일 스트림 순회로 평탄화와 그룹화를 수행합니다."
+- icon: "🔗"
+  title: "중첩 가능"
+  desc: "다른 다운스트림 컬렉터와 결합합니다."
+support:
+  description: "JDK 9 (2017년 9월) 이후 널리 사용 가능"

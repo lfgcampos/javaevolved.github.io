@@ -1,0 +1,17 @@
+title: "_를 사용한 이름 없는 변수"
+oldApproach: "미사용 변수"
+modernApproach: "_ 플레이스홀더"
+summary: "변수가 의도적으로 사용되지 않음을 표시하기 위해 _를 사용합니다."
+explanation: "이름 없는 변수는 값이 의도적으로 무시됨을 독자와 도구에 전달합니다. 더 이상 'ignored' 또는 'unused' 이름 규칙이나 IDE 경고가 필요 없습니다."
+whyModernWins:
+- icon: "📢"
+  title: "명확한 의도"
+  desc: "_는 '이 값이 여기서 필요하지 않습니다'를 명시적으로 표현합니다."
+- icon: "🔇"
+  title: "경고 없음"
+  desc: "IDE와 린터가 의도적으로 사용하지 않은 변수를 표시하지 않습니다."
+- icon: "🧹"
+  title: "더 깔끔한 람다"
+  desc: "일부 매개변수만 필요할 때 다중 매개변수 람다가 더 깔끔해집니다."
+support:
+  description: "JDK 22에서 확정 (JEP 456, 2024년 3월)."

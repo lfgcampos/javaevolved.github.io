@@ -1,0 +1,17 @@
+title: "String.strip() 대 trim()"
+oldApproach: "trim()"
+modernApproach: "strip()"
+summary: "strip(), stripLeading(), stripTrailing()으로 유니코드 인식 공백 제거를 사용합니다."
+explanation: "trim()은 U+0020(ASCII 제어 문자와 공백) 이하의 문자만 제거합니다. strip()은 Character.isWhitespace()를 사용하여 모든 유니코드 공백을 처리합니다."
+whyModernWins:
+- icon: "🌐"
+  title: "유니코드 정확"
+  desc: "모든 스크립트의 공백 문자를 처리합니다."
+- icon: "🎯"
+  title: "방향성"
+  desc: "한쪽만 트리밍하기 위한 stripLeading()과 stripTrailing()."
+- icon: "🛡️"
+  title: "버그 감소"
+  desc: "국제 텍스트에서 남겨진 공백이 없습니다."
+support:
+  description: "JDK 11 (2018년 9월) 이후 널리 사용 가능"

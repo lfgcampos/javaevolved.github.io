@@ -1,0 +1,17 @@
+title: "내장 HTTP 서버"
+oldApproach: "외부 서버 / 프레임워크"
+modernApproach: "jwebserver CLI"
+summary: "Java 18에는 프로토타이핑과 파일 서빙을 위한 내장 최소 HTTP 서버가 포함되어 있습니다."
+explanation: "JDK 18에는 jwebserver CLI 도구와 SimpleFileServer API를 통해 접근 가능한 간단하고 의존성 없는 HTTP 파일 서버가 추가되었습니다. 설치, 설정, 의존성이 필요 없습니다."
+whyModernWins:
+- icon: "🚀"
+  title: "설정 없음"
+  desc: "어느 디렉토리에서든 jwebserver를 실행합니다 — 설치, 설정, 의존성이 필요 없습니다."
+- icon: "📦"
+  title: "JDK에 내장"
+  desc: "모든 JDK 18+ 설치에 포함되어 Java가 있는 모든 머신에서 항상 사용 가능합니다."
+- icon: "🧪"
+  title: "프로토타이핑에 적합"
+  desc: "HTML, API, 프론트엔드 개발 테스트를 위해 정적 파일을 즉시 서빙합니다."
+support:
+  description: "JDK 18 (2022년 3월) 이후 사용 가능"

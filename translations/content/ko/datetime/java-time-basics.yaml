@@ -1,0 +1,17 @@
+title: "java.time API 기초"
+oldApproach: "Date + Calendar"
+modernApproach: "java.time.*"
+summary: "Date와 Calendar 대신 불변이고 명확한 날짜/시간 타입을 사용합니다."
+explanation: "java.time은 LocalDate, LocalTime, LocalDateTime, Instant, ZonedDateTime을 제공합니다 — 모두 불변이고 스레드 안전합니다. 월은 1부터 시작합니다. 더 이상 Calendar.JANUARY = 0 같은 혼동이 없습니다."
+whyModernWins:
+- icon: "🔒"
+  title: "불변"
+  desc: "날짜/시간 값이 실수로 수정될 수 없습니다."
+- icon: "📖"
+  title: "명확한 API"
+  desc: "0이 아닌 Month.JANUARY, 2가 아닌 DayOfWeek.MONDAY."
+- icon: "🛡️"
+  title: "스레드 안전"
+  desc: "동기화 없이 스레드 간에 자유롭게 공유합니다."
+support:
+  description: "JDK 8 (2014년 3월) 이후 널리 사용 가능"

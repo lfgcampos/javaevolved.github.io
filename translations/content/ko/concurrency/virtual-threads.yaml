@@ -1,0 +1,17 @@
+title: "가상 스레드"
+oldApproach: "플랫폼 스레드"
+modernApproach: "가상 스레드"
+summary: "무거운 OS 스레드 대신 수백만 개의 경량 가상 스레드를 생성합니다."
+explanation: "가상 스레드는 OS가 아닌 JVM이 관리하는 경량 스레드입니다. 스레드 풀을 조정하지 않고 수백만 개를 만들 수 있습니다. HTTP 호출, 데이터베이스 쿼리 같은 I/O 바운드 작업에 이상적입니다."
+whyModernWins:
+- icon: "⚡"
+  title: "경량"
+  desc: "가상 스레드는 KB의 메모리를 사용하고, 플랫폼 스레드는 MB를 사용합니다."
+- icon: "♾️"
+  title: "확장 가능"
+  desc: "수백만 개의 스레드를 생성할 수 있습니다 — 풀 크기 조정 불필요."
+- icon: "🧹"
+  title: "단순한 모델"
+  desc: "비동기 코드처럼 확장되는 블로킹 코드를 작성합니다."
+support:
+  description: "JDK 21 LTS (2023년 9월) 이후 널리 사용 가능"

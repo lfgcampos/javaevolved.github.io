@@ -1,0 +1,17 @@
+title: "RandomGenerator 인터페이스"
+oldApproach: "new Random() / ThreadLocalRandom"
+modernApproach: "RandomGenerator 팩토리"
+summary: "이름으로 난수 알고리즘을 선택하기 위해 RandomGenerator 인터페이스를 사용합니다."
+explanation: "JDK 17은 모든 RNG 구현을 위한 공통 인터페이스로 RandomGenerator를 도입했습니다. 알고리즘을 이름으로 선택하고 코드 구조를 변경하지 않고도 교체할 수 있습니다."
+whyModernWins:
+- icon: "🔧"
+  title: "알고리즘 무관"
+  desc: "코드 구조를 변경하지 않고 이름으로 최적의 RNG 알고리즘을 선택합니다."
+- icon: "⚡"
+  title: "더 나은 알고리즘"
+  desc: "우수한 통계적 특성을 가진 최신 LXM 생성기에 접근합니다."
+- icon: "🔗"
+  title: "통일된 API"
+  desc: "하나의 인터페이스가 Random, ThreadLocalRandom, SplittableRandom 등을 모두 포괄합니다."
+support:
+  description: "JDK 17 (2021년 9월, JEP 356) 이후 사용 가능."

@@ -1,0 +1,17 @@
+title: "JPA 대 Jakarta Data"
+oldApproach: "JPA EntityManager"
+modernApproach: "Jakarta Data 리포지토리"
+summary: "리포지토리 인터페이스를 선언하고 Jakarta Data가 DAO 구현을 생성하도록 합니다."
+explanation: "Jakarta Data(Jakarta EE 11)는 데이터 접근을 순수 인터페이스로 만듭니다. 메서드 이름이 쿼리가 되고, 컨테이너가 구현을 생성하며, 수동 EntityManager 코드가 필요 없습니다."
+whyModernWins:
+- icon: "��"
+  title: "보일러플레이트 제로"
+  desc: "인터페이스를 선언합니다; 컨테이너가 배포 시점에 전체 DAO 구현을 생성합니다."
+- icon: "🔍"
+  title: "파생 쿼리"
+  desc: "findByNameAndStatus 같은 메서드 이름이 자동으로 파싱됩니다 — JPQL이나 SQL이 필요 없습니다."
+- icon: "🔌"
+  title: "이식 가능"
+  desc: "모든 Jakarta EE 11 호환 런타임이 벤더 종속성 없이 리포지토리 구현을 제공합니다."
+support:
+  description: "Jakarta EE 11 / Java 21 (2024) 이후 사용 가능"

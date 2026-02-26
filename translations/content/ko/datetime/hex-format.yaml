@@ -1,0 +1,17 @@
+title: "HexFormat"
+oldApproach: "수동 16진수 변환"
+modernApproach: "HexFormat"
+summary: "HexFormat으로 16진수 문자열과 바이트 배열을 변환합니다."
+explanation: "HexFormat은 바이트, 정수, 배열에 대한 양방향 16진수 인코딩/디코딩을 제공합니다. 구분자, 접두사, 접미사, 대소문자를 설정할 수 있습니다. 더 이상 수동 형식 지정이나 파싱이 필요 없습니다."
+whyModernWins:
+- icon: "📐"
+  title: "양방향"
+  desc: "하나의 API로 바이트→16진수, 16진수→바이트 변환을 수행합니다."
+- icon: "🔧"
+  title: "설정 가능"
+  desc: "구분자, 접두사, 접미사, 대소문자를 설정합니다."
+- icon: "📦"
+  title: "배열 지원"
+  desc: "전체 바이트 배열을 한 번에 인코딩/디코딩합니다."
+support:
+  description: "JDK 17 LTS (2021년 9월) 이후 널리 사용 가능"

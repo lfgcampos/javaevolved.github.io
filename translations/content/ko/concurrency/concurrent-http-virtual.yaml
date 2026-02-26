@@ -1,0 +1,17 @@
+title: "가상 스레드를 이용한 동시 HTTP 요청"
+oldApproach: "스레드 풀 + URLConnection"
+modernApproach: "가상 스레드 + HttpClient"
+summary: "가상 스레드와 HttpClient로 여러 URL을 동시에 가져옵니다."
+explanation: "가상 스레드를 통해 HTTP 요청당 스레드를 하나씩 만드는 것이 현실적으로 가능해졌습니다. HttpClient와 결합하면 확장 가능한 간단한 블로킹 코드로 복잡한 비동기 콜백 패턴을 대체할 수 있습니다."
+whyModernWins:
+- icon: "♾️"
+  title: "요청당 스레드"
+  desc: "풀 크기 조정 없이 URL당 가상 스레드 하나를 사용합니다."
+- icon: "📖"
+  title: "단순한 코드"
+  desc: "직관적인 블로킹 코드를 작성합니다."
+- icon: "⚡"
+  title: "높은 처리량"
+  desc: "최소한의 리소스로 수천 개의 동시 요청을 처리합니다."
+support:
+  description: "JDK 21 LTS (2023년 9월) 이후 널리 사용 가능"

@@ -1,0 +1,17 @@
+title: "수정 불가능한 컬렉터"
+oldApproach: "collectingAndThen"
+modernApproach: "stream.toList()"
+summary: "stream.toList()로 수정 불가능한 리스트에 직접 수집합니다."
+explanation: "Java 10에서 toUnmodifiableList(), toUnmodifiableSet(), toUnmodifiableMap()이 추가되어 장황한 collectingAndThen 래퍼를 대체했습니다. 리스트의 경우 Java 16의 stream.toList()가 더 간단한 대안을 제공합니다 — collect() 호출 자체가 필요 없습니다. 다른 컬렉션 타입에는 toUnmodifiableSet()과 toUnmodifiableMap()을 사용하세요."
+whyModernWins:
+- icon: "📏"
+  title: "가장 짧은 형태"
+  desc: "stream.toList()는 collect()나 Collectors 임포트가 전혀 필요 없습니다."
+- icon: "🔒"
+  title: "불변"
+  desc: "결과를 수정할 수 없어 우발적인 변경을 방지합니다."
+- icon: "📖"
+  title: "가독성"
+  desc: "스트림 파이프라인의 터미널 단계로 자연스럽게 읽힙니다."
+support:
+  description: "JDK 16 (2021년 3월) 이후 널리 사용 가능"

@@ -1,0 +1,17 @@
+title: "JSpecify null 안전성을 갖춘 JUnit 6"
+oldApproach: "어노테이션 없는 API"
+modernApproach: "@NullMarked API"
+summary: "JUnit 6은 JSpecify @NullMarked를 채택하여 전체 API에서 null 계약을 명시적으로 만듭니다."
+explanation: "JUnit 5는 표준화된 null 가능성 어노테이션 없이 출시되어 어떤 매개변수가 null을 허용하는지가 불명확했습니다. JUnit 6의 JSpecify 채택은 이를 변경합니다: 전체 모듈이 @NullMarked로 표시되어 어노테이션 없는 타입이 non-null임을 의미합니다."
+whyModernWins:
+- icon: "📜"
+  title: "명시적 계약"
+  desc: "JUnit 6 모듈의 @NullMarked는 null 의미론을 API에 직접 문서화합니다."
+- icon: "🛡️"
+  title: "컴파일 시점 안전성"
+  desc: "IDE와 분석기가 non-null이 예상되는 곳에 null이 전달될 때 경고하여 테스트 실행 전에 버그를 잡습니다."
+- icon: "🌐"
+  title: "에코시스템 표준"
+  desc: "JSpecify는 Spring, Guava 등에서 채택되었습니다 — 전체 스택에서 일관된 null 의미론."
+support:
+  description: "JUnit 6.0 (2025년 10월, Java 17+ 필요) 이후 사용 가능"

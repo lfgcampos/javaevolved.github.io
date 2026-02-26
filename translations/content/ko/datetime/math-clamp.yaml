@@ -1,0 +1,17 @@
+title: "Math.clamp()"
+oldApproach: "중첩 min/max"
+modernApproach: "Math.clamp()"
+summary: "단일하고 명확한 호출로 값을 범위 내로 제한합니다."
+explanation: "Math.clamp(value, min, max)는 값을 [min, max] 범위로 제한합니다. 중첩된 Math.min/Math.max보다 명확하며 int, long, float, double에서 사용 가능합니다."
+whyModernWins:
+- icon: "📖"
+  title: "자기 문서화"
+  desc: "clamp(value, min, max)는 명확합니다."
+- icon: "🛡️"
+  title: "오류 감소"
+  desc: "더 이상 min/max 순서를 실수로 바꾸지 않습니다."
+- icon: "🎯"
+  title: "모든 숫자 타입"
+  desc: "int, long, float, double에서 작동합니다."
+support:
+  description: "JDK 21 LTS (2023년 9월) 이후 널리 사용 가능"

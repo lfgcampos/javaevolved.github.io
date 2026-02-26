@@ -1,0 +1,17 @@
+title: "String.indent()와 transform()"
+oldApproach: "수동 들여쓰기"
+modernApproach: "indent() / transform()"
+summary: "텍스트 들여쓰기와 문자열 변환을 유창하게 체이닝합니다."
+explanation: "indent(n)은 각 줄에 n 칸의 공백을 추가합니다. transform(fn)은 임의의 함수를 적용하여 유창한 문자열 파이프라인을 가능하게 합니다."
+whyModernWins:
+- icon: "📏"
+  title: "내장됨"
+  desc: "들여쓰기는 일반적인 작업입니다 — 이제 한 번의 호출로 가능합니다."
+- icon: "🔗"
+  title: "체이닝 가능"
+  desc: "transform()은 문자열에서 유창한 파이프라인을 가능하게 합니다."
+- icon: "🧹"
+  title: "깔끔한 코드"
+  desc: "수동 줄 분할과 StringBuilder 루프가 없습니다."
+support:
+  description: "JDK 12 (2019년 3월) 이후 널리 사용 가능"

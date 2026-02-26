@@ -1,0 +1,17 @@
+title: "String.repeat()"
+oldApproach: "StringBuilder 루프"
+modernApproach: "repeat()"
+summary: "루프 없이 문자열을 n번 반복합니다."
+explanation: "String.repeat(int)는 문자열을 자신과 n번 연결한 결과를 반환합니다. StringBuilder 루프를 완전히 대체합니다."
+whyModernWins:
+- icon: "📏"
+  title: "한 줄"
+  desc: "5줄의 StringBuilder 코드를 한 번의 호출로 대체합니다."
+- icon: "⚡"
+  title: "최적화됨"
+  desc: "내부 구현이 대량 반복을 위해 최적화되어 있습니다."
+- icon: "📖"
+  title: "명확한 의도"
+  desc: "repeat(3)은 목적을 즉시 전달합니다."
+support:
+  description: "JDK 11 (2018년 9월) 이후 널리 사용 가능"

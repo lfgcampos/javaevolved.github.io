@@ -1,0 +1,17 @@
+title: "Javadoc 주석에서 Markdown 사용"
+oldApproach: "HTML 기반 Javadoc"
+modernApproach: "Markdown Javadoc"
+summary: "더 나은 가독성을 위해 HTML 대신 Markdown으로 Javadoc 주석을 작성합니다."
+explanation: "Java 23은 전통적인 /** */ HTML 기반 형식의 대안으로 /// Markdown 스타일 Javadoc 주석을 도입합니다. Markdown 구문은 더 자연스럽게 작성하고 읽을 수 있으며, 코드 블록, 강조, 목록, 링크를 지원합니다."
+whyModernWins:
+- icon: "📖"
+  title: "자연스러운 구문"
+  desc: "HTML 태그 대신 인라인 코드에 백틱, 블록에 ```를 사용합니다."
+- icon: "✍️"
+  title: "작성 용이"
+  desc: "{@code}, <pre>, <p> 태그 없이 Markdown으로 작성합니다."
+- icon: "👁"
+  title: "편집기에서 더 나음"
+  desc: "Markdown은 모던 IDE와 텍스트 편집기에서 아름답게 렌더링됩니다."
+support:
+  description: "JDK 23 (2024년 9월) 이후 사용 가능"

@@ -1,0 +1,17 @@
+title: "유용한 NullPointerException"
+oldApproach: "불분명한 NPE"
+modernApproach: "상세한 NPE"
+summary: "JVM이 어떤 변수가 null이었는지 정확히 알려줍니다."
+explanation: "유용한 NPE는 어떤 표현식이 null이었고 어떤 연산이 실패했는지 설명합니다. Java 14부터 기본적으로 활성화되어 있습니다 — 코드 변경 없이 JDK를 업그레이드하기만 하면 됩니다."
+whyModernWins:
+- icon: "🔍"
+  title: "정확한 변수"
+  desc: "메시지가 체인에서 null인 변수를 지목합니다."
+- icon: "⚡"
+  title: "더 빠른 디버깅"
+  desc: "5개의 체이닝된 호출 중 어느 것이 null인지 더 이상 추측하지 않아도 됩니다."
+- icon: "🆓"
+  title: "무료 업그레이드"
+  desc: "코드 변경 없이 JDK 14 이상에서 실행하기만 하면 됩니다."
+support:
+  description: "JDK 14 (2020년 3월) 이후 널리 사용 가능"

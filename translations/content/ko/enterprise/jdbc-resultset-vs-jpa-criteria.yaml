@@ -1,0 +1,17 @@
+title: "JDBC ResultSet 매핑 대 JPA Criteria API"
+oldApproach: "JDBC ResultSet"
+modernApproach: "JPA Criteria API"
+summary: "수동 JDBC ResultSet 매핑을 JPA의 타입 안전 Criteria API로 대체합니다."
+explanation: "원시 JDBC는 SQL 문자열 구축, 인덱스로 매개변수 설정, 열별 ResultSet에서 객체로의 수동 매핑이 필요합니다. JPA Criteria API는 타입 안전 쿼리 구축과 자동 엔티티 매핑을 제공합니다."
+whyModernWins:
+- icon: "🔒"
+  title: "타입 안전 쿼리"
+  desc: "Criteria 빌더는 컴파일 시점에 필드 이름 및 타입 불일치를 잡습니다."
+- icon: "🗺️"
+  title: "자동 매핑"
+  desc: "JPA는 결과 행을 엔티티 객체에 매핑합니다 — 열별 수동 추출이 없습니다."
+- icon: "🧩"
+  title: "조합 가능한 조건자"
+  desc: "동적 where 절이 and(), or()와 재사용 가능한 Predicate 객체로 깔끔하게 구축됩니다."
+support:
+  description: "Jakarta EE 8 / Java 11 이후 널리 사용 가능"

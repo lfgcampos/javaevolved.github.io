@@ -1,0 +1,80 @@
+site:
+  tagline: Java는 진화했습니다. 당신의 코드도 그럴 수 있습니다.
+  tagline_line1: Java는 진화했습니다.
+  tagline_line2: 당신의 코드도 그럴 수 있습니다.
+  description: 모던 Java 코드 스니펫 모음. 오래된 Java 패턴과 깔끔하고 모던한 대체 코드를 나란히 비교합니다.
+  heroSnippetCount: ✦ {{snippetCount}}개의 모던 패턴 · Java 8 → Java 25
+  heroOld: 이전
+  heroModern: 모던
+  allComparisons: 모든 비교
+  snippetsBadge: '{{snippetCount}}개 스니펫'
+nav:
+  allPatterns: ← 모든 패턴
+  toggleTheme: 테마 전환
+  viewOnGitHub: GitHub에서 보기
+  selectLanguage: 언어 선택
+breadcrumb:
+  home: 홈
+sections:
+  codeComparison: 코드 비교
+  whyModernWins: 모던 방식이 더 나은 이유
+  oldApproach: 이전 방식
+  modernApproach: 모던 방식
+  sinceJdk: JDK 버전
+  difficulty: 난이도
+  jdkSupport: JDK 지원
+  howItWorks: 동작 원리
+  relatedDocs: 관련 문서
+  relatedPatterns: 관련 패턴
+filters:
+  show: '표시:'
+  all: 전체
+difficulty:
+  beginner: 초급
+  intermediate: 중급
+  advanced: 고급
+search:
+  placeholder: 스니펫 검색…
+  noResults: 검색 결과가 없습니다.
+  esc: ESC
+  searchTrigger: 검색…
+  navigate: 이동
+  open: 열기
+  close: 닫기
+cards:
+  old: 이전
+  modern: 모던
+  hoverHint: 마우스를 올려 모던 코드 보기 →
+  hoverHintRelated: 마우스를 올려 모던 코드 보기 ➜
+  touchHint: 👆 탭하거나 스와이프 →
+copy:
+  copy: 복사
+  copied: 복사됨!
+share:
+  label: 공유
+view:
+  expandAll: 모두 펼치기
+  collapseAll: 모두 접기
+stats:
+  modernPatterns: 모던 패턴
+  jdkVersions: 지원 JDK 버전
+  categories: 카테고리
+  linesOfPython: 필요한 Python 코드 줄 수
+footer:
+  tagline: Java는 진화했습니다. 당신의 코드도 그럴 수 있습니다.
+  madeWith: ❤️ 으로 만들었습니다
+  and: 그리고
+  inspiredBy: 영감을 받은
+  viewOnGitHub: GitHub에서 보기
+copilot:
+  headline: GitHub Copilot으로 Java 코드베이스를 현대화하세요.
+  description: Copilot이 레거시 패턴을 모던 Java로 자동으로 마이그레이션하도록 도와줍니다.
+  appModernization: 앱 현대화 →
+  javaGuide: Java 가이드 →
+support:
+  available: 사용 가능
+  preview: 프리뷰
+  experimental: 실험적
+untranslated:
+  notice: 이 페이지는 아직 {{localeName}}(으)로 번역되지 않았습니다.
+  viewInEnglish: 영어로 보기

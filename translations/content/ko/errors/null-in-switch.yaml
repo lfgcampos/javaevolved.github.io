@@ -1,0 +1,17 @@
+title: "switch의 null 케이스"
+oldApproach: "switch 전 null 가드"
+modernApproach: "case null"
+summary: "별도의 null 가드 없이 switch 케이스로 null을 직접 처리합니다."
+explanation: "패턴 매칭 switch는 null을 케이스 레이블로 매칭할 수 있습니다. 이를 통해 switch 전에 null 확인이 필요 없어지고 null 처리가 명시적이고 가시적이 됩니다."
+whyModernWins:
+- icon: "🎯"
+  title: "명시적"
+  desc: "null 처리가 switch에 바로 표시됩니다."
+- icon: "🛡️"
+  title: "NPE 없음"
+  desc: "null 값으로 switch해도 NullPointerException이 발생하지 않습니다."
+- icon: "📐"
+  title: "일체형"
+  desc: "null을 포함한 모든 케이스가 단일 switch 표현식에 있습니다."
+support:
+  description: "JDK 21 LTS (2023년 9월) 이후 널리 사용 가능"

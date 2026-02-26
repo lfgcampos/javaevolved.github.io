@@ -1,0 +1,17 @@
+title: "스트림 takeWhile / dropWhile"
+oldApproach: "수동 루프"
+modernApproach: "takeWhile/dropWhile"
+summary: "조건자를 기반으로 스트림에서 요소를 가져오거나 제거합니다."
+explanation: "takeWhile()은 조건자가 참인 동안 요소를 반환하고 실패 시 중지합니다. dropWhile()은 조건자가 참인 동안 요소를 건너뛰고 나머지를 반환합니다."
+whyModernWins:
+- icon: "🎯"
+  title: "단락 평가"
+  desc: "조건자가 실패하는 즉시 처리를 중지합니다."
+- icon: "🔗"
+  title: "파이프라인 친화적"
+  desc: "다른 스트림 연산과 자연스럽게 체이닝됩니다."
+- icon: "📖"
+  title: "선언적"
+  desc: "takeWhile은 영어처럼 읽힙니다: '100보다 작은 동안 가져오기'."
+support:
+  description: "JDK 9 (2017년 9월) 이후 널리 사용 가능"

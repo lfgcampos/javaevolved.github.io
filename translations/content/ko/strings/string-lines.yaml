@@ -1,0 +1,17 @@
+title: "줄 분할을 위한 String.lines()"
+oldApproach: 'split("\\n")'
+modernApproach: "lines()"
+summary: "정규식 오버헤드 없이 텍스트를 줄 스트림으로 분할하기 위해 String.lines()를 사용합니다."
+explanation: "String.lines()는 \n, \r, \r\n으로 분할된 줄의 Stream<String>을 반환합니다. 지연 평가되므로 대용량 문자열에 효율적입니다."
+whyModernWins:
+- icon: "⚡"
+  title: "지연 스트리밍"
+  desc: "줄은 split()처럼 한 번에 모두가 아닌 필요에 따라 생성됩니다."
+- icon: "🔧"
+  title: "범용 줄 끝"
+  desc: "정규식 없이 \n, \r, \r\n을 자동으로 처리합니다."
+- icon: "🔗"
+  title: "스트림 통합"
+  desc: "filter, map, collect와 직접 사용하기 위한 Stream을 반환합니다."
+support:
+  description: "JDK 11 (2018년 9월) 이후 사용 가능."

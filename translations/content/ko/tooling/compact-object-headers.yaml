@@ -1,0 +1,17 @@
+title: "컴팩트 객체 헤더"
+oldApproach: "128비트 헤더"
+modernApproach: "64비트 헤더"
+summary: "더 나은 메모리 밀도와 캐시 사용을 위해 객체 헤더 크기를 절반으로 줄입니다."
+explanation: "컴팩트 객체 헤더는 객체당 오버헤드를 128비트에서 64비트로 줄입니다. 이는 힙 사용량을 줄이고 CPU 캐시 효율성을 향상시킵니다."
+whyModernWins:
+- icon: "📦"
+  title: "50% 작은 헤더"
+  desc: "객체당 16바이트 대신 8바이트."
+- icon: "⚡"
+  title: "더 나은 캐시 사용"
+  desc: "더 많은 객체가 CPU 캐시 라인에 들어갑니다."
+- icon: "📊"
+  title: "더 높은 밀도"
+  desc: "동일한 힙 크기에 더 많은 객체를 넣습니다."
+support:
+  description: "JDK 25 LTS에서 확정 (JEP 519, 2025년 9월)."

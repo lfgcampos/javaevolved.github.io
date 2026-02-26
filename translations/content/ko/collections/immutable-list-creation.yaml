@@ -1,0 +1,17 @@
+title: "불변 리스트 생성"
+oldApproach: "장황한 래핑"
+modernApproach: "List.of()"
+summary: "하나의 깔끔한 표현식으로 불변 리스트를 만듭니다."
+explanation: "List.of()는 래핑이나 방어적 복사 없이 진정한 불변 리스트를 만듭니다. null에 비허용적(null 요소 거부)이며 구조적으로 불변입니다. 이전 방식은 세 개의 중첩 호출이 필요했습니다."
+whyModernWins:
+- icon: "📏"
+  title: "한 번의 호출"
+  desc: "세 개의 중첩 호출을 단일 팩토리 메서드로 대체합니다."
+- icon: "🔒"
+  title: "진정한 불변"
+  desc: "단순 래퍼가 아니라 리스트 자체가 불변입니다."
+- icon: "🛡️"
+  title: "null 안전"
+  desc: "생성 시점에 null 요소를 거부하여 빠른 실패를 보장합니다."
+support:
+  description: "JDK 9 (2017년 9월) 이후 널리 사용 가능"

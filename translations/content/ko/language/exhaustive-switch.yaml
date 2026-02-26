@@ -1,0 +1,17 @@
+title: "default 없는 완전한 switch"
+oldApproach: "필수 default"
+modernApproach: "봉인된 완전성"
+summary: "컴파일러가 봉인된 모든 하위 타입이 처리되었는지 검증합니다 — default 불필요."
+explanation: "봉인된 타입으로 switch할 때 컴파일러는 가능한 모든 하위 타입을 알고 모든 케이스가 처리되었는지 검증합니다. 새 하위 타입을 추가하면 컴파일러가 이제 불완전한 모든 switch를 표시합니다."
+whyModernWins:
+- icon: "✅"
+  title: "컴파일 시점 안전성"
+  desc: "새 하위 타입을 추가하면 컴파일러가 업데이트할 모든 위치를 표시합니다."
+- icon: "🚫"
+  title: "죽은 코드 없음"
+  desc: "버그를 숨기는 도달 불가능한 default 분기가 없습니다."
+- icon: "📐"
+  title: "대수적 타입"
+  desc: "봉인된 클래스 + 레코드 + 완전한 switch = Java에서 올바른 ADT."
+support:
+  description: "JDK 21 LTS (2023년 9월) 이후 널리 사용 가능"

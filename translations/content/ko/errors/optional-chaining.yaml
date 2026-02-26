@@ -1,0 +1,17 @@
+title: "Optional 체이닝"
+oldApproach: "중첩 null 확인"
+modernApproach: "Optional 파이프라인"
+summary: "중첩된 null 확인을 Optional 파이프라인으로 대체합니다."
+explanation: "Optional.map()은 nullable 값을 체이닝하면서 첫 번째 null에서 단락 평가합니다. orElse()는 기본값을 제공합니다. 이를 통해 피라미드형 null 확인을 제거합니다."
+whyModernWins:
+- icon: "🔗"
+  title: "체이닝 가능"
+  desc: "각 .map() 단계가 null을 투명하게 처리합니다."
+- icon: "📖"
+  title: "선형 흐름"
+  desc: "중첩된 if 블록 대신 왼쪽에서 오른쪽으로 읽습니다."
+- icon: "🛡️"
+  title: "NPE 방지"
+  desc: "각 단계에서 null이 처리됩니다 — 충돌 가능성 없음."
+support:
+  description: "JDK 8 이상에서 사용 가능 (9 이상에서 개선)"

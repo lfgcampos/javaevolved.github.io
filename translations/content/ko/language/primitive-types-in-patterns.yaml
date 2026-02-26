@@ -1,0 +1,17 @@
+title: "패턴의 기본 타입"
+oldApproach: "수동 범위 확인"
+modernApproach: "기본 타입 패턴"
+summary: "패턴 매칭이 이제 객체뿐만 아니라 기본 타입에도 작동합니다."
+explanation: "Java 25는 패턴 매칭을 기본 타입으로 확장합니다. when 가드와 함께 switch 패턴에서 int, long, double 등을 사용할 수 있어 박싱이나 수동 범위 확인이 필요 없습니다."
+whyModernWins:
+- icon: "📦"
+  title: "박싱 없음"
+  desc: "Integer 래퍼 없이 기본 타입을 직접 매칭합니다."
+- icon: "🎯"
+  title: "패턴 일관성"
+  desc: "객체와 기본 타입 모두 동일한 패턴 구문을 사용합니다."
+- icon: "⚡"
+  title: "더 나은 성능"
+  desc: "패턴 매칭에서 오토박싱 오버헤드를 피합니다."
+support:
+  description: "JDK 25에서 프리뷰 (세 번째 프리뷰, JEP 507). --enable-preview가 필요합니다."

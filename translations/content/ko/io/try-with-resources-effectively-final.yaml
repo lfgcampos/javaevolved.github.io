@@ -1,0 +1,17 @@
+title: "try-with-resources 개선"
+oldApproach: "변수 재선언"
+modernApproach: "사실상 final"
+summary: "사실상 final인 기존 변수를 try-with-resources에서 직접 사용합니다."
+explanation: "Java 9는 사실상 final인 변수를 재선언 없이 try-with-resources에서 직접 사용할 수 있게 합니다. try 블록 외부에서 리소스가 생성된 경우 더 깔끔합니다."
+whyModernWins:
+- icon: "🧹"
+  title: "재선언 없음"
+  desc: "기존 변수 이름을 직접 사용합니다."
+- icon: "📖"
+  title: "혼동 감소"
+  desc: "try 블록 내부에 별도의 변수 이름이 없습니다."
+- icon: "📏"
+  title: "간결함"
+  desc: "더 적은 줄, 동일한 리소스 안전성."
+support:
+  description: "JDK 9 (2017년 9월) 이후 널리 사용 가능"

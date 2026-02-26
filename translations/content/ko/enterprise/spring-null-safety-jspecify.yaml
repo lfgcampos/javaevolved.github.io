@@ -1,0 +1,17 @@
+title: "JSpecify를 사용한 Spring Null 안전성"
+oldApproach: "Spring @NonNull/@Nullable"
+modernApproach: "JSpecify @NullMarked"
+summary: "Spring 7은 JSpecify 어노테이션을 채택하여 null이 아닌 것을 기본으로 만들고 어노테이션을 줄입니다."
+explanation: "Spring 5와 6은 org.springframework.lang 패키지에 자체 null 안전성 어노테이션을 도입했습니다. Spring 7은 JSpecify 어노테이션으로 마이그레이션하여 에코시스템 전반의 null 의미론을 표준화합니다."
+whyModernWins:
+- icon: "✂️"
+  title: "기본적으로 non-null"
+  desc: "@NullMarked는 어노테이션 없는 모든 타입을 non-null로 만들어 nullable 예외만 어노테이션이 필요합니다."
+- icon: "🌐"
+  title: "에코시스템 표준"
+  desc: "JSpecify 어노테이션은 NullAway, Error Prone, IDE가 인식하는 크로스 프레임워크 표준입니다."
+- icon: "🔍"
+  title: "더 풍부한 도구"
+  desc: "모던 정적 분석기는 JSpecify의 null 모델을 이해하고 컴파일 시점에 위반을 보고합니다."
+support:
+  description: "Spring Framework 7.0 (Java 17+ 필요) 이후 사용 가능"

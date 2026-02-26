@@ -1,0 +1,17 @@
+title: "Stream.ofNullable()"
+oldApproach: "null 확인"
+modernApproach: "ofNullable()"
+summary: "nullable 값에서 0개 또는 1개의 요소를 가진 스트림을 만듭니다."
+explanation: "Stream.ofNullable()은 값이 non-null이면 단일 요소 스트림을, null이면 빈 스트림을 반환합니다. null 확인 없이 스트림 파이프라인에 nullable 값을 통합합니다."
+whyModernWins:
+- icon: "📏"
+  title: "간결함"
+  desc: "하나의 호출이 삼항 조건부를 대체합니다."
+- icon: "🔗"
+  title: "flatMap 친화적"
+  desc: "null 값을 건너뛰기 위해 flatMap 내부에서 완벽합니다."
+- icon: "🛡️"
+  title: "null 안전"
+  desc: "NPE 위험 없음 — null은 빈 스트림이 됩니다."
+support:
+  description: "JDK 9 (2017년 9월) 이후 널리 사용 가능"

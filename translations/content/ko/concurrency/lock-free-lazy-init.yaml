@@ -1,0 +1,17 @@
+title: "락 없는 지연 초기화"
+oldApproach: "synchronized + volatile"
+modernApproach: "StableValue"
+summary: "지연 초기화 싱글톤을 위해 이중 검사 잠금을 StableValue로 대체합니다."
+explanation: "StableValue는 올바른 스레드 안전성으로 지연 초기화 패턴을 캡슐화합니다. JVM은 초기화 후 읽기 경로를 최적화하여 volatile 읽기보다 빠르게 만들 수 있습니다."
+whyModernWins:
+- icon: "🧹"
+  title: "보일러플레이트 없음"
+  desc: "volatile, synchronized, 이중 null 확인이 필요 없습니다."
+- icon: "⚡"
+  title: "더 빠른 읽기"
+  desc: "JVM이 초기화 후 상수로 최적화할 수 있습니다."
+- icon: "✅"
+  title: "증명 가능한 정확성"
+  desc: "미묘한 순서 버그 없음 — JVM이 처리합니다."
+support:
+  description: "JDK 25에서 프리뷰 (JEP 502, StableValue). --enable-preview가 필요합니다."

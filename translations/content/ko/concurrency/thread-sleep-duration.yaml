@@ -1,0 +1,17 @@
+title: "Duration을 사용한 Thread.sleep"
+oldApproach: "밀리초"
+modernApproach: "Duration"
+summary: "자기 문서화 시간 값을 위해 Duration을 사용합니다."
+explanation: "Thread.sleep(Duration)은 시간 단위를 명시적으로 만듭니다. 5000이 밀리초인지 마이크로초인지 더 이상 추측할 필요가 없습니다. Duration.ofSeconds, ofMillis, ofMinutes 등과 함께 작동합니다."
+whyModernWins:
+- icon: "📖"
+  title: "자기 문서화"
+  desc: "Duration.ofSeconds(5)는 명확합니다."
+- icon: "🛡️"
+  title: "단위 안전"
+  desc: "마이크로초를 밀리초로 실수로 전달하는 일이 없습니다."
+- icon: "🧩"
+  title: "조합 가능"
+  desc: "Duration 연산: plus(), multipliedBy() 등."
+support:
+  description: "JDK 19 (2022년 9월) 이후 널리 사용 가능"

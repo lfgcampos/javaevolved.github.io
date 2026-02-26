@@ -1,0 +1,17 @@
+title: "불변 맵 생성"
+oldApproach: "맵 빌더 패턴"
+modernApproach: "Map.of()"
+summary: "빌더 없이 인라인으로 불변 맵을 만듭니다."
+explanation: "Map.of()는 키-값 쌍을 인라인으로 받아 불변 맵을 반환합니다. 10개 초과 항목의 경우 Map.ofEntries()와 Map.entry() 쌍을 사용하세요."
+whyModernWins:
+- icon: "📏"
+  title: "인라인 생성"
+  desc: "임시 가변 맵이 필요 없습니다."
+- icon: "🔒"
+  title: "불변 결과"
+  desc: "생성 후 맵을 수정할 수 없습니다."
+- icon: "🚫"
+  title: "null 키/값 불허"
+  desc: "null 항목은 즉시 거부됩니다."
+support:
+  description: "JDK 9 (2017년 9월) 이후 널리 사용 가능"

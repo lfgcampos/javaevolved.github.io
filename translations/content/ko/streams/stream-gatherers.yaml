@@ -1,0 +1,17 @@
+title: "스트림 수집기"
+oldApproach: "커스텀 Collector"
+modernApproach: "gather()"
+summary: "커스텀 중간 스트림 연산을 위해 수집기를 사용합니다."
+explanation: "Gatherer는 복잡한 상태 저장 중간 변환을 표현할 수 있는 새로운 중간 스트림 연산입니다. 내장 수집기로는 windowFixed, windowSliding, fold, scan이 있습니다."
+whyModernWins:
+- icon: "🧩"
+  title: "조합 가능"
+  desc: "수집기는 다른 스트림 연산과 조합됩니다."
+- icon: "📦"
+  title: "내장 연산"
+  desc: "windowFixed, windowSliding, fold, scan이 기본 제공됩니다."
+- icon: "🔧"
+  title: "확장 가능"
+  desc: "임의의 중간 변환을 위한 커스텀 수집기를 작성합니다."
+support:
+  description: "JDK 24에서 확정 (JEP 485, 2025년 3월)."

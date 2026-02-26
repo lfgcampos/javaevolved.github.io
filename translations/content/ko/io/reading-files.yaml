@@ -1,0 +1,17 @@
+title: "파일 읽기"
+oldApproach: "BufferedReader"
+modernApproach: "Files.readString()"
+summary: "한 줄로 전체 파일을 String으로 읽습니다."
+explanation: "Files.readString()은 파일의 전체 내용을 String으로 읽습니다. 인코딩(기본값 UTF-8)과 리소스 정리를 처리합니다. 대용량 파일에는 지연 스트리밍을 위해 Files.lines()를 사용하세요."
+whyModernWins:
+- icon: "📏"
+  title: "한 줄"
+  desc: "BufferedReader 보일러플레이트 8줄을 대체합니다."
+- icon: "🧹"
+  title: "자동 정리"
+  desc: "파일 핸들이 자동으로 닫힙니다."
+- icon: "🌐"
+  title: "UTF-8 기본값"
+  desc: "기본적으로 올바른 인코딩 — 문자셋 혼동이 없습니다."
+support:
+  description: "JDK 11 (2018년 9월) 이후 널리 사용 가능"

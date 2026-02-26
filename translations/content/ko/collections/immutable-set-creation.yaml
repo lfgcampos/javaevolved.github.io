@@ -1,0 +1,17 @@
+title: "불변 셋 생성"
+oldApproach: "장황한 래핑"
+modernApproach: "Set.of()"
+summary: "단일 팩토리 호출로 불변 셋을 만듭니다."
+explanation: "Set.of()는 null과 중복 요소를 생성 시점에 거부하는 진정한 불변 셋을 만듭니다. 더 이상 가변 셋을 래핑할 필요가 없습니다."
+whyModernWins:
+- icon: "📏"
+  title: "간결함"
+  desc: "세 개의 중첩 호출 대신 한 줄로 작성합니다."
+- icon: "🚫"
+  title: "중복 감지"
+  desc: "중복 요소를 실수로 전달하면 예외를 던집니다."
+- icon: "🔒"
+  title: "불변"
+  desc: "생성 후 추가/제거가 불가능합니다."
+support:
+  description: "JDK 9 (2017년 9월) 이후 널리 사용 가능"

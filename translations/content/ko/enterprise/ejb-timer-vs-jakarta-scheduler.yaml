@@ -1,0 +1,17 @@
+title: "EJB 타이머 대 Jakarta 스케줄러"
+oldApproach: "EJB TimerService"
+modernApproach: "ManagedScheduledExecutorService"
+summary: "ManagedScheduledExecutorService로 무거운 EJB 타이머를 대체합니다."
+explanation: "EJB 타이머는 @Timeout 콜백과 ScheduleExpression을 사용하는 @Stateless 또는 @Singleton 빈이 필요합니다. ManagedScheduledExecutorService는 컨테이너 관리 스레드로 표준 ScheduledExecutorService API를 제공합니다."
+whyModernWins:
+- icon: "🪶"
+  title: "보일러플레이트 감소"
+  desc: "@Timeout 콜백이나 ScheduleExpression이 없습니다 — 표준 ScheduledExecutorService API를 사용합니다."
+- icon: "🧪"
+  title: "더 나은 테스트 가능성"
+  desc: "일반 메서드와 실행자 목은 EJB 컨테이너 없이 단위 테스트를 간단하게 만듭니다."
+- icon: "☁️"
+  title: "클라우드 네이티브 친화적"
+  desc: "관리된 실행자는 컨테이너 생명주기와 통합되고 경량 런타임에서 작동합니다."
+support:
+  description: "Jakarta EE 10 / Concurrency 3.0 이후 사용 가능"

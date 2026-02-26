@@ -1,0 +1,17 @@
+title: "SOAP 웹 서비스 대 Jakarta REST"
+oldApproach: "JAX-WS / SOAP"
+modernApproach: "Jakarta REST / JSON"
+summary: "무거운 SOAP/WSDL 엔드포인트를 깔끔한 Jakarta REST 리소스로 대체합니다."
+explanation: "SOAP 기반 웹 서비스는 WSDL 계약, XML 마샬링, 생성된 클라이언트 스텁에 의존합니다. Jakarta REST는 표준 HTTP 메서드와 JSON 페이로드로 이를 대체합니다."
+whyModernWins:
+- icon: "🪶"
+  title: "더 가벼운 페이로드"
+  desc: "JSON은 SOAP XML 봉투보다 더 간결하여 대역폭과 파싱 오버헤드를 줄입니다."
+- icon: "📐"
+  title: "단순한 어노테이션"
+  desc: "@GET, @Path, @Produces가 WSDL, @WebService, @WebMethod 형식을 대체합니다."
+- icon: "🔌"
+  title: "마이크로서비스 준비"
+  desc: "REST/JSON은 클라우드 네이티브 아키텍처에서 서비스 간 통신의 표준입니다."
+support:
+  description: "Jakarta EE 8 / Java 11 이후 널리 사용 가능"
