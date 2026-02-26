@@ -78,6 +78,11 @@ support:
   available: Disponible
   preview: Aperçu
   experimental: Expérimental
+contribute:
+  button: Contribuer
+  codeIssue: Signaler un problème de code
+  translationIssue: Signaler un problème de traduction
+  suggestPattern: Proposer un nouveau pattern
 untranslated:
   notice: Cette page n'a pas encore été traduite en {{localeName}}.
   viewInEnglish: Voir en Anglais

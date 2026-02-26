@@ -75,6 +75,11 @@ support:
   available: 利用可能
   preview: プレビュー
   experimental: 実験的
+contribute:
+  button: 貢献する
+  codeIssue: コードの問題を報告
+  translationIssue: 翻訳の問題を報告
+  suggestPattern: 新しいパターンを提案
 untranslated:
   notice: このページはまだ{{localeName}}に翻訳されていません。
   viewInEnglish: 英語で見る

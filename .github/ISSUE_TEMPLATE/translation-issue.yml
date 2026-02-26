@@ -1,0 +1,70 @@
+---
+name: Translation Issue
+description: Report a translation problem or suggest an improvement
+title: "[Translation] "
+labels: ["translation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Report a translation issue
+
+        Found a mistranslation, awkward phrasing, or missing translation?
+        Let us know and we'll fix it.
+
+  - type: dropdown
+    id: locale
+    attributes:
+      label: Language
+      description: "Which language has the issue?"
+      options:
+        - de — Deutsch
+        - es — Español
+        - pt-BR — Português (Brasil)
+        - zh-CN — 中文 (简体)
+        - ar — العربية
+        - fr — Français
+        - ja — 日本語
+        - ko — 한국어
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: What is affected?
+      description: "Is this about a pattern page or the site UI (nav, buttons, labels)?"
+      options:
+        - Pattern content (title, summary, explanation, etc.)
+        - UI strings (navigation, buttons, labels, footer)
+    validations:
+      required: true
+
+  - type: input
+    id: pattern
+    attributes:
+      label: Pattern slug (if applicable)
+      description: "The pattern ID, e.g. `type-inference-with-var`. Leave blank for UI string issues."
+      placeholder: "type-inference-with-var"
+
+  - type: textarea
+    id: current-text
+    attributes:
+      label: Current text
+      description: "Copy the text that is incorrect or needs improvement"
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested-text
+    attributes:
+      label: Suggested text
+      description: "What should it say instead?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: "Any extra context about why the current translation is incorrect"

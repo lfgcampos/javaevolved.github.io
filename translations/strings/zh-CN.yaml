@@ -76,6 +76,11 @@ support:
   available: 可用
   preview: 预览
   experimental: 实验性
+contribute:
+  button: 贡献
+  codeIssue: 报告代码问题
+  translationIssue: 报告翻译问题
+  suggestPattern: 建议新模式
 untranslated:
   notice: 此页面尚未翻译为{{localeName}}。
   viewInEnglish: 查看英文版

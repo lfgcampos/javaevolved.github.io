@@ -28,6 +28,7 @@ body:
         - datetime
         - security
         - tooling
+        - enterprise
     validations:
       required: true
 

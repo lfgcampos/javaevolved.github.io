@@ -699,6 +699,37 @@
   };
 
   /* ==========================================================
+     9. Contribute Dropdown
+     ========================================================== */
+  const initContributeDropdown = () => {
+    const dropdown = document.getElementById('contributeDropdown');
+    if (!dropdown) return;
+
+    const toggleBtn = dropdown.querySelector('.contribute-toggle');
+    const list = dropdown.querySelector('ul');
+
+    const open = () => {
+      list.style.display = 'block';
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    };
+
+    const close = () => {
+      list.style.display = 'none';
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    };
+
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      list.style.display === 'block' ? close() : open();
+    });
+
+    document.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  };
+
+  /* ==========================================================
      Utilities
      ========================================================== */
   const escapeHtml = (str) => {
@@ -722,5 +753,6 @@
     initNewsletter();
     initThemeToggle();
     initLocalePicker();
+    initContributeDropdown();
   });
 })();

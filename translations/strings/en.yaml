@@ -77,6 +77,11 @@ support:
   available: Available
   preview: Preview
   experimental: Experimental
+contribute:
+  button: Contribute
+  codeIssue: Report a code issue
+  translationIssue: Report a translation issue
+  suggestPattern: Suggest a new pattern
 untranslated:
   notice: This page has not yet been translated into {{localeName}}.
   viewInEnglish: View in English

@@ -77,6 +77,11 @@ support:
   available: Disponible
   preview: Preview
   experimental: Experimental
+contribute:
+  button: Contribuir
+  codeIssue: Reportar un problema de código
+  translationIssue: Reportar un problema de traducción
+  suggestPattern: Sugerir un nuevo patrón
 untranslated:
   notice: Esta página aún no ha sido traducida al {{localeName}}.
   viewInEnglish: Ver en Inglés

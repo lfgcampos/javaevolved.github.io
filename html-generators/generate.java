@@ -416,6 +416,28 @@ String renderSocialShare(String tpl, String slug, String title, Map<String, Stri
             "share.label", strings.getOrDefault("share.label", "Share")));
 }
 
+static final String GITHUB_ISSUES_URL = "https://github.com/javaevolved/javaevolved.github.io/issues/new";
+
+Map<String, String> buildContributeUrls(Snippet s, String locale, String localeName) {
+    var pageUrl = locale.equals("en")
+            ? "%s/%s/%s.html".formatted(BASE_URL, s.category(), s.slug())
+            : "%s/%s/%s/%s.html".formatted(BASE_URL, locale, s.category(), s.slug());
+
+    var codeTitle = urlEncode("[Code Issue] %s".formatted(s.title()));
+    var codeBody = urlEncode("**Pattern:** %s\n**URL:** %s\n\nDescribe the issue:\n".formatted(s.slug(), pageUrl));
+    var codeUrl = "%s?title=%s&labels=%s&body=%s".formatted(GITHUB_ISSUES_URL, codeTitle, "bug", codeBody);
+
+    var transUrl = "%s?template=translation-issue.yml&title=%s".formatted(
+            GITHUB_ISSUES_URL, urlEncode("[Translation] %s (%s)".formatted(s.title(), localeName)));
+
+    var suggestUrl = "%s?template=new-pattern.yml".formatted(GITHUB_ISSUES_URL);
+
+    return Map.of(
+            "contributeCodeIssueUrl", codeUrl,
+            "contributeTranslationIssueUrl", transUrl,
+            "contributeSuggestUrl", suggestUrl);
+}
+
 String generateHtml(Templates tpl, Snippet s, Map<String, Snippet> all, Map<String, String> extraTokens, String locale) throws IOException {
     var isEnglish = locale.equals("en");
     var canonicalUrl = isEnglish
@@ -445,6 +467,8 @@ String generateHtml(Templates tpl, Snippet s, Map<String, Snippet> all, Map<Stri
             Map.entry("docLinks", renderDocLinks(tpl.docLink(), s.node().withArray("docs"))),
             Map.entry("relatedCards", renderRelatedSection(tpl.relatedCard(), s, all, locale, extraTokens)),
             Map.entry("socialShare", renderSocialShare(tpl.socialShare(), s.slug(), s.title(), extraTokens))));
+    var localeName = LOCALES.getOrDefault(locale, locale);
+    tokens.putAll(buildContributeUrls(s, locale, localeName));
     return replaceTokens(tpl.page(), tokens);
 }
 

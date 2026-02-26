@@ -869,6 +869,12 @@ nav {
   margin-bottom: 40px;
 }
 
+.tip-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
 .tip-header h1 {
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   font-weight: 800;
@@ -1572,6 +1578,68 @@ footer a:hover {
 }
 .share-li { font-family: Georgia, serif; font-weight: 800; font-size: 0.85rem; }
 .share-reddit { font-size: 1.1rem; }
+
+/* ============================
+   Contribute Dropdown
+   ============================ */
+.contribute-dropdown {
+  position: relative;
+  display: inline-flex;
+  margin-inline-start: auto;
+}
+.contribute-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1;
+  transition: all 0.2s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.contribute-toggle:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.contribute-dropdown ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin: 4px 0 0;
+  padding: 4px 0;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 100;
+  min-width: 220px;
+}
+[dir="rtl"] .contribute-dropdown ul {
+  right: auto;
+  left: 0;
+}
+.contribute-dropdown li a {
+  display: block;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  color: var(--text);
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.contribute-dropdown li a:hover {
+  background: var(--accent);
+  color: #fff;
+}
 
 /* ============================
    Locale Picker
