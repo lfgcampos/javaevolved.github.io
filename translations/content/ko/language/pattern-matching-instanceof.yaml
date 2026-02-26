@@ -1,0 +1,17 @@
+title: "instanceof 패턴 매칭"
+oldApproach: "instanceof + 캐스트"
+modernApproach: "패턴 변수"
+summary: "패턴 매칭으로 타입 확인과 캐스트를 한 단계로 결합합니다."
+explanation: "instanceof 패턴 매칭은 타입 확인 후 중복 캐스트를 제거합니다. 변수는 패턴이 매칭되는 곳에서만 자동으로 범위가 지정되어 코드가 더 안전하고 짧아집니다."
+whyModernWins:
+- icon: "🔄"
+  title: "중복 캐스트 없음"
+  desc: "타입 확인과 변수 바인딩이 단일 표현식에서 이루어집니다."
+- icon: "📏"
+  title: "줄 수 감소"
+  desc: "두 줄 대신 한 줄 — 캐스트 줄이 완전히 사라집니다."
+- icon: "🛡️"
+  title: "범위 안전성"
+  desc: "패턴 변수는 타입이 보장되는 범위에서만 존재합니다."
+support:
+  description: "JDK 16 (2021년 3월) 이후 널리 사용 가능"

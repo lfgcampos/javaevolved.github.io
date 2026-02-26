@@ -1,0 +1,17 @@
+title: "Map.entry() 팩토리"
+oldApproach: "SimpleEntry"
+modernApproach: "Map.entry()"
+summary: "깔끔한 팩토리 메서드로 맵 항목을 만듭니다."
+explanation: "Map.entry()는 장황한 AbstractMap.SimpleEntry 생성자를 대체합니다. 불변 항목을 반환하므로 Map.ofEntries()와 스트림 연산에 이상적입니다."
+whyModernWins:
+- icon: "📏"
+  title: "간결함"
+  desc: "세 줄 대신 더 명확한 의도로 한 줄에 작성합니다."
+- icon: "🔒"
+  title: "불변"
+  desc: "반환된 항목을 수정할 수 없습니다."
+- icon: "🧩"
+  title: "조합 가능"
+  desc: "대형 맵에서 Map.ofEntries()와 완벽하게 작동합니다."
+support:
+  description: "JDK 9 (2017년 9월) 이후 널리 사용 가능"

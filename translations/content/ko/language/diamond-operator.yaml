@@ -1,0 +1,17 @@
+title: "익명 클래스의 다이아몬드 연산자"
+oldApproach: "타입 인수 반복"
+modernApproach: "다이아몬드 <>"
+summary: "다이아몬드 연산자가 이제 익명 클래스에서도 작동합니다."
+explanation: "Java 7에서 <>를 도입했지만 익명 내부 클래스에서는 작동하지 않았습니다. Java 9에서 이를 수정하여 우변에 타입 인수를 반복할 필요가 없습니다."
+whyModernWins:
+- icon: "📏"
+  title: "일관된 규칙"
+  desc: "다이아몬드는 생성자와 익명 클래스 어디서든 작동합니다."
+- icon: "🧹"
+  title: "중복 감소"
+  desc: "타입 인수를 왼쪽에 한 번만 명시합니다."
+- icon: "🔧"
+  title: "DRY 원칙"
+  desc: "컴파일러가 이미 타입을 알고 있는데 왜 두 번 써야 합니까?"
+support:
+  description: "익명 클래스의 다이아몬드는 JDK 9 (2017년 9월) 이후 사용 가능."

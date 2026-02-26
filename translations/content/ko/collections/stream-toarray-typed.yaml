@@ -1,0 +1,17 @@
+title: "타입이 지정된 스트림 toArray"
+oldApproach: "수동 배열 복사"
+modernApproach: "toArray(생성자)"
+summary: "메서드 참조로 스트림을 타입이 지정된 배열로 변환합니다."
+explanation: "toArray(IntFunction) 메서드는 스트림에서 올바르게 타입이 지정된 배열을 만듭니다. 생성자(String[]::new)는 스트림에 생성할 배열 타입을 알려줍니다."
+whyModernWins:
+- icon: "🎯"
+  title: "타입 안전"
+  desc: "Object[] 캐스트 없이 정확한 배열 타입을 얻습니다."
+- icon: "🔗"
+  title: "체이닝 가능"
+  desc: "스트림 파이프라인의 끝에서 작동합니다."
+- icon: "📏"
+  title: "간결함"
+  desc: "수동 루프를 하나의 표현식으로 대체합니다."
+support:
+  description: "JDK 8 (2014년 3월) 이후 널리 사용 가능"

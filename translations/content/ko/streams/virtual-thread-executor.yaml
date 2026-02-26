@@ -1,0 +1,17 @@
+title: "가상 스레드 실행자"
+oldApproach: "고정 스레드 풀"
+modernApproach: "가상 스레드 실행자"
+summary: "제한 없는 경량 동시성을 위해 가상 스레드 실행자를 사용합니다."
+explanation: "가상 스레드 실행자는 각 작업에 대해 새 가상 스레드를 만듭니다. 고정 풀을 완전히 포화하는 I/O 집약적 작업에 이상적입니다."
+whyModernWins:
+- icon: "♾️"
+  title: "크기 조정 없음"
+  desc: "풀 크기를 조정할 필요 없음 — 필요한 만큼 스레드를 만듭니다."
+- icon: "⚡"
+  title: "경량"
+  desc: "가상 스레드는 MB가 아닌 KB의 메모리를 사용합니다."
+- icon: "🧹"
+  title: "자동 닫기"
+  desc: "try-with-resources가 자동으로 종료를 처리합니다."
+support:
+  description: "JDK 21 LTS (2023년 9월) 이후 널리 사용 가능"

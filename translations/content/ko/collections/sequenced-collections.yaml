@@ -1,0 +1,17 @@
+title: "시퀀스 컬렉션"
+oldApproach: "인덱스 산술"
+modernApproach: "getFirst/getLast"
+summary: "깔끔한 API 메서드로 첫/마지막 요소와 역순 뷰에 접근합니다."
+explanation: "SequencedCollection은 List, Deque, SortedSet, LinkedHashSet에 getFirst(), getLast(), reversed(), addFirst(), addLast()를 추가합니다. 더 이상 size-1 산술이나 수동 역순 반복이 필요 없습니다."
+whyModernWins:
+- icon: "📖"
+  title: "자기 문서화"
+  desc: "getLast()는 get(size()-1)보다 훨씬 명확합니다."
+- icon: "🔄"
+  title: "역순 뷰"
+  desc: "reversed()는 뷰를 제공합니다 — 복사가 필요 없습니다."
+- icon: "🧩"
+  title: "통일된 API"
+  desc: "List, Deque, SortedSet에서 동일하게 작동합니다."
+support:
+  description: "JDK 21 LTS (2023년 9월) 이후 널리 사용 가능"

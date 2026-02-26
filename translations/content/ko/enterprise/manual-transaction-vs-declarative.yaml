@@ -1,0 +1,17 @@
+title: "수동 JPA 트랜잭션 대 선언적 @Transactional"
+oldApproach: "수동 트랜잭션"
+modernApproach: "@Transactional"
+summary: "장황한 begin/commit/rollback 블록을 단일 @Transactional 어노테이션으로 대체합니다."
+explanation: "수동 트랜잭션 관리는 명시적 begin(), commit(), rollback() 호출과 오류 처리가 필요합니다. @Transactional은 컨테이너가 경계를 관리하도록 하여 비즈니스 코드가 일관성에 집중할 수 있게 합니다."
+whyModernWins:
+- icon: "🗑️"
+  title: "보일러플레이트 없음"
+  desc: "하나의 어노테이션이 반복적인 begin/commit/rollback try-catch 블록을 대체합니다."
+- icon: "🛡️"
+  title: "더 안전한 롤백"
+  desc: "컨테이너는 확인되지 않은 예외에서 롤백을 보장합니다 — catch 블록을 잊을 위험이 없습니다."
+- icon: "📐"
+  title: "선언적 제어"
+  desc: "전파, 격리, 롤백 규칙이 어노테이션 속성으로 표현됩니다."
+support:
+  description: "Jakarta EE 8 / Java 11 이후 널리 사용 가능"

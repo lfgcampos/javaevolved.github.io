@@ -1,0 +1,17 @@
+title: "InputStream.transferTo()"
+oldApproach: "수동 복사 루프"
+modernApproach: "transferTo()"
+summary: "한 번의 호출로 InputStream을 OutputStream에 복사합니다."
+explanation: "transferTo()는 입력 스트림의 모든 바이트를 읽어 출력 스트림에 씁니다. 버퍼 관리나 루프가 필요 없습니다. 최적화된 내부 버퍼를 사용합니다."
+whyModernWins:
+- icon: "📏"
+  title: "한 줄"
+  desc: "전체 읽기/쓰기 루프를 단일 메서드 호출로 대체합니다."
+- icon: "⚡"
+  title: "최적화됨"
+  desc: "내부 버퍼 크기가 성능을 위해 조정됩니다."
+- icon: "🛡️"
+  title: "버그 없음"
+  desc: "버퍼 관리에서 오프바이원 오류가 없습니다."
+support:
+  description: "JDK 9 (2017년 9월) 이후 널리 사용 가능"

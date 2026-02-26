@@ -1,0 +1,17 @@
+title: "컴팩트 소스 파일"
+oldApproach: "메인 클래스 의식"
+modernApproach: "void main()"
+summary: "클래스 선언이나 public static void main 없이 완전한 프로그램을 작성합니다."
+explanation: "컴팩트 소스 파일은 간단한 프로그램에서 클래스 선언과 main 메서드 서명의 형식적 절차를 제거합니다. java.io.IO의 암묵적 임포트와 결합하면 println도 직접 사용할 수 있습니다."
+whyModernWins:
+- icon: "🚀"
+  title: "의식 없음"
+  desc: "클래스, public static void main, String[] args가 없습니다."
+- icon: "🎓"
+  title: "초보자 친화적"
+  desc: "새 프로그래머가 1행부터 유용한 코드를 작성할 수 있습니다."
+- icon: "📝"
+  title: "스크립트 같은"
+  desc: "빠른 프로토타입, 스크립트, 예제에 완벽합니다."
+support:
+  description: "JDK 25 LTS에서 확정 (JEP 512, 2025년 9월)."

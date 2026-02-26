@@ -1,0 +1,17 @@
+title: "String.isBlank()"
+oldApproach: "trim().isEmpty()"
+modernApproach: "isBlank()"
+summary: "단일 메서드 호출로 빈 문자열을 확인합니다."
+explanation: "isBlank()는 문자열이 비어 있거나 공백만 포함하는 경우 true를 반환합니다. trim().isEmpty()와 달리 유니코드 공백을 올바르게 처리합니다."
+whyModernWins:
+- icon: "📖"
+  title: "자기 문서화"
+  desc: "isBlank()는 정확히 무엇을 확인하는지 설명합니다."
+- icon: "🌐"
+  title: "유니코드 인식"
+  desc: "ASCII뿐만 아니라 모든 유니코드 공백을 처리합니다."
+- icon: "⚡"
+  title: "할당 없음"
+  desc: "중간 트리밍된 문자열이 생성되지 않습니다."
+support:
+  description: "JDK 11 (2018년 9월) 이후 널리 사용 가능"

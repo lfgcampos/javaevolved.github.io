@@ -1,0 +1,17 @@
+title: "안정적인 값"
+oldApproach: "이중 검사 잠금"
+modernApproach: "StableValue"
+summary: "volatile 또는 synchronized 없는 스레드 안전한 지연 초기화."
+explanation: "StableValue는 내장 스레드 안전성을 갖춘 지연 초기화된 불변 값을 제공합니다. 이중 검사 잠금, volatile 필드, synchronized 블록이 필요 없습니다. JVM은 초기화 후 읽기 경로를 최적화할 수도 있습니다."
+whyModernWins:
+- icon: "🧹"
+  title: "보일러플레이트 제로"
+  desc: "volatile, synchronized, null 확인이 없습니다."
+- icon: "⚡"
+  title: "JVM 최적화"
+  desc: "JVM이 초기화 후 값을 최적화할 수 있습니다."
+- icon: "🛡️"
+  title: "단 한 번 보장"
+  desc: "공급자는 경합 상태에서도 정확히 한 번만 실행됩니다."
+support:
+  description: "JDK 25에서 프리뷰 (JEP 502). --enable-preview가 필요합니다."

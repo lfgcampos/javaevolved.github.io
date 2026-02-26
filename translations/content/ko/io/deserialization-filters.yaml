@@ -1,0 +1,17 @@
+title: "역직렬화 필터"
+oldApproach: "모든 것 허용"
+modernApproach: "ObjectInputFilter"
+summary: "공격을 방지하기 위해 역직렬화 가능한 클래스를 제한합니다."
+explanation: "ObjectInputFilter를 통해 클래스를 허용 목록/거부 목록에 추가하고, 객체 그래프 깊이, 배열 크기, 참조 횟수를 제한할 수 있습니다. 외부 라이브러리 없이 역직렬화 취약점을 방어합니다."
+whyModernWins:
+- icon: "🛡️"
+  title: "보안"
+  desc: "예상치 못한/악성 클래스의 역직렬화를 방지합니다."
+- icon: "📐"
+  title: "세밀한 제어"
+  desc: "깊이, 배열 크기, 참조 횟수, 클래스 패턴을 제어합니다."
+- icon: "🏗️"
+  title: "JVM 전체"
+  desc: "JVM의 모든 역직렬화에 대한 전역 필터를 설정합니다."
+support:
+  description: "JDK 9 (2017년 9월) 이후 널리 사용 가능"

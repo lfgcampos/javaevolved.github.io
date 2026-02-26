@@ -1,0 +1,17 @@
+title: "기본 TLS 1.3"
+oldApproach: "수동 TLS 설정"
+modernApproach: "TLS 1.3 기본값"
+summary: "TLS 1.3이 기본으로 활성화되어 있습니다 — 명시적 프로토콜 설정이 필요 없습니다."
+explanation: "Java 11에서 TLS 1.3 지원이 추가되었고 선호 프로토콜이 되었습니다. 기본 SSLContext는 이제 TLS 1.3을 우선시하여 수동 프로토콜 설정이 불필요합니다."
+whyModernWins:
+- icon: "🛡️"
+  title: "더 안전"
+  desc: "TLS 1.3은 구식 암호화 스위트와 핸드셰이크 패턴을 제거합니다."
+- icon: "⚡"
+  title: "더 빠른 핸드셰이크"
+  desc: "TLS 1.3은 두 번 대신 한 번의 왕복으로 완료됩니다."
+- icon: "🆓"
+  title: "설정 없음"
+  desc: "기본적으로 안전합니다 — 명시적 프로토콜 선택이 필요 없습니다."
+support:
+  description: "JDK 11 (2018년 9월) 이후 널리 사용 가능"

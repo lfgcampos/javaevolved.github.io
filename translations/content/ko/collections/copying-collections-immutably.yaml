@@ -1,0 +1,17 @@
+title: "컬렉션 불변 복사"
+oldApproach: "수동 복사 + 래핑"
+modernApproach: "List.copyOf()"
+summary: "한 번의 호출로 모든 컬렉션의 불변 복사본을 만듭니다."
+explanation: "List.copyOf(), Set.copyOf(), Map.copyOf()는 기존 컬렉션의 불변 스냅샷을 만듭니다. 원본이 이미 불변 컬렉션이라면 복사가 생략됩니다."
+whyModernWins:
+- icon: "⚡"
+  title: "스마트 복사"
+  desc: "원본이 이미 불변이면 복사를 건너뜁니다."
+- icon: "📏"
+  title: "한 번의 호출"
+  desc: "ArrayList 수동 생성과 래핑이 필요 없습니다."
+- icon: "🛡️"
+  title: "방어적 복사"
+  desc: "원본을 변경해도 복사본에 영향을 주지 않습니다."
+support:
+  description: "JDK 10 (2018년 3월) 이후 널리 사용 가능"

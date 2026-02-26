@@ -1,0 +1,17 @@
+title: "부정을 위한 Predicate.not()"
+oldApproach: "람다 부정"
+modernApproach: "Predicate.not()"
+summary: "람다로 작성하는 대신 Predicate.not()을 사용하여 메서드 참조를 깔끔하게 부정합니다."
+explanation: "Java 11 이전에는 메서드 참조를 부정하려면 람다로 감싸야 했습니다. Predicate.not()은 메서드 참조를 직접 부정하는 정적 팩토리 메서드입니다."
+whyModernWins:
+- icon: "👁"
+  title: "더 깔끔한 부정"
+  desc: "메서드 참조를 부정하기 위해 람다로 감쌀 필요가 없습니다."
+- icon: "🔗"
+  title: "조합 가능"
+  desc: "모든 Predicate와 함께 작동하여 깔끔한 Predicate 체인을 가능하게 합니다."
+- icon: "📖"
+  title: "자연스럽게 읽힘"
+  desc: "Predicate.not(String::isBlank)는 영어처럼 읽힙니다."
+support:
+  description: "JDK 11 (2018년 9월) 이후 사용 가능."

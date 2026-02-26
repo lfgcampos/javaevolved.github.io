@@ -1,0 +1,17 @@
+title: "프로파일링을 위한 JFR"
+oldApproach: "외부 프로파일러"
+modernApproach: "Java Flight Recorder"
+summary: "외부 도구 없이 내장 Flight Recorder로 모든 Java 앱을 프로파일링합니다."
+explanation: "Java Flight Recorder(JFR)는 모든 JDK에 내장된 저오버헤드 프로파일링 도구입니다. CPU, 메모리, GC, 스레드, I/O, 잠금, 커스텀 이벤트를 기록합니다."
+whyModernWins:
+- icon: "🆓"
+  title: "내장됨"
+  desc: "설치하거나 라이센스를 구입할 외부 프로파일러가 없습니다."
+- icon: "⚡"
+  title: "낮은 오버헤드"
+  desc: "약 1% 성능 영향 — 프로덕션에서 안전합니다."
+- icon: "📊"
+  title: "풍부한 이벤트"
+  desc: "CPU, 메모리, GC, 스레드, I/O, 잠금, 커스텀 이벤트."
+support:
+  description: "JDK 9/11 이후 널리 사용 가능 (11에서 오픈소스화)"

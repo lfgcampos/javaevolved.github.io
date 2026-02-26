@@ -1,0 +1,17 @@
+title: "Stream.toList()"
+oldApproach: "Collectors.toList()"
+modernApproach: ".toList()"
+summary: "터미널 toList()가 장황한 collect(Collectors.toList())를 대체합니다."
+explanation: "Stream.toList()는 수정 불가능한 리스트를 반환합니다. .collect(Collectors.toUnmodifiableList())와 동일하지만 훨씬 짧습니다."
+whyModernWins:
+- icon: "📏"
+  title: "7자 대 24자"
+  desc: ".toList()가 .collect(Collectors.toList())를 대체합니다."
+- icon: "🔒"
+  title: "불변"
+  desc: "결과 리스트를 수정할 수 없습니다."
+- icon: "��"
+  title: "유창함"
+  desc: "파이프라인 끝에서 자연스럽게 읽힙니다."
+support:
+  description: "JDK 16 (2021년 3월) 이후 널리 사용 가능"

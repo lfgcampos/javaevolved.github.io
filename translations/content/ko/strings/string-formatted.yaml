@@ -1,0 +1,17 @@
+title: "String.formatted()"
+oldApproach: "String.format()"
+modernApproach: "formatted()"
+summary: "템플릿 문자열 자체에서 formatted()를 호출합니다."
+explanation: "String.formatted()는 String.format()의 인스턴스 메서드 동등물입니다. 정적 메서드 호출과 템플릿 인수를 혼용하지 않고 메서드를 체이닝할 수 있습니다."
+whyModernWins:
+- icon: "📖"
+  title: "자연스럽게 읽힘"
+  desc: "Template.formatted(args)는 String.format(template, args)보다 더 자연스럽게 흐릅니다."
+- icon: "🔗"
+  title: "체이닝 가능"
+  desc: "다른 문자열 메서드와 체이닝할 수 있습니다."
+- icon: "📏"
+  title: "덜 장황함"
+  desc: "중복되는 String.format() 정적 호출을 생략합니다."
+support:
+  description: "JDK 15 (2020년 9월) 이후 널리 사용 가능"

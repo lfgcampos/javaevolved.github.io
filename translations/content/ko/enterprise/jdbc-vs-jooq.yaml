@@ -1,0 +1,17 @@
+title: "JDBC 대 jOOQ"
+oldApproach: "원시 JDBC"
+modernApproach: "jOOQ SQL DSL"
+summary: "원시 JDBC 문자열 기반 SQL을 jOOQ의 타입 안전하고 유창한 SQL DSL로 대체합니다."
+explanation: "jOOQ(Java Object Oriented Querying)는 데이터베이스에서 Java 코드를 생성합니다. 모든 테이블, 열, 함수가 타입 안전 Java 상수가 되어 SQL 오타가 런타임 오류가 아닌 컴파일러 오류가 됩니다."
+whyModernWins:
+- icon: "🔒"
+  title: "타입 안전 열"
+  desc: "열 이름은 생성된 Java 상수입니다 — 오타와 타입 불일치는 런타임 실패 대신 컴파일러 오류가 됩니다."
+- icon: "📖"
+  title: "SQL 유창성"
+  desc: "jOOQ DSL은 SQL 구문과 유사하여 복잡한 JOIN, 서브쿼리, CTE가 읽기 쉽게 유지됩니다."
+- icon: "🛡️"
+  title: "설계상 인젝션 없음"
+  desc: "매개변수는 항상 안전하게 바인딩됩니다 — 문자열 연결이 없으면 SQL 인젝션 위험도 없습니다."
+support:
+  description: "jOOQ 오픈소스 에디션은 모든 주요 오픈소스 데이터베이스를 지원합니다."

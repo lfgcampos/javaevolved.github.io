@@ -1,0 +1,17 @@
+title: "Servlet 대 JAX-RS"
+oldApproach: "HttpServlet"
+modernApproach: "JAX-RS 리소스"
+summary: "장황한 HttpServlet 보일러플레이트를 선언적 JAX-RS 리소스 클래스로 대체합니다."
+explanation: "JAX-RS(Jakarta RESTful Web Services)는 어노테이션으로 REST 엔드포인트를 노출할 수 있게 합니다. HTTP 메서드 체크, 경로 파싱, 요청/응답 마샬링이 프레임워크에 의해 처리됩니다."
+whyModernWins:
+- icon: "📐"
+  title: "선언적 라우팅"
+  desc: "어노테이션이 명령형 if/else 디스패치 대신 HTTP 메서드, 경로, 콘텐츠 타입을 정의합니다."
+- icon: "🔄"
+  title: "자동 마샬링"
+  desc: "POJO를 직접 반환합니다; 런타임이 @Produces에 따라 JSON이나 XML로 직렬화합니다."
+- icon: "🧪"
+  title: "더 쉬운 테스트"
+  desc: "리소스 클래스는 서블릿 컨테이너 없이 테스트 가능한 일반 Java 객체입니다."
+support:
+  description: "Jakarta EE 8 / Java 11 이후 널리 사용 가능"

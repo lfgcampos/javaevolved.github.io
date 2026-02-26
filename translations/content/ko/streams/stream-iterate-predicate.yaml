@@ -1,0 +1,17 @@
+title: "조건자가 있는 Stream.iterate()"
+oldApproach: "iterate + limit"
+modernApproach: "iterate(시드, 조건자, 연산)"
+summary: "반복을 중지하기 위해 조건자를 사용합니다 — 스트림 형태의 for 루프."
+explanation: "세 인수 Stream.iterate(seed, hasNext, next)는 for 루프처럼 작동합니다. hasNext 조건자가 false를 반환할 때 스트림이 종료됩니다."
+whyModernWins:
+- icon: "🎯"
+  title: "자연스러운 종료"
+  desc: "임의의 제한 대신 조건에 따라 중지합니다."
+- icon: "📐"
+  title: "for 루프 동등물"
+  desc: "for(seed; hasNext; next)와 동일한 의미론."
+- icon: "🛡️"
+  title: "무한 스트림 위험 없음"
+  desc: "조건자가 종료를 보장합니다."
+support:
+  description: "JDK 9 (2017년 9월) 이후 널리 사용 가능"

@@ -1,0 +1,17 @@
+title: "구조적 동시성"
+oldApproach: "수동 스레드 생명주기"
+modernApproach: "StructuredTaskScope"
+summary: "동시 작업의 생명주기를 하나의 작업 단위로 관리합니다."
+explanation: "구조적 동시성은 동시 작업 그룹을 하나의 작업으로 처리합니다. 하위 작업이 실패하면 나머지가 취소됩니다. 스코프는 스레드 누수가 없고 명확한 부모-자식 관계를 제공합니다."
+whyModernWins:
+- icon: "🛡️"
+  title: "스레드 누수 없음"
+  desc: "포크된 모든 작업이 스코프가 닫히기 전에 완료됩니다."
+- icon: "⚡"
+  title: "빠른 실패"
+  desc: "ShutdownOnFailure는 하나가 실패하면 형제 작업을 취소합니다."
+- icon: "📐"
+  title: "명확한 구조"
+  desc: "작업 생명주기가 코드의 어휘적 스코프와 일치합니다."
+support:
+  description: "JDK 25에서 프리뷰 (다섯 번째 프리뷰, JEP 505). --enable-preview가 필요합니다."

@@ -1,0 +1,17 @@
+title: "Files.mismatch()"
+oldApproach: "수동 바이트 비교"
+modernApproach: "Files.mismatch()"
+summary: "파일을 메모리에 로드하지 않고 효율적으로 두 파일을 비교합니다."
+explanation: "Files.mismatch()는 첫 번째로 다른 바이트의 위치를 반환하거나, 파일이 동일하면 -1을 반환합니다. 지연 방식으로 읽고 첫 번째 차이에서 단락 평가합니다."
+whyModernWins:
+- icon: "⚡"
+  title: "메모리 효율적"
+  desc: "전체 파일을 바이트 배열에 로드하지 않습니다."
+- icon: "🎯"
+  title: "차이 지점 정확"
+  desc: "첫 번째 불일치의 정확한 바이트 위치를 반환합니다."
+- icon: "📏"
+  title: "한 번의 호출"
+  desc: "수동 바이트 배열 비교 로직이 필요 없습니다."
+support:
+  description: "JDK 12 (2019년 3월) 이후 널리 사용 가능"

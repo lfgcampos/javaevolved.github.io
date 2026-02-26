@@ -1,0 +1,17 @@
+title: "리스트 역순 반복"
+oldApproach: "수동 ListIterator"
+modernApproach: "reversed()"
+summary: "깔끔한 향상된 for 루프로 리스트를 역순으로 반복합니다."
+explanation: "SequencedCollection의 reversed() 메서드는 리스트의 역순 뷰를 반환합니다. 이 뷰는 원본 리스트와 연결되어 있어 복사가 발생하지 않습니다. 향상된 for 루프 구문으로 역순 반복이 순방향만큼 읽기 쉬워집니다."
+whyModernWins:
+- icon: "📖"
+  title: "자연스러운 문법"
+  desc: "장황한 ListIterator 대신 향상된 for 루프를 사용합니다."
+- icon: "⚡"
+  title: "복사 없음"
+  desc: "reversed()는 뷰를 반환합니다 — 성능 오버헤드가 없습니다."
+- icon: "🧩"
+  title: "일관된 API"
+  desc: "List, Deque, SortedSet에서 동일하게 작동합니다."
+support:
+  description: "JDK 21 LTS (2023년 9월) 이후 널리 사용 가능"

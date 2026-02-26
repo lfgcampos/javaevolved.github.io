@@ -1,0 +1,17 @@
+title: "유연한 생성자 본문"
+oldApproach: "super() 이후 유효성 검사"
+modernApproach: "super() 이전 코드"
+summary: "super() 또는 this()를 호출하기 전에 값을 검증하고 계산합니다."
+explanation: "Java 25는 super()가 첫 번째 문장이어야 한다는 제한을 해제합니다. 이제 부모 생성자에 위임하기 전에 인수를 검증하고, 파생 값을 계산하고, 상태를 설정할 수 있습니다."
+whyModernWins:
+- icon: "🛡️"
+  title: "빠른 실패"
+  desc: "슈퍼클래스 생성자가 실행되기 전에 인수를 검증합니다."
+- icon: "🧮"
+  title: "먼저 계산"
+  desc: "super()를 호출하기 전에 값을 파생하고 데이터를 준비합니다."
+- icon: "🧹"
+  title: "우회 방법 불필요"
+  desc: "제한을 우회하기 위한 정적 헬퍼 메서드나 팩토리 패턴이 필요 없습니다."
+support:
+  description: "JDK 25 LTS에서 확정 (JEP 513, 2025년 9월)."

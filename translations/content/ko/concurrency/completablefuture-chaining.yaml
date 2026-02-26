@@ -1,0 +1,17 @@
+title: "CompletableFuture 체이닝"
+oldApproach: "블로킹 Future.get()"
+modernApproach: "CompletableFuture"
+summary: "CompletableFuture를 사용하여 블로킹 없이 비동기 작업을 체이닝합니다."
+explanation: "CompletableFuture는 논블로킹 비동기 파이프라인을 가능하게 합니다. thenApply, thenCompose, thenAccept로 작업을 체이닝하고, exceptionally()로 오류를 처리합니다. 여러 Future를 allOf/anyOf로 조합할 수 있습니다."
+whyModernWins:
+- icon: "🔗"
+  title: "체이닝 가능"
+  desc: "비동기 단계를 읽기 쉬운 파이프라인으로 구성합니다."
+- icon: "🚫"
+  title: "논블로킹"
+  desc: "어떤 스레드도 결과를 기다리며 유휴 상태로 있지 않습니다."
+- icon: "🛡️"
+  title: "오류 처리"
+  desc: "exceptionally()와 handle()로 깔끔한 오류 복구를 수행합니다."
+support:
+  description: "JDK 8 (2014년 3월) 이후 널리 사용 가능"

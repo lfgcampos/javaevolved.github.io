@@ -1,0 +1,17 @@
+title: "레코드 기반 오류 응답"
+oldApproach: "맵 또는 장황한 클래스"
+modernApproach: "오류 레코드"
+summary: "간결하고 불변인 오류 응답 타입에 레코드를 사용합니다."
+explanation: "레코드는 오류 응답에 완벽합니다 — 불변이고, 비교를 위한 내장 equals/hashCode를 가지며, 로깅을 위한 toString도 있습니다. 커스텀 생성자로 유효성 검사나 기본값을 추가할 수 있습니다."
+whyModernWins:
+- icon: "📏"
+  title: "간결함"
+  desc: "오류 타입을 30줄 대신 3줄로 정의합니다."
+- icon: "🔒"
+  title: "불변"
+  desc: "생성 후 오류 데이터를 실수로 수정할 수 없습니다."
+- icon: "📋"
+  title: "자동 toString"
+  desc: "로깅에 완벽 — 모든 필드를 자동으로 표시합니다."
+support:
+  description: "JDK 16 (2021년 3월) 이후 널리 사용 가능"

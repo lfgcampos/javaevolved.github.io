@@ -1,0 +1,17 @@
+title: "레코드 패턴 (구조 분해)"
+oldApproach: "수동 접근"
+modernApproach: "구조 분해"
+summary: "패턴에서 레코드를 직접 구조 분해합니다 — 한 단계로 필드를 추출합니다."
+explanation: "레코드 패턴은 instanceof와 switch에서 레코드 컴포넌트를 직접 분해할 수 있게 합니다. 중간 변수 없이 심층 매칭을 가능하게 하는 중첩 패턴도 지원됩니다."
+whyModernWins:
+- icon: "🎯"
+  title: "직접 추출"
+  desc: "접근자를 수동으로 호출하지 않고 레코드 컴포넌트에 접근합니다."
+- icon: "🪆"
+  title: "중첩 가능"
+  desc: "패턴은 중첩될 수 있습니다 — 단일 표현식으로 내부 레코드를 매칭합니다."
+- icon: "📏"
+  title: "간결한 코드"
+  desc: "5줄이 2줄이 됩니다 — 의식은 줄고 명확성은 동일합니다."
+support:
+  description: "JDK 21 LTS (2023년 9월) 이후 널리 사용 가능"

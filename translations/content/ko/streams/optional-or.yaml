@@ -1,0 +1,17 @@
+title: "Optional.or() 폴백"
+oldApproach: "중첩 폴백"
+modernApproach: ".or() 체인"
+summary: "중첩 확인 없이 Optional 폴백을 체이닝합니다."
+explanation: "Optional.or()는 값이 있으면 원래 Optional을 반환하고, 그렇지 않으면 공급자에서 다른 Optional을 반환합니다. 이를 통해 여러 폴백 소스를 읽기 쉬운 파이프라인으로 체이닝할 수 있습니다."
+whyModernWins:
+- icon: "🔗"
+  title: "체이닝 가능"
+  desc: "읽기 쉬운 파이프라인으로 폴백을 쌓습니다."
+- icon: "⚡"
+  title: "지연 평가"
+  desc: "폴백 공급자는 필요할 때만 실행됩니다."
+- icon: "📖"
+  title: "선언적"
+  desc: "'기본을 시도, 또는 보조, 또는 기본값'으로 읽힙니다."
+support:
+  description: "JDK 9 (2017년 9월) 이후 널리 사용 가능"

@@ -1,0 +1,17 @@
+title: "강력한 난수 생성"
+oldApproach: "new SecureRandom()"
+modernApproach: "getInstanceStrong()"
+summary: "플랫폼의 가장 강력한 SecureRandom 구현을 가져옵니다."
+explanation: "getInstanceStrong()은 강력한 난수 생성에 대한 보안 구성에서 설정된 SecureRandom 구현을 반환합니다. 플랫폼 보안 속성을 준수합니다."
+whyModernWins:
+- icon: "🛡️"
+  title: "가장 강력한 것"
+  desc: "플랫폼에 맞는 최선의 알고리즘을 자동으로 선택합니다."
+- icon: "📖"
+  title: "명확한 의도"
+  desc: "강력한 난수가 필요함을 명확히 전달합니다."
+- icon: "🔧"
+  title: "설정 가능"
+  desc: "관리자가 보안 속성을 통해 강력한 알고리즘을 변경할 수 있습니다."
+support:
+  description: "JDK 9 (2017년 9월) 이후 널리 사용 가능"

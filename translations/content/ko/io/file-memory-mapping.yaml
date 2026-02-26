@@ -1,0 +1,17 @@
+title: "파일 메모리 매핑"
+oldApproach: "MappedByteBuffer"
+modernApproach: "Arena를 사용한 MemorySegment"
+summary: "MemorySegment를 사용하여 결정적 정리로 2GB보다 큰 파일을 매핑합니다."
+explanation: "Foreign Function & Memory API(JEP 454)는 안전하고 효율적인 메모리 접근을 위한 MemorySegment를 도입합니다. MappedByteBuffer와 달리 MemorySegment는 2GB(Integer.MAX_VALUE) 이상의 파일을 지원하고, Arena를 통한 결정적 정리를 제공하며, 현대 하드웨어에서 더 나은 성능을 발휘합니다."
+whyModernWins:
+- icon: "📏"
+  title: "크기 제한 없음"
+  desc: "우회 방법 없이 2GB보다 큰 파일을 매핑합니다."
+- icon: "🔒"
+  title: "결정적 정리"
+  desc: "Arena는 GC 시점이 아닌 스코프 종료 시점에 메모리를 해제합니다."
+- icon: "⚡"
+  title: "더 나은 성능"
+  desc: "현대 메모리 모델 및 하드웨어와 정렬됩니다."
+support:
+  description: "JDK 22 (2024년 3월) 이후 사용 가능"

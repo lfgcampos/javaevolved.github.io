@@ -1,0 +1,17 @@
+title: "Stream.mapMulti()"
+oldApproach: "flatMap + 리스트"
+modernApproach: "mapMulti()"
+summary: "중간 스트림을 생성하지 않고 입력당 0개 이상의 요소를 방출합니다."
+explanation: "mapMulti()는 각 요소마다 Stream을 생성하지 않는 flatMap의 명령형 대안입니다. 필터링이나 복잡한 조건부 확장에 더 효율적입니다."
+whyModernWins:
+- icon: "⚡"
+  title: "할당 감소"
+  desc: "요소당 중간 Stream이 생성되지 않습니다."
+- icon: "🎯"
+  title: "명령형 스타일"
+  desc: "루프와 조건문을 직접 사용합니다."
+- icon: "📐"
+  title: "유연함"
+  desc: "완전한 제어로 0개, 1개, 또는 여러 개의 요소를 방출합니다."
+support:
+  description: "JDK 16 (2021년 3월) 이후 널리 사용 가능"

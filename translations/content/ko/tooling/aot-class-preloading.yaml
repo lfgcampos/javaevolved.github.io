@@ -1,0 +1,17 @@
+title: "AOT 클래스 사전 로딩"
+oldApproach: "매번 콜드 스타트"
+modernApproach: "AOT 캐시"
+summary: "즉각적인 시작을 위해 클래스 로딩과 컴파일을 캐시합니다."
+explanation: "AOT 클래스 사전 로딩은 훈련 실행에서 로드되고 링크된 클래스를 캐시합니다. 이후 실행에서 JVM은 클래스 로딩, 검증, 링크 단계를 건너뜁니다."
+whyModernWins:
+- icon: "⚡"
+  title: "더 빠른 시작"
+  desc: "클래스 로딩, 검증, 링크를 건너뜁니다."
+- icon: "📦"
+  title: "캐시된 상태"
+  desc: "훈련 실행이 이상적인 클래스 상태를 캡처합니다."
+- icon: "🔧"
+  title: "코드 변경 없음"
+  desc: "기존 애플리케이션과 함께 작동합니다 — JVM 플래그만 추가하면 됩니다."
+support:
+  description: "JDK 25 LTS에서 표준 기능으로 사용 가능 (JEPs 514/515, 2025년 9월)."

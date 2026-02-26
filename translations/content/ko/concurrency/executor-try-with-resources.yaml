@@ -1,0 +1,17 @@
+title: "ExecutorService 자동 닫기"
+oldApproach: "수동 종료"
+modernApproach: "try-with-resources"
+summary: "try-with-resources로 실행기를 자동으로 종료합니다."
+explanation: "Java 19부터 ExecutorService가 AutoCloseable을 구현합니다. close() 메서드가 shutdown()을 호출하고 작업 완료를 기다립니다. 더 이상 수동 try/finally 종료 패턴이 필요 없습니다."
+whyModernWins:
+- icon: "🧹"
+  title: "자동 정리"
+  desc: "블록이 종료될 때 자동으로 종료됩니다."
+- icon: "🛡️"
+  title: "누수 없음"
+  desc: "예외가 발생해도 실행기가 항상 종료됩니다."
+- icon: "📖"
+  title: "익숙한 패턴"
+  desc: "파일, 연결 등에 사용하는 동일한 try-with-resources 패턴입니다."
+support:
+  description: "JDK 19 (2022년 9월) 이후 널리 사용 가능"

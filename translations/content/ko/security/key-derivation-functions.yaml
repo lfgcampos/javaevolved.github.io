@@ -1,0 +1,17 @@
+title: "키 파생 함수"
+oldApproach: "수동 PBKDF2"
+modernApproach: "KDF API"
+summary: "표준 KDF API를 사용하여 암호화 키를 파생합니다."
+explanation: "KDF API는 키 파생 함수를 위한 표준 인터페이스를 제공합니다. PBKDF2와 HKDF를 지원하며 이전의 직접 KeySpec 생성자 사용을 대체합니다."
+whyModernWins:
+- icon: "📐"
+  title: "깔끔한 API"
+  desc: "어색한 KeySpec 생성자 대신 빌더 패턴."
+- icon: "🔧"
+  title: "HKDF 지원"
+  desc: "PBKDF2와 함께 모던 HKDF 알고리즘을 지원합니다."
+- icon: "🛡️"
+  title: "표준"
+  desc: "모든 키 파생 알고리즘을 위한 통일된 API."
+support:
+  description: "JDK 25 LTS에서 확정 (JEP 510, 2025년 9월)."

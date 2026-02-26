@@ -1,0 +1,17 @@
+title: "Message-Driven Bean 대 Reactive Messaging"
+oldApproach: "Message-Driven Bean"
+modernApproach: "Reactive Messaging"
+summary: "JMS Message-Driven Bean을 MicroProfile Reactive Messaging으로 대체합니다."
+explanation: "Message-Driven Bean은 MessageListener 구현, 활성화 설정 구성, 무거운 EJB 컨테이너가 필요합니다. MicroProfile Reactive Messaging은 어노테이션 기반 메시지 소비를 단순화합니다."
+whyModernWins:
+- icon: "🪶"
+  title: "최소 코드"
+  desc: "단일 @Incoming 메서드가 MDB 클래스, MessageListener 인터페이스, 활성화 설정을 대체합니다."
+- icon: "🔌"
+  title: "브로커 무관"
+  desc: "애플리케이션 코드를 변경하지 않고 설정으로 Kafka, AMQP, JMS 커넥터를 교체합니다."
+- icon: "☁️"
+  title: "클라우드 네이티브 적합"
+  desc: "리액티브 스트림 백프레셔와 경량 런타임은 컨테이너화된 배포에 이상적입니다."
+support:
+  description: "MicroProfile 4.0 / SmallRye Reactive Messaging 이후 사용 가능"

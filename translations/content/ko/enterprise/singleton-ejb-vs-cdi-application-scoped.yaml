@@ -1,0 +1,17 @@
+title: "Singleton EJB 대 CDI @ApplicationScoped"
+oldApproach: "@Singleton EJB"
+modernApproach: "@ApplicationScoped CDI"
+summary: "더 간단한 공유 상태 관리를 위해 Singleton EJB를 CDI @ApplicationScoped 빈으로 대체합니다."
+explanation: "Singleton EJB는 동시성 관리(@Lock, @ConcurrencyManagement)를 번들로 제공합니다. CDI @ApplicationScoped는 선택한 동시성 메커니즘과 결합된 간단한 대안입니다."
+whyModernWins:
+- icon: "🪶"
+  title: "적은 어노테이션 노이즈"
+  desc: "@ConcurrencyManagement, @Lock, @Startup이 없습니다 — 단일 @ApplicationScoped 어노테이션만."
+- icon: "🔧"
+  title: "유연한 동시성"
+  desc: "정확히 필요한 스레드 안전성을 위해 java.util.concurrent 잠금이나 volatile을 사용합니다."
+- icon: "🧪"
+  title: "쉬운 테스트"
+  desc: "일반 CDI 빈은 EJB 컨테이너 없이 테스트에서 직접 인스턴스화할 수 있습니다."
+support:
+  description: "Jakarta EE 8 / Java 11 이후 널리 사용 가능"

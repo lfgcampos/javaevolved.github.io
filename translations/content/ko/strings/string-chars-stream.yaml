@@ -1,0 +1,17 @@
+title: "스트림으로서의 문자열 문자"
+oldApproach: "수동 루프"
+modernApproach: "chars() 스트림"
+summary: "스트림 파이프라인으로 문자열 문자를 처리합니다."
+explanation: "String.chars()는 문자 값의 IntStream을 반환하여 함수형 파이프라인 처리를 가능하게 합니다. filter, map, collect를 문자 스트림에 사용하세요."
+whyModernWins:
+- icon: "🔗"
+  title: "체이닝 가능"
+  desc: "문자 스트림에 filter, map, collect를 사용합니다."
+- icon: "📐"
+  title: "선언적"
+  desc: "어떻게 루프를 돌릴지가 아닌 무엇을 할지를 설명합니다."
+- icon: "🌐"
+  title: "유니코드 준비"
+  desc: "codePoints()는 이모지와 보조 문자를 올바르게 처리합니다."
+support:
+  description: "JDK 8 이상에서 사용 가능 (9 이상에서 개선)"

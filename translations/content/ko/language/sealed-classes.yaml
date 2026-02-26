@@ -1,0 +1,17 @@
+title: "타입 계층을 위한 봉인된 클래스"
+oldApproach: "개방 계층"
+modernApproach: "sealed permits"
+summary: "어떤 클래스가 타입을 확장할 수 있는지 제한합니다 — 완전한 switch를 가능하게 합니다."
+explanation: "봉인된 클래스는 닫힌 하위 타입 집합을 정의합니다. 컴파일러는 모든 가능한 케이스를 알고 있어 default 분기 없이 완전한 패턴 매칭을 가능하게 합니다. 레코드와 결합하면 대수적 데이터 타입을 모델링합니다."
+whyModernWins:
+- icon: "🔐"
+  title: "제어된 계층"
+  desc: "허가된 하위 타입만 확장할 수 있습니다 — 예상치 못한 서브클래스 없음."
+- icon: "✅"
+  title: "완전한 매칭"
+  desc: "컴파일러가 switch가 모든 케이스를 처리하는지 검증합니다."
+- icon: "📐"
+  title: "대수적 데이터 타입"
+  desc: "합 타입을 자연스럽게 모델링합니다 — 봉인된 클래스 + 레코드 = Java의 ADT."
+support:
+  description: "JDK 17 LTS (2021년 9월) 이후 널리 사용 가능"

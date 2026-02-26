@@ -1,0 +1,17 @@
+title: "인수 없는 Optional.orElseThrow()"
+oldApproach: "get() 또는 orElseThrow(공급자)"
+modernApproach: "orElseThrow()"
+summary: "get()의 명확하고 의도를 드러내는 대안으로 Optional.orElseThrow()를 사용합니다."
+explanation: "Optional.get()은 실패 가능성을 숨기기 때문에 코드 냄새로 널리 인식됩니다. Java 10에 추가된 인수 없는 orElseThrow()는 동일한 일을 하지만 의도를 명시합니다: 개발자는 값을 기대하며 없으면 예외를 원합니다."
+whyModernWins:
+- icon: "📖"
+  title: "자기 문서화"
+  desc: "orElseThrow()는 값이 없는 경우가 예상치 못한 상황임을 명확히 알립니다."
+- icon: "🔒"
+  title: "get() 회피"
+  desc: "정적 분석 도구는 get()을 위험하다고 표시합니다; orElseThrow()는 관용적입니다."
+- icon: "⚡"
+  title: "보일러플레이트 감소"
+  desc: "기본 NoSuchElementException을 위한 공급자를 전달할 필요가 없습니다."
+support:
+  description: "JDK 10 (2018년 3월) 이후 사용 가능."
