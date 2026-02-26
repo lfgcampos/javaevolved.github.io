@@ -116,7 +116,7 @@ static Map<String, String> loadStrings(String locale) throws IOException {
     // Warn about missing keys
     for (var key : enStrings.keySet()) {
         if (!localeStrings.containsKey(key)) {
-            IO.println("[WARN] strings/%s.json: missing key \"%s\" — using English fallback".formatted(locale, key));
+            IO.println("[WARN] %s: missing key \"%s\" — using English fallback".formatted(localeFile.get().getFileName(), key));
         }
     }
     return merged;
