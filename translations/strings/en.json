@@ -36,6 +36,11 @@
     "show": "Show:",
     "all": "All"
   },
+  "difficulty": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  },
   "search": {
     "placeholder": "Search snippets…",
     "noResults": "No results found.",

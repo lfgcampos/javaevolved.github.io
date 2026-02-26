@@ -1,17 +1,8 @@
 {
-  "id": 1,
-  "slug": "type-inference-with-var",
-  "title": "Inferência de tipo com var",
-  "category": "language",
-  "difficulty": "beginner",
-  "jdkVersion": "10",
-  "oldLabel": "Java 8",
-  "modernLabel": "Java 10+",
-  "oldApproach": "Tipos explícitos",
   "modernApproach": "Palavra-chave var",
-  "oldCode": "",
-  "modernCode": "",
   "summary": "Use var para inferência de tipo em variáveis locais — menos ruído, mesma segurança.",
+  "title": "Inferência de tipo com var",
+  "oldApproach": "Tipos explícitos",
   "explanation": "Desde o Java 10, o compilador infere os tipos de variáveis locais a partir do lado direito da atribuição. Isso reduz o ruído visual sem sacrificar a segurança de tipos. Use var quando o tipo for óbvio pelo contexto.",
   "whyModernWins": [
     {
@@ -31,24 +22,6 @@
     }
   ],
   "support": {
-    "state": "available",
     "description": "Amplamente disponível desde o JDK 10 (março de 2018)"
-  },
-  "prev": null,
-  "next": "language/text-blocks-for-multiline-strings",
-  "related": [
-    "language/sealed-classes",
-    "language/pattern-matching-instanceof",
-    "language/exhaustive-switch"
-  ],
-  "docs": [
-    {
-      "title": "Local Variable Type Inference (JEP 286)",
-      "href": "https://openjdk.org/jeps/286"
-    },
-    {
-      "title": "Style Guidelines for var",
-      "href": "https://openjdk.org/projects/amber/guides/lvti-style-guide"
-    }
-  ]
+  }
 }

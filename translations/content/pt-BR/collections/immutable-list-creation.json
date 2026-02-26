@@ -1,17 +1,8 @@
 {
-  "id": 19,
-  "slug": "immutable-list-creation",
-  "title": "Criação de listas imutáveis",
-  "category": "collections",
-  "difficulty": "beginner",
-  "jdkVersion": "9",
-  "oldLabel": "Java 8",
-  "modernLabel": "Java 9+",
-  "oldApproach": "Encapsulamento verboso",
   "modernApproach": "List.of()",
-  "oldCode": "",
-  "modernCode": "",
   "summary": "Crie listas imutáveis em uma expressão limpa.",
+  "title": "Criação de listas imutáveis",
+  "oldApproach": "Encapsulamento verboso",
   "explanation": "List.of() cria uma lista verdadeiramente imutável — sem encapsulamento, sem cópia defensiva. Rejeita elementos nulos (null-hostile) e é estruturalmente imutável. O modo antigo exigia três chamadas aninhadas.",
   "whyModernWins": [
     {
@@ -31,24 +22,6 @@
     }
   ],
   "support": {
-    "state": "available",
     "description": "Amplamente disponível desde o JDK 9 (setembro de 2017)"
-  },
-  "prev": "language/exhaustive-switch",
-  "next": "collections/immutable-map-creation",
-  "related": [
-    "collections/immutable-map-creation",
-    "collections/immutable-set-creation",
-    "collections/sequenced-collections"
-  ],
-  "docs": [
-    {
-      "title": "List.of()",
-      "href": "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html#of()"
-    },
-    {
-      "title": "Collections Factory Methods (JEP 269)",
-      "href": "https://openjdk.org/jeps/269"
-    }
-  ]
+  }
 }

@@ -35,6 +35,11 @@
     "show": "Mostrar:",
     "all": "Todos"
   },
+  "difficulty": {
+    "beginner": "Iniciante",
+    "intermediate": "Intermediário",
+    "advanced": "Avançado"
+  },
   "search": {
     "placeholder": "Buscar padrões…",
     "noResults": "Nenhum resultado encontrado.",
