@@ -1,7 +1,7 @@
 title: ファイルへの書き込み
 oldApproach: FileWriter + BufferedWriter
 modernApproach: Files.writeString()
-summary: "StringをファイルへJava1行で書き込む。"
+summary: "Stringを1行のコードでファイルに書き込む。"
 explanation: "Files.writeString()はデフォルトでUTF-8エンコーディングを使用してコンテンツをファイルに書き込みます。追記や作成などのオプションを渡すこともできます。"
 whyModernWins:
 - icon: "📏"
