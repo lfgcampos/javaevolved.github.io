@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: string-formatted
 /// Source: content/strings/string-formatted.yaml
 void main() {

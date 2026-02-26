@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: process-api
 /// Source: content/concurrency/process-api.yaml
 void main() {

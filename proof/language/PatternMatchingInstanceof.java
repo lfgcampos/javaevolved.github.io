@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: pattern-matching-instanceof
 /// Source: content/language/pattern-matching-instanceof.yaml
 void main() {

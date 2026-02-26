@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: markdown-javadoc-comments
 /// Source: content/language/markdown-javadoc-comments.yaml
 record User(int id, String name) {}

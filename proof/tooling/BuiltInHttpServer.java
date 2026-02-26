@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 import java.net.*;
 import java.nio.file.*;
 import com.sun.net.httpserver.*;

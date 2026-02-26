@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 import java.util.concurrent.*;
 
 /// Proof: executor-try-with-resources

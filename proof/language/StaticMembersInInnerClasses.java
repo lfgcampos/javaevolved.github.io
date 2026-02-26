@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: static-members-in-inner-classes
 /// Source: content/language/static-members-in-inner-classes.yaml
 class Library {

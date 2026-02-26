@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: private-interface-methods
 /// Source: content/language/private-interface-methods.yaml
 interface Logger {

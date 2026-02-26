@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: sealed-classes
 /// Source: content/language/sealed-classes.yaml
 public sealed interface Shape

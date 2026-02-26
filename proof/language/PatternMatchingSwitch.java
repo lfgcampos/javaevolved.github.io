@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: pattern-matching-switch
 /// Source: content/language/pattern-matching-switch.yaml
 String format(Object obj) {

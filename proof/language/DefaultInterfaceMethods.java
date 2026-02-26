@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: default-interface-methods
 /// Source: content/language/default-interface-methods.yaml
 import java.io.*;

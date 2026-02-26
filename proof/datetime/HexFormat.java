@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: hex-format
 /// Source: content/datetime/hex-format.yaml
 void main() {

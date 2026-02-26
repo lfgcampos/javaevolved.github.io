@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: string-strip
 /// Source: content/strings/string-strip.yaml
 void main() {

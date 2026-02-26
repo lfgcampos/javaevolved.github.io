@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: exhaustive-switch
 /// Source: content/language/exhaustive-switch.yaml
 sealed interface Shape permits Circle, Rect {}

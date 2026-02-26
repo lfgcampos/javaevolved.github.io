@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: static-methods-in-interfaces
 /// Source: content/language/static-methods-in-interfaces.yaml
 public interface Validator {

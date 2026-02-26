@@ -1,3 +1,7 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
+//JAVAC_OPTIONS --enable-preview --release 25
+//JAVA_OPTIONS --enable-preview
 import java.util.function.*;
 
 /// Proof: lock-free-lazy-init

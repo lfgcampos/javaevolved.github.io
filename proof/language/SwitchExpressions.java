@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: switch-expressions
 /// Source: content/language/switch-expressions.yaml
 enum Day { MONDAY, TUESDAY, WEDNESDAY,

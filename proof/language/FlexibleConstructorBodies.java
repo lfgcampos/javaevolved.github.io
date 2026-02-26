@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: flexible-constructor-bodies
 /// Source: content/language/flexible-constructor-bodies.yaml
 class Shape {

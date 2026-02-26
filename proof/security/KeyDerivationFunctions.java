@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 import javax.crypto.*;
 import javax.crypto.spec.*;
 import java.security.*;

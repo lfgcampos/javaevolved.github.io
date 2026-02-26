@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: record-patterns
 /// Source: content/language/record-patterns.yaml
 record Point(int x, int y) {}

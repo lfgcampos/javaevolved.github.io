@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 import java.nio.file.*;
 
 /// Proof: path-of

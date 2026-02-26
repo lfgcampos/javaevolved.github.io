@@ -1,3 +1,5 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
 /// Proof: guarded-patterns
 /// Source: content/language/guarded-patterns.yaml
 sealed interface Shape permits Circle, Other {}
