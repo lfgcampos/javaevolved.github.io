@@ -4,7 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'content/**/*.json'
+      - 'content/**'
+      - 'translations/**'
       - 'templates/**'
       - 'site/**'
   workflow_run:
