@@ -456,6 +456,62 @@ needing to update the translation.
 
 ---
 
+## Practical Guidelines for Translation Files
+
+### YAML quoting
+
+Translation text frequently contains colons (`:`) — especially in Romance
+languages with explanatory phrases like "Nota: el resultado es inmutable" or
+"Ejemplo: seed es el inicio". **Unquoted colons break YAML parsing.**
+
+Always ensure values containing colons are properly quoted:
+
+```yaml
+# ✗ BROKEN — YAML interprets "Nota:" as a mapping key
+explanation: Stream.toList() devuelve una lista. Nota: el resultado es inmutable.
+
+# ✓ CORRECT — value is quoted
+explanation: "Stream.toList() devuelve una lista. Nota: el resultado es inmutable."
+```
+
+When generating translation files programmatically, use a YAML library's
+`dump()` function (which handles quoting automatically) rather than writing
+raw YAML strings by hand.
+
+### Jackson YAML parser compatibility
+
+Jackson's YAML parser (`jackson-dataformat-yaml`) is stricter than Python's
+`PyYAML`. Certain serialization styles that Python accepts can crash Jackson:
+
+- **`---` document markers** combined with backslash line continuations (`\`)
+  can trigger `ArrayIndexOutOfBoundsException` in Jackson's `UTF8Reader`.
+- Always test translation files with `jbang html-generators/generate.java`
+  before committing — Python validation alone is not sufficient.
+
+If a file parses in Python but fails in Jackson, re-serialize it with
+`yaml.dump(..., default_flow_style=False)` to produce a compatible style.
+
+### Validation before commit
+
+Always validate translation files before committing:
+
+```bash
+# Build all locales — will fail fast on any broken file
+jbang html-generators/generate.java
+
+# Or build a single locale for faster iteration
+jbang html-generators/generate.java --locale es
+```
+
+### Format support
+
+Both content translations and UI strings files can be in JSON or YAML format.
+The generator discovers files by trying `.json`, `.yaml`, and `.yml` extensions
+in order via `findWithExtensions()`. Within a single locale, formats can be
+mixed freely (e.g., strings in YAML, some content in JSON).
+
+---
+
 ## Migration Path
 
 | Phase | Work |
