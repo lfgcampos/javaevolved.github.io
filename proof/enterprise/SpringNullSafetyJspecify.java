@@ -1,13 +1,13 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
+//DEPS org.jspecify:jspecify:1.0.0
+
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import java.util.*;
 
 /// Proof: spring-null-safety-jspecify
 /// Source: content/enterprise/spring-null-safety-jspecify.yaml
-///
-/// Note: Uses stub annotations to prove the null-safety pattern compiles
-/// without JSpecify dependency.
-@interface NullMarked {}
-@interface Nullable {}
-
 record User(String name) {}
 
 interface UserRepository {

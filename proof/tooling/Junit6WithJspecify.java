@@ -1,21 +1,20 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
+//DEPS org.junit.jupiter:junit-jupiter-api:5.11.4
+//DEPS org.jspecify:jspecify:1.0.0
+
+import org.junit.jupiter.api.Test;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+import static org.junit.jupiter.api.Assertions.*;
+
 /// Proof: junit6-with-jspecify
 /// Source: content/tooling/junit6-with-jspecify.yaml
-///
-/// Note: Uses stub annotations to prove the null-safety + JUnit pattern
-/// compiles without JUnit 6 and JSpecify dependencies.
-@interface Test {}
-@interface NullMarked {}
-@interface Nullable {}
-
 record User(String name) {}
 
 interface UserService {
     @Nullable User findById(String id);
 }
-
-void assertNotNull(Object obj) { if (obj == null) throw new AssertionError(); }
-void assertNull(Object obj) { if (obj != null) throw new AssertionError(); }
-void assertEquals(Object a, Object b) {}
 
 UserService service = id -> id.equals("u1") ? new User("Alice") : null;
 

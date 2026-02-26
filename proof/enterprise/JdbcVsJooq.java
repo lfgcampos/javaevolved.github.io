@@ -1,44 +1,37 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
+//DEPS org.jooq:jooq:3.20.11
+
+import org.jooq.*;
+import org.jooq.impl.DSL;
+import javax.sql.DataSource;
 import java.util.*;
 
 /// Proof: jdbc-vs-jooq
 /// Source: content/enterprise/jdbc-vs-jooq.yaml
-///
-/// Note: Uses stub types to prove the fluent API compiles without jOOQ dependency.
-@interface Table {}
-
-// Minimal stubs for jOOQ-style API
-enum SQLDialect { POSTGRES }
-interface Field<T> {
-    Condition eq(T val);
-    Condition and(Condition c);
-    Condition gt(T val);
-}
-interface Condition {}
-interface TableField<R, T> extends Field<T> {}
-interface Record {}
-interface SelectJoinStep<R> { SelectConditionStep<R> where(Condition c); }
-interface SelectConditionStep<R> { <E> List<E> fetchInto(Class<E> cls); }
-interface SelectSelectStep<R> { SelectJoinStep<R> from(Object table); }
-interface DSLContext {
-    <R extends Record> SelectSelectStep<R> select(Object... fields);
+class User {
+    Long id; String name; String email;
 }
 
-record UserTable(
-    Field<String> DEPARTMENT,
-    Field<Integer> SALARY,
-    Field<Long> ID,
-    Field<String> NAME,
-    Field<String> EMAIL
-) {}
-
-record User(Long id, String name, String email) {}
-
-class Db {
-    static final UserTable USERS = new UserTable(
-        null, null, null, null, null);
-    static DSLContext dsl;
+// Simulating the generated jOOQ table fields (normally produced by jOOQ codegen)
+class USERS {
+    static final Field<String> DEPARTMENT = DSL.field(DSL.name("department"), String.class);
+    static final Field<Integer> SALARY = DSL.field(DSL.name("salary"), Integer.class);
+    static final Field<Long> ID = DSL.field(DSL.name("id"), Long.class);
+    static final Field<String> NAME = DSL.field(DSL.name("name"), String.class);
+    static final Field<String> EMAIL = DSL.field(DSL.name("email"), String.class);
+    static final Table<?> TABLE = DSL.table(DSL.name("users"));
 }
 
-void main() {
-    // Structural proof only — real jOOQ requires runtime dependency
+List<User> findByDept(DataSource ds, String department, int minSalary) {
+    DSLContext dsl = DSL.using(ds, SQLDialect.POSTGRES);
+
+    return dsl
+        .select(USERS.ID, USERS.NAME, USERS.EMAIL)
+        .from(USERS.TABLE)
+        .where(USERS.DEPARTMENT.eq(department)
+            .and(USERS.SALARY.gt(minSalary)))
+        .fetchInto(User.class);
 }
+
+void main() {}

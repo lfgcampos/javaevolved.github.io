@@ -1,14 +1,17 @@
-import java.util.concurrent.*;
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
+//DEPS jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0
+//DEPS jakarta.annotation:jakarta.annotation-api:3.0.0
+//DEPS jakarta.enterprise.concurrent:jakarta.enterprise.concurrent-api:3.1.0
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.annotation.Resource;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.concurrent.ManagedScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /// Proof: ejb-timer-vs-jakarta-scheduler
 /// Source: content/enterprise/ejb-timer-vs-jakarta-scheduler.yaml
-@interface ApplicationScoped {}
-@interface Resource {}
-@interface PostConstruct {}
-
-interface ManagedScheduledExecutorService
-        extends ScheduledExecutorService {}
-
 @ApplicationScoped
 class ReportGenerator {
     @Resource

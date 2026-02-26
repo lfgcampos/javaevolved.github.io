@@ -1,15 +1,14 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
+//DEPS jakarta.data:jakarta.data-api:1.0.1
+
+import jakarta.data.repository.*;
 import java.util.*;
 
 /// Proof: jpa-vs-jakarta-data
 /// Source: content/enterprise/jpa-vs-jakarta-data.yaml
-@interface Repository {}
-
-record User(Long id, String name) {}
-
-interface CrudRepository<T, ID> {
-    T findById(ID id);
-    List<T> findAll();
-    T save(T entity);
+class User {
+    Long id; String name;
 }
 
 @Repository

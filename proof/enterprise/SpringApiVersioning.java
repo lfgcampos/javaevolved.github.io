@@ -1,24 +1,15 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 25+
+//DEPS org.springframework:spring-webmvc:7.0.5
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.*;
+
 /// Proof: spring-api-versioning
 /// Source: content/enterprise/spring-api-versioning.yaml
-///
-/// Note: Spring 7 API versioning feature — uses stub annotations to prove
-/// the code structure compiles without Spring dependency.
-@interface Configuration {}
-@interface Override {}
-@interface RestController {}
-@interface RequestMapping { String value() default ""; }
-@interface GetMapping { String value() default ""; String version() default ""; }
-@interface PathVariable {}
-
 record ProductDtoV1(Long id) {}
 record ProductDtoV2(Long id, String name) {}
-
-interface ApiVersionConfigurer {
-    void useRequestHeader(String header);
-}
-interface WebMvcConfigurer {
-    default void configureApiVersioning(ApiVersionConfigurer config) {}
-}
 
 // Configure versioning once
 @Configuration
