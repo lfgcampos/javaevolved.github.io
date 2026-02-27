@@ -60,7 +60,7 @@ stats:
   modernPatterns: Nowoczesne wzorce
   jdkVersions: Obsługiwane wersje JDK
   categories: Kategorie
-  linesOfPython: Linie Pythona wymagane
+  linesOfPython: Wymagane linie Pythona
 footer:
   tagline: Java ewoluowała. Twój kod też może.
   madeWith: Stworzone z ❤️ przez

@@ -1,7 +1,7 @@
 title: Inferencja typów z var
 oldApproach: Jawne typy
 modernApproach: Słowo kluczowe var
-summary: Używaj var do inferencji typów zmiennych lokalnych, mniej szumu i taka sama kontrola typów.
+summary: Używaj var do inferencji typów zmiennych lokalnych, mniej szumu i to samo bezpieczeństwo typów.
 explanation: Od Java 10 kompilator wywnioskuje typ zmiennej lokalnej na podstawie prawej strony przypisania. To ogranicza wizualny szum bez utraty bezpieczeństwa typów. Używaj var, gdy typ jest oczywisty z kontekstu.
 whyModernWins:
   - icon: ⚡
