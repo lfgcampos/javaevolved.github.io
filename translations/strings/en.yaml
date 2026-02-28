@@ -27,6 +27,8 @@ sections:
   jdkSupport: JDK Support
   howItWorks: How it works
   relatedDocs: Related Documentation
+  proof: Proof
+  proofLink: View proof source
   relatedPatterns: Related patterns
 filters:
   show: 'Show:'

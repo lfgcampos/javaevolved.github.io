@@ -404,6 +404,30 @@ String renderDocLinks(String tpl, JsonNode docs) {
     return String.join("\n", links);
 }
 
+String slugToPascalCase(String slug) {
+    return Arrays.stream(slug.split("-"))
+            .filter(w -> !w.isEmpty())
+            .map(w -> Character.toUpperCase(w.charAt(0)) + w.substring(1))
+            .collect(Collectors.joining());
+}
+
+String renderProofSection(Snippet s, Map<String, String> strings) {
+    var pascal = slugToPascalCase(s.slug());
+    var proofFile = Path.of("proof", s.category(), pascal + ".java");
+    if (!Files.exists(proofFile)) return "";
+    var proofUrl = "https://github.com/javaevolved/javaevolved.github.io/blob/main/proof/%s/%s.java"
+            .formatted(s.category(), pascal);
+    var label = strings.getOrDefault("sections.proof", "Proof");
+    var linkText = strings.getOrDefault("sections.proofLink", "View proof source");
+    return """
+    <section class="docs-section">
+      <div class="section-label">%s</div>
+      <div class="docs-links">
+        <a href="%s" target="_blank" rel="noopener" class="doc-link">%s ↗</a>
+      </div>
+    </section>""".formatted(label, proofUrl, linkText);
+}
+
 String renderRelatedSection(String tpl, Snippet snippet, Map<String, Snippet> all, String locale, Map<String, String> strings) {
     return snippet.related().stream().filter(all::containsKey)
             .map(p -> renderRelatedCard(tpl, all.get(p), locale, strings))
@@ -469,6 +493,7 @@ String generateHtml(Templates tpl, Snippet s, Map<String, Snippet> all, Map<Stri
             Map.entry("navArrows", renderNavArrows(s, locale)),
             Map.entry("whyCards", renderWhyCards(tpl.whyCard(), s.whyModernWins())),
             Map.entry("docLinks", renderDocLinks(tpl.docLink(), s.node().withArray("docs"))),
+            Map.entry("proofSection", renderProofSection(s, extraTokens)),
             Map.entry("relatedCards", renderRelatedSection(tpl.relatedCard(), s, all, locale, extraTokens)),
             Map.entry("socialShare", renderSocialShare(tpl.socialShare(), s.slug(), s.title(), extraTokens))));
     var localeName = LOCALES.getOrDefault(locale, locale);

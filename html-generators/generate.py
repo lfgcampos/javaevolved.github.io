@@ -341,6 +341,32 @@ def render_related_section(tpl, data, all_snippets, locale, strings):
     return "\n".join(cards)
 
 
+def slug_to_pascal_case(slug):
+    """Convert a hyphen-delimited slug to PascalCase. E.g. 'type-inference-with-var' -> 'TypeInferenceWithVar'."""
+    return "".join(w.capitalize() for w in slug.split("-") if w)
+
+
+def render_proof_section(data, strings):
+    """Render the proof section linking to the proof source file on GitHub, or empty string if no proof exists."""
+    slug = data["slug"]
+    category = data["category"]
+    pascal = slug_to_pascal_case(slug)
+    proof_file = os.path.join("proof", category, f"{pascal}.java")
+    if not os.path.isfile(proof_file):
+        return ""
+    proof_url = f"https://github.com/javaevolved/javaevolved.github.io/blob/main/proof/{category}/{pascal}.java"
+    label = strings.get("sections.proof", "Proof")
+    link_text = strings.get("sections.proofLink", "View proof source")
+    return (
+        '    <section class="docs-section">\n'
+        f'      <div class="section-label">{label}</div>\n'
+        '      <div class="docs-links">\n'
+        f'        <a href="{proof_url}" target="_blank" rel="noopener" class="doc-link">{link_text} ↗</a>\n'
+        '      </div>\n'
+        '    </section>'
+    )
+
+
 def render_social_share(tpl, slug, title, strings):
     """Render social share URLs."""
     encoded_url = url_encode(f"{BASE_URL}/{slug}.html")
@@ -520,6 +546,7 @@ def generate_html(templates, data, all_snippets, extra_tokens, locale):
         "navArrows": render_nav_arrows(data, locale),
         "whyCards": render_why_cards(templates["why_card"], data["whyModernWins"]),
         "docLinks": render_doc_links(templates["doc_link"], data.get("docs", [])),
+        "proofSection": render_proof_section(data, extra_tokens),
         "relatedCards": render_related_section(
             templates["related_card"], data, all_snippets, locale, extra_tokens
         ),
