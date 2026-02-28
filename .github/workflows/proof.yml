@@ -1,0 +1,58 @@
+name: Proof Scripts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'proof/**'
+  pull_request:
+    paths:
+      - 'proof/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+
+      - uses: jbangdev/setup-jbang@main
+
+      - name: Run all proof scripts
+        shell: bash
+        run: |
+          passed=0
+          failed=0
+          failures=()
+
+          while IFS= read -r -d '' script; do
+            name="${script#proof/}"
+            if jbang "$script" > /dev/null 2>&1; then
+              echo "✅ $name"
+              ((passed++))
+            else
+              echo "❌ $name"
+              failures+=("$name")
+              ((failed++))
+            fi
+          done < <(find proof -name '*.java' -print0 | sort -z)
+
+          echo ""
+          echo "Results: $passed passed, $failed failed out of $((passed + failed)) scripts"
+
+          if [ ${#failures[@]} -gt 0 ]; then
+            echo ""
+            echo "Failed scripts:"
+            for f in "${failures[@]}"; do
+              echo "  - $f"
+            done
+            exit 1
+          fi
